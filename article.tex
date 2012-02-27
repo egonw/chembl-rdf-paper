@@ -27,7 +27,6 @@
 
 %%%%%%%%%%% Put your definitions here
 
-
 %%%%%%%%%%% End of definitions
 
 \pubyear{0000}
@@ -60,25 +59,142 @@
 %\address[B]{}
 
 \begin{abstract}
-An abstract,
+This paper describes the continued conversion of ChEMBL data into RDF triples, using a few existing
+ontologis, and demonstrates a few new use cases, taking advantage of its linked nature.
 \end{abstract}
 
 \begin{keyword}
- \sep Resource Description Framework
+% \sep 
+Resource Description Framework, ChEMBL
 \end{keyword}
 
 \end{frontmatter}
 
 %%%%%%%%%%% The article body starts:
 
-%\section{}\label{s1}
+\section{Introduction}\label{s1}
+
+Linked Data, pharmaceutical research, Open PHACTS, ...
+
+This data set has been previously used in~\cite{} and \cite{} and some used practices have
+been described in \cite{}...
 
 %\subsection{}\label{s1.1}
 
+\section{Methods}\label{s2}
 
+The ChEMBL version used in this paper is ChEMBL 12, which was released on ....
 
+\subsection{Ontologies}
 
+Ontologies... CHEMINF, ...
 
+The BIBO ontology is used to represent documents.
+
+\subsection{Use cases}
+
+John/Anna: common statistics with SPARQL
+
+Ola: use in BC-DS for possible adverse reactions
+
+Andra: CitedIn
+
+The link between data and formal publication is important in many areas of
+attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
+ChEMBL contains many literature references, and we wish to query this data
+for CitedIn.
+
+Peter: Bio2RDF
+
+David: Chem2Bio2RDF
+
+\section{Results}\label{s3}
+
+Previously, a SPARQL end point has been set up at Uppsala University.
+
+Later, to satisfy the requirements for the Linked Open Drug Data \cite{}
+network, the data was also hosted on Kasabi, a triple store hosting service
+free for Open Data~\cite{}.
+
+\# triples
+\# links out
+\# problems
+
+For each of the common resource classes a triple pattern was defined, following the
+data available in the relational database.
+
+Assays .... anything
+
+\begin{verbatim}
+\end{verbatim}
+
+Targets ... protein, other
+
+\begin{verbatim}
+\end{verbatim}
+
+Activities ...
+
+\begin{verbatim}
+\end{verbatim}
+
+Compounds ... Three types of compounds, peptides, small chemicals, ...
+
+\begin{tiny}
+\begin{verbatim}
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.w3.org/2000/01/rdf-schema#label> "Bis(3-[14-Benzyl-11-(1H-indol-3-ylmethyl)-2-isobutyl-13-methyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide)" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/CHEMINF_000000> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.w3.org/2002/07/owl#equivalentClass> <http://bio2rdf.org/chebi:100041> .
+<http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL406142> <http://www.w3.org/2002/07/owl#equivalentClass> <http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.w3.org/2002/07/owl#equivalentClass> <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL406142> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.w3.org/2000/01/rdf-schema#label> "CHEMBL406142" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.blueobelisk.org/chemistryblogs/smiles> "CC(C)C[C@@H]1N2C=CC(NC(=O)[C@H](Cc3ccccc3)N(C)C(=O)C(Cc4c[nH]c5ccccc45)NC(=O)C(CCC(=O)N)NC(=O)[C@@H](CCSCCSCC[C@H]6NC(=O)[C@H](CC(C)C)N7C=CC(NC(=O)[C@H](Cc8ccccc8)N(C)C(=O)C(Cc9c[nH]c%10ccccc9%10)NC(=O)C(CCC(=O)N)NC6=O)C7=O)NC1=O)C2=O" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://semanticscience.org/resource/CHEMINF_000200> <http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/smiles> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/smiles> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://semanticscience.org/resource/CHEMINF_000018> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/smiles> <http://semanticscience.org/resource/SIO_000300> "CC(C)C[C@@H]1N2C=CC(NC(=O)[C@H](Cc3ccccc3)N(C)C(=O)C(Cc4c[nH]c5ccccc45)NC(=O)C(CCC(=O)N)NC(=O)[C@@H](CCSCCSCC[C@H]6NC(=O)[C@H](CC(C)C)N7C=CC(NC(=O)[C@H](Cc8ccccc8)N(C)C(=O)C(Cc9c[nH]c%10ccccc9%10)NC(=O)C(CCC(=O)N)NC6=O)C7=O)NC1=O)C2=O" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.blueobelisk.org/chemistryblogs/inchi> "InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://semanticscience.org/resource/CHEMINF_000200> <http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/inchi> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/inchi> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://semanticscience.org/resource/CHEMINF_000113> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/inchi> <http://semanticscience.org/resource/SIO_000300> "InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.w3.org/2002/07/owl#equivalentClass> <http://rdf.openmolecules.net/?InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://www.blueobelisk.org/chemistryblogs/inchikey> "LMCOMIDLRGMFCZ-RIPOXUOASA-N" .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41> <http://semanticscience.org/resource/CHEMINF_000200> <http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/inchikey> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/inchikey> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://semanticscience.org/resource/CHEMINF_000059> .
+<http://data.kasabi.com/dataset/chembl-rdf/molecule/m41/inchikey> <http://semanticscience.org/resource/SIO_000300> "LMCOMIDLRGMFCZ-RIPOXUOASA-N" .
+\end{verbatim}
+\end{tiny}
+
+For documents little information is replicated from the database, taking advantage
+of PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs). URIs for the
+latter can be resolved online, providing curated information on the identified
+documents. For PubMed articles ...
+
+\begin{tiny}
+\begin{verbatim}
+<http://data.kasabi.com/dataset/chembl-rdf/journal/j6c706049c2e08871b7c46a6528065736> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Journal> .
+<http://data.kasabi.com/dataset/chembl-rdf/journal/j6c706049c2e08871b7c46a6528065736> <http://purl.org/dc/elements/1.1/title> "J. Med. Chem." .
+
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/ontology/bibo/Article> .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/ontology/bibo/pmid> "14695813" .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://bio2rdf.org/pubmed:14695813> .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/dc/elements/1.1/date> "2004" .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/ontology/bibo/volume> "47" .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/ontology/bibo/issue> "1" .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/ontology/bibo/pageStart> "1" .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/ontology/bibo/pageEnd> "9" .
+<http://data.kasabi.com/dataset/chembl-rdf/resource/r1> <http://purl.org/dc/elements/1.1/isPartOf> <http://data.kasabi.com/dataset/chembl-rdf/journal/j6c706049c2e08871b7c46a6528065736> .
+\end{verbatim}
+\end{tiny}
+
+\# results of use cases
+
+\section{Discussion}
+
+outlook ...
+
+\section{Acknowledgements}
+
+Kasabi.
 
 %\begin{figure}[t]
 %\includegraphics{}
@@ -104,5 +220,7 @@ An abstract,
 %\bibitem{r2}
 %
 %\end{thebibliography}
+
+\printbibliography
 
 \end{document}

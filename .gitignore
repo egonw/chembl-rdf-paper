@@ -1,1 +1,7 @@
 iosart2c.pdf
+article-blx.bib
+article.pdf
+*.bbl
+*.blg
+*.log
+*.aux
