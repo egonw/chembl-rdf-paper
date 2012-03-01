@@ -91,6 +91,9 @@ Ontologies... CHEMINF, ...
 
 The BIBO ontology is used to represent documents.
 
+Throughout this paper, various prefixes are used to simplify RDF output, outlined
+in Table~\ref{namespaces}.
+
 \subsection{Use cases}
 
 John/Anna: common statistics with SPARQL
@@ -125,8 +128,22 @@ data available in the relational database.
 
 Assays .... anything
 
+\begin{small}
 \begin{verbatim}
+act:a31863
+      a       chembl:Activity ;
+      cito:citesAsDataSource
+              res:r6424 ;
+      chembl:forMolecule mol:m180094 ;
+      chembl:onAssay assay:a54505 ;
+      chembl:relation ">" ;
+      chembl:standardUnits
+              "nM" ;
+      chembl:standardValue
+              "100000"^^xsd:float ;
+      chembl:type "IC50" .
 \end{verbatim}
+\end{small}
 
 Targets ... protein, other
 
@@ -201,15 +218,24 @@ Kasabi.
 %\caption{Figure caption.}\label{f1}
 %\end{figure}
 
-%\begin{table*}
-%\caption{} \label{t1}
-%\begin{tabular}{lll}
-%\hline
-%&&\\
-%&&\\
-%\hline
-%\end{tabular}
-%\end{table*}
+\begin{table*}
+\caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
+\begin{tabular}{ll}
+\hline
+Common & Vocabularies \\
+cito & Citation Typing Ontology~\cite{ont:cito} \\
+     & http://purl.org/spar/cito/ \\
+
+\hline
+ChEMBL-RDF & Namespaces\\
+act    & http://data.kasabi.com/dataset/chembl-rdf/activity/ \\
+chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
+res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
+assay  & http://data.kasabi.com/dataset/chembl-rdf/assay/ \\
+mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
+\hline
+\end{tabular}
+\end{table*}
 
 
 %%%%%%%%%%% The bibliography starts:
@@ -221,6 +247,6 @@ Kasabi.
 %
 %\end{thebibliography}
 
-\printbibliography
+% \printbibliography
 
 \end{document}
