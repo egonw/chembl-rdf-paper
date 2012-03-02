@@ -49,16 +49,27 @@
 
 
 % For one author:
-\author[A]{\fnms{Egon} \snm{Willighagen}\thanks{Huh?}}
+\author[A]{\fnms{Egon} \snm{Willighagen}} % \thanks{Huh?}}
 \address[A]{Maastricht University}
 \runningauthor{E.L. Willighagen et al.}
 
-% Two or more authors:
-\author[A]{\fnms{Ola} \snm{Spjuth}\thanks{}},
+% Two or more authors (order to be determined):
+\author[B]{\fnms{Ola} \snm{Spjuth}},
+\address[B]{Uppsala University}
+
+\author[C]{\fnms{Peter} \snm{Ansell}},
+\address[C]{xxx}
+
+\author[D]{\fnms{Antony} \snm{Williams}},
+\address[D]{xxx}
+
+\author[E]{\fnms{John} \snm{Overington}},
+\author[E]{\fnms{Anna} \snm{Gaulton}},
+\address[E]{European Bioinformatics Institute}
+
 %\author[B]{\fnms{} \snm{}}
 %\runningauthor{}
 %\address[A]{}
-%\address[B]{}
 
 \begin{abstract}
 This paper describes the continued conversion of ChEMBL data into RDF triples, using a few existing
@@ -78,14 +89,13 @@ Resource Description Framework, ChEMBL
 
 Linked Data, pharmaceutical research, Open PHACTS, ...
 
-This data set has been previously used in~\cite{} and \cite{} and some used practices have
-been described in \cite{}...
+This data set has been previously used in~\cite{Willighagen2011} ...
 
 %\subsection{}\label{s1.1}
 
 \section{Methods}\label{s2}
 
-The ChEMBL version used in this paper is ChEMBL 12, which was released on ....
+The ChEMBL version used in this paper is ChEMBL 13, which was released on February 29 2011....
 
 \subsection{Ontologies}
 
@@ -119,7 +129,7 @@ Previously, a SPARQL end point has been set up at Uppsala University.
 
 Later, to satisfy the requirements for the Linked Open Drug Data \cite{Samwald2011}
 network, the data was also hosted on Kasabi, a triple store hosting service
-free for Open Data~\cite{}.
+free for Open Data~\cite{kasabi}.
 
 \# triples
 \# links out
@@ -213,10 +223,6 @@ mol:m41
               m41:inchikey , m41:smiles , m41:inchi ;
       <http://www.blueobelisk.org/chemistryblogs/inchi>
               "InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1" ;
-      <http://www.blueobelisk.org/chemistryblogs/inchikey>
-              "LMCOMIDLRGMFCZ-RIPOXUOASA-N" ;
-      <http://www.blueobelisk.org/chemistryblogs/smiles>
-              "CC(C)C[C@@H]1N2C=CC(NC(=O)[C@H](Cc3ccccc3)N(C)C(=O)C(Cc4c[nH]c5ccccc45)NC(=O)C(CCC(=O)N)NC(=O)[C@@H](CCSCCSCC[C@H]6NC(=O)[C@H](CC(C)C)N7C=CC(NC(=O)[C@H](Cc8ccccc8)N(C)C(=O)C(Cc9c[nH]c%10ccccc9%10)NC(=O)C(CCC(=O)N)NC6=O)C7=O)NC1=O)C2=O" ;
       owl:equivalentClass <http://rdf.openmolecules.net/?InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1> , <http://bio2rdf.org/chebi:100041> , chemblid:CHEMBL406142 .
 \end{verbatim}
 \end{tiny}
@@ -265,8 +271,12 @@ Kasabi.
 \begin{tabular}{ll}
 \hline
 Common & Vocabularies \\
-cito & Citation Typing Ontology~\cite{ont:cito} \\
-     & http://purl.org/spar/cito/ \\
+cito    & Citation Typing Ontology~\cite{Shotton2010} \\
+        & http://purl.org/spar/cito/ \\
+cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
+        & http://semanticscience.org/resource/ \\
+bibo    & Bibliography Ontology~\cite{Giasson2011} \\
+        & http://purl.org/ontology/bibo/ \\
 
 \hline
 ChEMBL-RDF & Namespaces\\
