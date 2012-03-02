@@ -89,13 +89,18 @@ Resource Description Framework, ChEMBL
 
 Linked Data, pharmaceutical research, Open PHACTS, ...
 
-This data set has been previously used in~\cite{Willighagen2011} ...
+This data set has been previously used in~\cite{Willighagen2011} and in Foo where the data is used
+in the Foo framework (book chapter...)
 
 %\subsection{}\label{s1.1}
 
 \section{Methods}\label{s2}
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on February 29 2011....
+
+The RDF triples were generated from the a local MySQL chembl\_13 database populated with a stock
+SQL dump of ChEMBL 13. PHP scripts were used to create N-Triples files. The source code is
+available under a XXX license from https://github.com/egonw/chembl.rdf.
 
 \subsection{Ontologies}
 
@@ -108,32 +113,25 @@ in Table~\ref{namespaces}.
 
 \subsection{Use cases}
 
-John/Anna: common statistics with SPARQL
+A few new uses cases have been developed for this paper to demonstrate not just the intrinsic
+value of the data in the ChEMBL database as done previously, but also to show the possibilities
+the Linked Data nature offers.
 
-Ola: Use in BC-DS for possible adverse reactions.
-
-Andra: CitedIn
-
-The link between data and formal publication is important in many areas of
-attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
-ChEMBL contains many literature references, and we wish to query this data
-for CitedIn.
-
-The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data server \cite{Ansell2011}, and access to SPARQL endpoints for a range of scientific databases \cite{Belleau2008}. A number of these databases are referenced in Chembl, including Chebi, Pubmed, and both the Uniprot protein and taxonomy databases \cite{TheUniProtConsortium2010}. These links are vital to provide context for users who need to query across both Chembl and its related databases. The Linked Data server used by Bio2RDF has been configured for Chembl to provide URL based services for text and link searches.
-
-David: Chem2Bio2RDF
+... describe what we want to show ...
 
 \section{Results}\label{s3}
 
-Previously, a SPARQL end point has been set up at Uppsala University.
-
-Later, to satisfy the requirements for the Linked Open Drug Data \cite{Samwald2011}
-network, the data was also hosted on Kasabi, a triple store hosting service
-free for Open Data~\cite{kasabi}.
+\subsection{Data Statistics}
 
 \# triples
 \# links out
 \# problems
+
+The full set of triples are available from http://semantics.bigcat.unimaas.nl/chembl12/.
+
+FIXME!
+
+\subsection{Data Structure}
 
 For each of the common resource classes a triple pattern was defined, following the
 data available in the relational database.
@@ -251,7 +249,56 @@ res:r1
 \end{verbatim}
 \end{tiny}
 
-\# results of use cases
+\subsection{SPARQL end points}
+
+Previously, a SPARQL end point has been set up at Uppsala University.
+
+\subsubsection{Bio2RDF}
+
+Peter: write up the proxying... if that still works...
+
+The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data server \cite{Ansell2011}, and access to SPARQL endpoints for a range of scientific databases \cite{Belleau2008}. A number of these databases are referenced in Chembl, including Chebi, Pubmed, and both the Uniprot protein and taxonomy databases \cite{TheUniProtConsortium2010}. These links are vital to provide context for users who need to query across both Chembl and its related databases. The Linked Data server used by Bio2RDF has been configured for Chembl to provide URL based services for text and link searches.
+
+\subsubsection{Data Statistics and Validation}
+
+John/Anna: common statistics with SPARQL
+
+%\subsubsection{CitedIn}
+
+%Andra: use the SPARQL end point to find which entries in ChEMBL cite what papers
+ 
+%The link between data and formal publication is important in many areas of
+%attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
+%ChEMBL contains many literature references, and we wish to query this data
+%for CitedIn.
+
+\subsubsection{Decision Support}
+
+Egon,Antony/Valery,Ola: develop and write up the Bioclipse Decision Support use case
+
+\subsection{Linked Data on Kasabi}
+
+Later, to satisfy the requirements for the Linked Open Drug Data \cite{Samwald2011}
+network, the data was also hosted on Kasabi, a triple store hosting service
+free for Open Data~\cite{kasabi}.
+
+David: Chem2Bio2RDF
+
+%\subsection{Use Case 2: Chem2Bio2RDF}
+
+%David: Chem2Bio2RDF
+
+\subsubsection{Linking out to ChemSpider}
+
+Antony: if you can contribute ChemSpider IDs for the ChEMBL compounds ...
+
+\subsubsection{Linking out to ChEMBL}
+
+John/Anna: I can easily add links to webpages using foaf:homepage... are webpage URLs for entities stable enough?
+
+\subsubsection{Linking out to Bio2RDF}
+
+Peter/Egon: write up links to Bio2RDF for protein, pubmed, ...
 
 \section{Discussion}
 
@@ -259,7 +306,7 @@ outlook ...
 
 \section{Acknowledgements}
 
-Kasabi.
+Tim and Foo of Kasabi. What S.H. Name of the Bioinformatics department at Uppsala University.
 
 %\begin{figure}[t]
 %\includegraphics{}
