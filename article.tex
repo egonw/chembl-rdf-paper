@@ -27,6 +27,8 @@
 
 %%%%%%%%%%% Put your definitions here
 
+\bibliographystyle{plain} 
+
 %%%%%%%%%%% End of definitions
 
 \pubyear{0000}
@@ -107,7 +109,7 @@ attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
 ChEMBL contains many literature references, and we wish to query this data
 for CitedIn.
 
-Peter: Bio2RDF
+The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data server \cite{Ansell2011}, and access to SPARQL endpoints for a range of scientific databases \cite{Belleau2008}. A number of these databases are referenced in Chembl, including Chebi, Pubmed, and both the Uniprot protein and taxonomy databases. These links are vital to provide context for users who need to query across both Chembl and its related databases. The Linked Data server used by Bio2RDF has been configured for Chembl to provide URL based services for text and link searches.
 
 David: Chem2Bio2RDF
 
@@ -115,7 +117,7 @@ David: Chem2Bio2RDF
 
 Previously, a SPARQL end point has been set up at Uppsala University.
 
-Later, to satisfy the requirements for the Linked Open Drug Data \cite{}
+Later, to satisfy the requirements for the Linked Open Drug Data \cite{Samwald2011}
 network, the data was also hosted on Kasabi, a triple store hosting service
 free for Open Data~\cite{}.
 
@@ -237,6 +239,7 @@ mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
 \end{tabular}
 \end{table*}
 
+\bibliography{article}
 
 %%%%%%%%%%% The bibliography starts:
 %\begin{thebibliography}{9}
