@@ -23,7 +23,9 @@
 \usepackage{natbib}% for bibliography sorting/compressing
 %\usepackage{amsmath}
 %\usepackage{endnotes}
-%\usepackage{graphics}
+\usepackage{graphicx}
+%\usepackage{tikz}
+%\usetikzlibrary{snakes,arrows,shapes}
 
 %%%%%%%%%%% Put your definitions here
 
@@ -308,10 +310,11 @@ outlook ...
 
 Tim and Foo of Kasabi. What S.H. Name of the Bioinformatics department at Uppsala University.
 
-%\begin{figure}[t]
-%\includegraphics{}
-%\caption{Figure caption.}\label{f1}
-%\end{figure}
+\begin{figure}[t]
+\includegraphics[width=0.5\textwidth]{figs/relations}
+\caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
+of common classes, while others are instances.}\label{f1}
+\end{figure}
 
 \begin{table*}
 \caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
@@ -346,7 +349,5 @@ mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
 %\bibitem{r2}
 %
 %\end{thebibliography}
-
-% \printbibliography
 
 \end{document}

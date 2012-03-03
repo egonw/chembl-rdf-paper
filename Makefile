@@ -1,11 +1,17 @@
-all: article.pdf
+all: subdirs article.pdf
 	@echo "********* Latex Summary *********"
 	@grep -i error article.log || true
 	@grep -i warning article.log || true
 
+subdirs:
+	@cd figs; make
+
 update: article.pdf
 
-article.bbl: article.bib
+figs/relations.tex: figs/relations.dot
+	dot2tex --figonly figs/relations.dot > figs/relations.tex
+
+article.bbl: article.bib figs/relations.tex
 	pdflatex article || true
 	bibtex article || true
 
@@ -17,4 +23,4 @@ article.pdf: article.tex article.bbl
 distclean: clean
 
 clean:
-	rm -f *.bbl *.aux article.pdf *.blg *.log *.ps *.fff *.lof *.lot *.ttt *.dvi *~ *.Rout
+	rm -f *.bbl *.aux article.pdf *.blg *.log *.ps *.fff *.lof *.lot *.ttt *.dvi *~ *.Rout *-blx.bib

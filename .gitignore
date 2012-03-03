@@ -3,6 +3,7 @@
 *.bak
 *.backup
 *.aux
+*-blx.bib
 *.bbl
 *.blg
 *.dvi

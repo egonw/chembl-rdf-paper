@@ -1,0 +1,31 @@
+
+digraph G {
+
+  center=""
+
+  assay [label="assay:a17"] ;
+  assayType [label="chembl:Assay",shape=box] ;
+  doc [label="res:r11347 "];
+  docType [label="bibo:Article",shape=box];
+  journal [label="journal:j6c706049c2e08871b7c46a6528065736"];
+  journalType [label="bibo:Journal",shape=box];
+  target [label="target:t100122"];
+  targetType [label="pro:PR_000000001",shape=box];
+  activity [label="a1235463"];
+  activityType [label="chembl:Activity",shape=box];
+  mol [label="m106514"];
+  molType [label="cheminf:CHEMINF_000000",shape=box];
+
+  assay -> assayType [label="rdf:type"] ;
+  assay -> doc [label="cito:citesAsDataSource"] ;
+  doc -> docType [label="rdf:type"];
+  doc -> journal [label="dc:isPartOf"];
+  journal -> journalType [label="rdf:type"];
+  assay -> target [label="chembl:hasTarget"];
+  target -> targetType [label="rdfs:subClassOf"];
+  activity -> activityType [label="rdf:type"];
+  activity -> assay [label="chembl:onAssay"];
+  activity -> mol [label="chembl:forMolecule"];
+  activity -> doc [label="cito:citesAsDataSource"] ;
+  mol -> molType [label="rdfs:subClassOf"];
+}
