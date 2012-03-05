@@ -104,32 +104,30 @@ and ontologies used for the RDF version of ChEMBL 13, and a few new example use 
 exemplifying how the data set can be linked to other data sources to further support
 research in the life sciences.
 
-%\subsection{}\label{s1.1}
-
 \section{Methods}\label{s2}
 
-The ChEMBL version used in this paper is ChEMBL 13, which was released on February 29 2011....
+The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2011.
+RDF triples were created from a local MySQL database to which the SQL data dump of ChEMBL was
+inserted, using a PHP script, available from source code hosting service
+GitHub~\citep{ChEMBLRDFGitHub}, a process outlined earlier in a best practices note by
+the international Health Care and Life Sciences XXX Working Group~\cite{Marshall2012}.
 
-The RDF triples were generated from the a local MySQL chembl\_13 database populated with a stock
-SQL dump of ChEMBL 13. PHP scripts were used to create N-Triples files. The source code is
-available under a XXX license from https://github.com/egonw/chembl.rdf.
-
-\subsection{Ontologies}
-
-Ontologies... CHEMINF, ...
-
-The BIBO ontology is used to represent documents.
-
-Throughout this paper, various prefixes are used to simplify RDF output, outlined
+During the life time of this project, the ontologies used in ChEMBL-RDF have changed,
+initially using a custom, ad-hoc ontology, but increasingly with community-proposed
+ontologies, making the RDF more interoperable. The ChEMBL-RDF 13 uses ontology
+standards like Bibliography Ontology for Citation Typinh Ontology for liteature
+references, and domain ontologies like the Protein Ontology and the Chemical Information
+Ontology. Throughout this paper, various prefixes are used to simplify RDF output, outlined
 in Table~\ref{namespaces}.
 
-\subsection{Use cases}
+To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
+hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
+querying is capped, based on the estimated computational effort. Second, resources have
+been made dereferencible using the Kasabi platform. This platform also provides a SPARQL
+end point, but requires a user account.
 
-A few new uses cases have been developed for this paper to demonstrate not just the intrinsic
-value of the data in the ChEMBL database as done previously, but also to show the possibilities
-the Linked Data nature offers.
-
-... describe what we want to show ...
+As a method to further test the access and possibilities of this Linked Data version of
+ChEMBL, a few new uses cases have been developed for this paper.
 
 \section{Results}\label{s3}
 
@@ -331,20 +329,22 @@ of common classes, while others are instances.}\label{f1}
 \begin{tabular}{ll}
 \hline
 Common & Vocabularies \\
-cito    & Citation Typing Ontology~\cite{Shotton2010} \\
-        & http://purl.org/spar/cito/ \\
-cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
-        & http://semanticscience.org/resource/ \\
 bibo    & Bibliography Ontology~\cite{Giasson2011} \\
         & http://purl.org/ontology/bibo/ \\
+cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
+        & http://semanticscience.org/resource/ \\
+cito    & Citation Typing Ontology~\cite{Shotton2010} \\
+        & http://purl.org/spar/cito/ \\
+pro     & PRotein Ontology~\cite{XXX} \\
+        & http://cccccc.cc/xxxxxx/ \\
 
 \hline
 ChEMBL-RDF & Namespaces\\
 act    & http://data.kasabi.com/dataset/chembl-rdf/activity/ \\
-chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
-res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
 assay  & http://data.kasabi.com/dataset/chembl-rdf/assay/ \\
+chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
 mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
+res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
 \hline
 \end{tabular}
 \end{table*}
