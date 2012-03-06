@@ -108,7 +108,7 @@ research in the life sciences.
 
 \section{Methods}\label{s2}
 
-The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2011.
+The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
 RDF triples were created from a local MySQL database to which the SQL data dump of ChEMBL was
 inserted, using a PHP script, available from source code hosting service
 GitHub~\citep{ChEMBLRDFGitHub}, a process outlined earlier in a best practices note by
@@ -267,9 +267,13 @@ Previously, a SPARQL end point has been set up at Uppsala University.
 
 \subsubsection{Bio2RDF}
 
-Peter: write up the proxying... if that still works...
+%Peter: write up the proxying... if that still works... It was broken through disuse, but is available again in its rdf.farmbio.uu.se configuration, separately from the bio2rdf-webapp at https://github.com/ansell/chembl-webapp/
 
-The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data server \cite{Ansell2011}, and access to SPARQL endpoints for a range of scientific databases \cite{Belleau2008}. A number of these databases are referenced in Chembl, including Chebi, Pubmed, and both the Uniprot protein and taxonomy databases \cite{TheUniProtConsortium2010}. These links are vital to provide context for users who need to query across both Chembl and its related databases. The Linked Data server used by Bio2RDF has been configured for Chembl to provide URL based services for text and link searches.
+The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data server \cite{Ansell2011} to access SPARQL endpoints for a range of scientific databases \cite{Belleau2008}. A number of these databases are referenced in Chembl, including Chebi, Pubmed, and both the Uniprot protein and taxonomy databases \cite{TheUniProtConsortium2010}. These links are vital to provide context for use cases that require a correlation between chemical structures and other scientific data. 
+
+The Linked Data server used by Bio2RDF has been reconfigured for Chembl to provide URL based services for standard URI resolution, along with text and link searches \footnote{\url{https://github.com/ansell/chembl-webapp}}. It proxies the standard item URIs by translating URLs between those requested by users and the URIs that are available in the databases. For example, if the Chembl web application is running on the users local machine \footnote{\url{http://localhost:8080/chembl/}}, then a request for the article with identifier ``a31863'' \footnote{\url{http://localhost:8080/chembl/article/a31863}} will be resolved from the database using the full original URI \footnote{\url{http://data.kasabi.com/dataset/chembl-rdf/13/activity/a31863}}. If the user requested an RDF document, using content negotiation, the original URIs will be unchanged, however, if the user requested an HTML document, the results will contain both the original RDF triples, represented using RDFa, with links that resolve using the users local machine.
+
+The links services enables the Chembl application to derive both forward links, originating in Chembl \footnote{\url{http://localhost:8080/chembl/linkstonamespace/targetns/originalns:identifier}}, and backward links, originating in other databases, such as LODD, Bio2RDF \footnote{\url{http://bio2rdf.org/linksns/targetns/originalns:identifier}}, or Chem2Bio2RDF. These services are vital to efficiently navigate the Linked Data web, as it is both impractical and inefficient to require users to crawl the web before they can discover all of the relevant resources. These services are currently only supplied as web services from Chembl and Bio2RDF, but it is hoped that similar services will be provided by other scientific Linked Data providers in the future. Datasets that are available in SPARQL endpoints can be queried for links efficiently using templated queries in the Chembl web application.
 
 \subsubsection{Data Statistics and Validation}
 
@@ -305,6 +309,8 @@ David: Chem2Bio2RDF
 Antony: if you can contribute ChemSpider IDs for the ChEMBL compounds ...
 
 \subsubsection{Linking out to ChEMBL}
+Peter: write up the proxying... if that still works...
+
 
 John/Anna: I can easily add links to webpages using foaf:homepage... are webpage URLs for entities stable enough?
 
@@ -337,8 +343,8 @@ cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
         & http://semanticscience.org/resource/ \\
 cito    & Citation Typing Ontology~\cite{Shotton2010} \\
         & http://purl.org/spar/cito/ \\
-pro     & PRotein Ontology~\cite{XXX} \\
-        & http://cccccc.cc/xxxxxx/ \\
+pro     & PRotein Ontology~\cite{Sidhu2006} \\
+        & http://purl.obolibrary.org/obo/ \\
 
 \hline
 ChEMBL-RDF & Namespaces\\
