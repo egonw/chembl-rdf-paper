@@ -55,7 +55,9 @@
 
 % For one author:
 \author[A]{\fnms{Egon} \snm{Willighagen}\thanks{Corresponding author.\\ E-mail: egon.willighagen@maastrichtuniversity.nl.}}
+\runningauthor{E.L. Willighagen et al.}
 % Two or more authors (order to be determined):
+\author[A]{\fnms{Andra} \snm{Waagmeester}}
 \author[B]{\fnms{Ola} \snm{Spjuth}},
 \author[C]{\fnms{Peter} \snm{Ansell}},
 \author[D]{\fnms{Antony} \snm{Williams}},
@@ -64,9 +66,7 @@
 \author[F]{\fnms{John} \snm{Overington}},
 \author[F]{\fnms{Anna} \snm{Gaulton}},
 
-\address[A]{Department of Bioinformatics - BiGCaT, Maastricht University, ADDRESS, Maastricht,\\ The Netherlands\\
-E-mail: egon.willighagen@maastrichtuniversity.nl}
-\runningauthor{E.L. Willighagen et al.}
+\address[A]{Department of Bioinformatics - BiGCaT, Maastricht University, ADDRESS, Maastricht,\\ The Netherlands}
 \address[B]{Uppsala University}
 \address[C]{University of Queensland}
 \address[D]{Royal Society of Chemistry, 904 Tamaras Circle, Wake Forest, NC 27587, U.S.A.}
@@ -307,14 +307,14 @@ links efficiently using templated queries in the ChEMBL web application.
 
 John/Anna: common statistics with SPARQL
 
-%\subsubsection{CitedIn}
+\subsubsection{CitedIn}
 
-%Andra: use the SPARQL end point to find which entries in ChEMBL cite what papers
+Andra: use the SPARQL end point to find which entries in ChEMBL cite what papers
  
-%The link between data and formal publication is important in many areas of
-%attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
-%ChEMBL contains many literature references, and we wish to query this data
-%for CitedIn.
+The link between data and formal publication is important in many areas of
+attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
+ChEMBL contains many literature references, and we wish to query this data
+for CitedIn.
 
 \subsubsection{Decision Support}
 
@@ -327,10 +327,6 @@ network, the data was also hosted on Kasabi, a triple store hosting service
 free for Open Data~\cite{kasabi}.
 
 David: Chem2Bio2RDF
-
-%\subsection{Use Case 2: Chem2Bio2RDF}
-
-%David: Chem2Bio2RDF
 
 \subsubsection{Linking out to ChemSpider}
 
