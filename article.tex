@@ -128,6 +128,31 @@ references, and domain ontologies like the Protein Ontology and the Chemical Inf
 Ontology. Throughout this paper, various prefixes are used to simplify RDF output, outlined
 in Table~\ref{namespaces}.
 
+\begin{table*}
+\caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
+\begin{tabular}{ll}
+\hline
+Common & Vocabularies \\
+bibo    & Bibliography Ontology~\cite{Giasson2011} \\
+        & http://purl.org/ontology/bibo/ \\
+cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
+        & http://semanticscience.org/resource/ \\
+cito    & Citation Typing Ontology~\cite{Shotton2010} \\
+        & http://purl.org/spar/cito/ \\
+pro     & PRotein Ontology~\cite{Sidhu2006} \\
+        & http://purl.obolibrary.org/obo/ \\
+
+\hline
+ChEMBL-RDF & Namespaces\\
+act    & http://data.kasabi.com/dataset/chembl-rdf/activity/ \\
+assay  & http://data.kasabi.com/dataset/chembl-rdf/assay/ \\
+chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
+mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
+res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
+\hline
+\end{tabular}
+\end{table*}
+
 To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
 hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
 querying is capped, based on the estimated computational effort. Second, resources have
@@ -152,7 +177,13 @@ FIXME!
 \subsection{Data Structure}
 
 For each of the common resource classes a triple pattern was defined, following the
-data available in the relational database.
+data available in the relational database. ... see Figure~\ref{f1}.
+
+\begin{figure}[t]
+\includegraphics[width=0.5\textwidth]{figs/relations}
+\caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
+of common classes, while others are instances.}\label{f1}
+\end{figure}
 
 Assays .... anything
 
@@ -352,37 +383,6 @@ outlook ...
 \section{Acknowledgements}
 
 Tim Hodson and Zach Beauvais of Kasabi for their support. What S.H. Name of the Bioinformatics department at Uppsala University.
-
-\begin{figure}[t]
-\includegraphics[width=0.5\textwidth]{figs/relations}
-\caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
-of common classes, while others are instances.}\label{f1}
-\end{figure}
-
-\begin{table*}
-\caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
-\begin{tabular}{ll}
-\hline
-Common & Vocabularies \\
-bibo    & Bibliography Ontology~\cite{Giasson2011} \\
-        & http://purl.org/ontology/bibo/ \\
-cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
-        & http://semanticscience.org/resource/ \\
-cito    & Citation Typing Ontology~\cite{Shotton2010} \\
-        & http://purl.org/spar/cito/ \\
-pro     & PRotein Ontology~\cite{Sidhu2006} \\
-        & http://purl.obolibrary.org/obo/ \\
-
-\hline
-ChEMBL-RDF & Namespaces\\
-act    & http://data.kasabi.com/dataset/chembl-rdf/activity/ \\
-assay  & http://data.kasabi.com/dataset/chembl-rdf/assay/ \\
-chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
-mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
-res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
-\hline
-\end{tabular}
-\end{table*}
 
 \bibliography{article}
 
