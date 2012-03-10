@@ -65,6 +65,7 @@
 \author[E]{\fnms{Janna} \snm{Hastings}},
 \author[F]{\fnms{John} \snm{Overington}},
 \author[F]{\fnms{Anna} \snm{Gaulton}},
+\author[F]{\fnms{Mark} \snm{Davies}},
 \author[G]{\fnms{Bin} \snm{Chen}},
 \author[G]{\fnms{David} \snm{Wild}}
 
@@ -249,28 +250,30 @@ Compounds ... Three types of compounds, peptides, small chemicals, ...
 \begin{tiny}
 \begin{verbatim}
 m41:inchikey
-      a       cheminf:CHEMINF_000059 ;
-      cheminf:SIO_000300 "LMCOMIDLRGMFCZ-RIPOXUOASA-N" .
+ a cheminf:CHEMINF_000059 ;
+ cheminf:SIO_000300 "LMCOMIDLRGMFCZ-RIPOXUOASA-N" .
 
 m41:smiles
-      a       cheminf:CHEMINF_000018 ;
-      cheminf:SIO_000300 "CC(C)C[C@@H]1N2C=CC(NC(=O)[C@H](Cc3ccccc3)N(C)C(=O)C(Cc4c[nH]c5ccccc45)NC(=O)C(CCC(=O)N)NC(=O)[C@@H](CCSCCSCC[C@H]6NC(=O)[C@H](CC(C)C)N7C=CC(NC(=O)[C@H](Cc8ccccc8)N(C)C(=O)C(Cc9c[nH]c%10ccccc9%10)NC(=O)C(CCC(=O)N)NC6=O)C7=O)NC1=O)C2=O" .
+ a cheminf:CHEMINF_000018 ;
+ cheminf:SIO_000300
+  "CC(C)C[C@@H]1N2C= .... O)C7=O)NC1=O)C2=O" .
 
 m41:inchi
-      a       cheminf:CHEMINF_000113 ;
-      cheminf:SIO_000300 "InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1" .
+ a cheminf:CHEMINF_000113 ;
+ cheminf:SIO_000300
+  "InChI=1S/C82H102N .... 66+,67+,68+/m1/s1" .
 
 chemblid:CHEMBL406142
-      owl:equivalentClass mol:m41 .
+ owl:equivalentClass mol:m41 .
 
 mol:m41
-      rdfs:label "CHEMBL406142" , "Bis(3-[14-Benzyl-11-(1H-indol-3-ylmethyl)-2-isobutyl-13-methyl-5-(2-methylsulfanyl-ethyl)-3,6,9,12,15,20-hexaoxo-1,4,7,10,13,16-hexaaza-bicyclo[15.2.1]icos-18-en-8-yl]-propionamide)" ;
-      rdfs:subClassOf cheminf:CHEMINF_000000 ;
-      cheminf:CHEMINF_000200
-              m41:inchikey , m41:smiles , m41:inchi ;
-      <http://www.blueobelisk.org/chemistryblogs/inchi>
-              "InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1" ;
-      owl:equivalentClass <http://rdf.openmolecules.net/?InChI=1S/C82H102N16O14S2/c1-47(2)39-67-77(107)89-59(73(103)87-57(25-27-69(83)99)71(101)93-63(43-51-45-85-55-23-15-13-21-53(51)55)79(109)95(5)65(41-49-17-9-7-10-18-49)75(105)91-61-29-33-97(67)81(61)111)31-35-113-37-38-114-36-32-60-74(104)88-58(26-28-70(84)100)72(102)94-64(44-52-46-86-56-24-16-14-22-54(52)56)80(110)96(6)66(42-50-19-11-8-12-20-50)76(106)92-62-30-34-98(82(62)112)68(40-48(3)4)78(108)90-60/h7-24,29-30,33-34,45-48,57-68,85-86H,25-28,31-32,35-44H2,1-6H3,(H2,83,99)(H2,84,100)(H,87,103)(H,88,104)(H,89,107)(H,90,108)(H,91,105)(H,92,106)(H,93,101)(H,94,102)/t57?,58?,59-,60-,61?,62?,63?,64?,65+,66+,67+,68+/m1/s1> , <http://bio2rdf.org/chebi:100041> , chemblid:CHEMBL406142 .
+ rdfs:label "CHEMBL406142" , "Bis(3-[1 .... yl]-propionamide)" ;
+ rdfs:subClassOf cheminf:CHEMINF_000000 ;
+ cheminf:CHEMINF_000200
+  m41:inchikey , m41:smiles , m41:inchi ;
+ owl:equivalentClass <http://rdf.openm .... 66+,67+,68+/m1/s1> ,
+  <http://bio2rdf.org/chebi:100041> ,
+  chemblid:CHEMBL406142 .
 \end{verbatim}
 \end{tiny}
 
@@ -289,7 +292,8 @@ res:r1
  a bibo:Article ;
  rdfs:seeAlso <http://bio2rdf.org/pubmed:14695813> ;
  dc:date "2004" ;
- dc:isPartOf journal:j6c706049c2e08871b7c46a6528065736 ;
+ dc:isPartOf
+  journal:j6c706049c2e08871b7c46a6528065736 ;
  bibo:issue "1" ;
  bibo:pageEnd "9" ;
  bibo:pageStart "1" ;
@@ -301,6 +305,15 @@ res:r1
 \subsection{SPARQL end points}
 
 Previously, a SPARQL end point has been set up at Uppsala University.
+
+For human-oriented browsing, a SNORQL front-end has been set up, which we
+recently updated to have a menu item for superclasses, that is classes
+of which subclasses are found in the data, as shown in Figure~\ref{f2}.
+
+\begin{figure}[bt]
+\includegraphics[width=0.5\textwidth]{snorql}
+\caption{The SNORQL interface for browsing the SPARQL end point.}\label{f2}
+\end{figure}
 
 \subsubsection{Bio2RDF}
 
