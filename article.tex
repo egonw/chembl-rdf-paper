@@ -79,7 +79,7 @@
 
 \begin{abstract}
 This paper describes the continued conversion of ChEMBL data into RDF triples, using a few existing
-ontologis, and demonstrates a few new use cases, taking advantage of its linked nature.
+ontologies, and demonstrates a few new use cases, taking advantage of its linked nature.
 \end{abstract}
 
 \begin{keyword}
@@ -95,14 +95,18 @@ Resource Description Framework, ChEMBL
 
 Despite the data deluge, finding new, unique, but significant patterns explaining biological
 phenomena not yet understood is limited by the availability of data. Such data analysis is
-beyond the scope is single data sets; it requires data integration from many sources, for
+beyond the scope of single data sets; it requires data integration from many sources, for
 example, systems biology integrating micro-array differential expression to biological
 pathways~\cite{}. Another prominent example is drug discovery where a new unique chemical entity is
 searched with just the right biological properties. This too requires linking many
 data sets~\cite{Samwald2011,OpenPHACTS}.
 
+AJW> CIte here the Open PHACTS paper submitted next week: Open PHACTS: Semantic interoperability for drug discovery
+Antony J. Williams, Lee Harland, Paul Groth, Stephen Pettifer, Christine Chichester, Egon L. Willighagen, Chris T. Evelo, Niklas Blomberg, Gerhard Ecker, Carole Goble and Barend Mons, Drug Disc. Today. Submitted for publication. Hopefully reviewed and with DOI available by the time this article is accepted.
+
+
 ChEMBL contains biological activities for over a million chemical entities, extracted from
-literature, providing a unique resource for drug discovers~\cite{Gaulton2012,Warr2009}. Originally, this
+literature, providing a unique resource for drug discovers~\cite{Gaulton2012,Warr2009}. It is updated on a fairly frequent basis as the existing data is further curated and new data is added. Originally, this
 data was available for download and via a web interface. The former requires setting up
 the data in a relational database, while the latter limits the machine access to the data.
 Two independent teams created RDF triples for the ChEMBL data, resulting in exposure
@@ -117,16 +121,16 @@ research in the life sciences.
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
 RDF triples were created from a local MySQL database to which the SQL data dump of ChEMBL was
-inserted, using a PHP script, available from source code hosting service
+inserted, using a PHP script, available from the source code hosting service
 GitHub~\citep{ChEMBLRDFGitHub}, a process outlined earlier in a best practices note by
 the international Health Care and Life Sciences XXX Working Group~\cite{Marshall2012}.
 
 During the life time of this project, the ontologies used in ChEMBL-RDF have changed,
 initially using a custom, ad-hoc ontology, but increasingly with community-proposed
-ontologies, making the RDF more interoperable. The ChEMBL-RDF 13 uses ontology
-standards like Bibliography Ontology for Citation Typinh Ontology for liteature
+ontologies, making the RDF more interoperable. The ChEMBL-RDF 13 dataset uses ontology
+standards such as the Bibliography Ontology for Citation Typing Ontology for literature
 references, and domain ontologies like the Protein Ontology and the Chemical Information
-Ontology. Throughout this paper, various prefixes are used to simplify RDF output, outlined
+Ontology. Throughout this paper, various prefixes are used to simplify the RDF output and they are outlined
 in Table~\ref{namespaces}.
 
 \begin{table*}
@@ -157,7 +161,7 @@ res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
 To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
 hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
 querying is capped, based on the estimated computational effort. Second, resources have
-been made dereferencible using the Kasabi platform. This platform also provides a SPARQL
+been made dereferencable using the Kasabi platform. This platform also provides a SPARQL
 end point, but requires a user account.
 
 As a method to further test the access and possibilities of this Linked Data version of
@@ -377,7 +381,8 @@ David: Chem2Bio2RDF
 
 \subsubsection{Linking out to ChemSpider}
 
-Antony: if you can contribute ChemSpider IDs for the ChEMBL compounds ...
+Antony: if you can contribute ChemSpider IDs for the ChEMBL compounds ... 
+AJW> CC-BY-SA 3.0 licensing approved for the mappings between ChEMBL and ChemSpider. Please use the Open PHACTS data provided and attribution to ChEMBL, OPS and ChemSPider.
 
 \subsubsection{Linking out to ChEMBL}
 Peter: write up the proxying... if that still works...
