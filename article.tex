@@ -384,6 +384,33 @@ David: Chem2Bio2RDF
 Antony: if you can contribute ChemSpider IDs for the ChEMBL compounds ... 
 AJW> CC-BY-SA 3.0 licensing approved for the mappings between ChEMBL and ChemSpider. Please use the Open PHACTS data provided and attribution to ChEMBL, OPS and ChemSPider.
 
+RSC’s ChemSpider~\cite{Pence2010} is a free online database of over 26 million unique
+chemical compounds aggregated from over 400 data sources as well as chemical data extracted
+from RSC scientific articles and databases. Since its inception efforts have been made to
+utilize the platform as both a deposition platform for the community to contribute data as
+well as a platform for annotation and curation. Studies have shown that there are data
+quality issues in many of the public compound databases~\cite{Williams2011} and ChemSpider has become a
+valuable resource for curated data, especially chemical-compound name mappings. ChemSpider
+is presently providing the chemical services underpinning the Open PHACTS semantic web
+project~\cite{Williams2012} providing access to structure, substructure and similarity searching services
+to the core architecture of the project. Specific chemical data sources containing data
+mappings between ChemSpider identifiers (CSIDs) and the original data source identifiers
+have been provided to the triple store, together with chemical identifiers including
+validated chemical names (systematic, generic and trivial), SMILES () and InChIs (). 
+The data mappings between the ChemSpider IDs and the data source IDs are released to
+the community under Creative Commons licenses (CC-BY-SA 3.0). Link mappings of the
+form:
+ 
+\begin{tiny}
+\begin{verbatim}
+<http://rdf.chemspider.com/370>
+ skos:exactMatch
+ <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846>
+\end{verbatim}
+\end{tiny}
+
+have been constructed.
+
 \subsubsection{Linking out to ChEMBL}
 Peter: write up the proxying... if that still works...
 
