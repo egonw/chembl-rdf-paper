@@ -8,10 +8,13 @@ subdirs:
 
 update: article.pdf
 
+figs/lodgraph.tex: figs/lodgraph.dot    
+	dot2tex --figonly figs/lodgraph.dot > figs/lodgraph.tex
+
 figs/relations.tex: figs/relations.dot
 	dot2tex --figonly figs/relations.dot > figs/relations.tex
 
-article.bbl: article.bib figs/relations.tex
+article.bbl: article.bib figs/relations.tex figs/lodgraph.tex
 	pdflatex article || true
 	bibtex article || true
 

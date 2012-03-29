@@ -102,7 +102,8 @@ searched with just the right biological properties. This too requires linking ma
 data sets~\cite{Samwald2011,OpenPHACTS}.
 
 ChEMBL contains biological activities for over a million chemical entities, extracted from
-literature, providing a unique resource for drug discovers~\cite{Gaulton2012,Warr2009}. It is updated on a fairly frequent basis as the existing data is further curated and new data is added. Originally, this
+literature, providing a unique resource for drug discovers~\cite{Gaulton2012,Warr2009}.
+It is updated on a fairly frequent basis as the existing data is further curated and new data is added. Originally, this
 data was available for download and via a web interface. The former requires setting up
 the data in a relational database, while the latter limits the machine access to the data.
 Two independent teams created RDF triples for the ChEMBL data, resulting in exposure
@@ -301,6 +302,20 @@ res:r1
  bibo:volume "47" .
 \end{verbatim}
 \end{tiny}
+
+\subsection{Linked Open Data}
+
+To make the data a proper citizen of the semantic web, we link out to various resources.
+The web resources linked to as well as the predicate used for that link is given in
+Figure~\ref{2}.
+Links out are made to ChemSpider and RDF OpenMolecules for compounds, Bio2RDF for
+protein targets, and CrossRef and Bio2RDF for DOIs and PubMed identifiers respectively.
+
+\begin{figure}[t]
+\includegraphics[width=0.5\textwidth]{figs/lodgraph}
+\caption{The links out of the ChEMBL-RDF data into the Linked Open Data cloud.
+Edges are labeled by the predicates making the links.}\label{2}
+\end{figure}
 
 \subsection{SPARQL end points}
 

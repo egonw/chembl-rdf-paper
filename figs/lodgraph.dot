@@ -1,0 +1,19 @@
+
+digraph G {
+
+  center=""
+
+  chembl [label="ChEMBL-RDF"];
+  chemspider [label="ChemSpider"];
+  bio2rdfuniprot [label="Bio2RDF Uniprot"];
+  bio2rdfpubmed [label="Bio2RDF PubMed"];
+  crossref [label="CrossRef"];
+  ron [label="RDF OpenMolecule"];
+
+  chembl -> chemspider [label="?"];
+  chembl -> bio2rdfuniprot [label="owl:sameAs"];
+  chembl -> bio2rdfpubmed [label="?"];
+  chembl -> crossref [label="?"];
+  chembl -> ron [label="owl:equivalentClass"];
+
+}
