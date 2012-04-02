@@ -10,10 +10,10 @@ digraph G {
   crossref [label="CrossRef"];
   ron [label="RDF OpenMolecule"];
 
-  chembl -> chemspider [label="?"];
+  chembl -> chemspider [label="skos:exactMatch"];
   chembl -> bio2rdfuniprot [label="owl:sameAs"];
-  chembl -> bio2rdfpubmed [label="?"];
-  chembl -> crossref [label="?"];
+  chembl -> bio2rdfpubmed [label="rdfs:seeAlso"];
+  chembl -> crossref [label="owl:sameAs"];
   chembl -> ron [label="owl:equivalentClass"];
 
 }
