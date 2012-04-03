@@ -152,10 +152,14 @@ pro     & PRotein Ontology~\cite{Sidhu2006} \\
         & http://purl.obolibrary.org/obo/ \\
 
 \hline
-ChEMBL-RDF & Namespaces\\
+ChEMBL-RDF & Namespace\\
+\hline
+chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
+\hline
+ChEMBL-RDF & Prefixes\\
+\hline
 act    & http://data.kasabi.com/dataset/chembl-rdf/activity/ \\
 assay  & http://data.kasabi.com/dataset/chembl-rdf/assay/ \\
-chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
 mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
 res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
 \hline
@@ -167,6 +171,12 @@ hosted at Uppsala University, using the Open Source Virtuoso software. Use is fr
 querying is capped, based on the estimated computational effort. Second, resources have
 been made dereferencable using the Kasabi platform~\cite{kasabi}. This platform also provides a SPARQL
 end point, but requires a user account.
+
+An initial custom vocabulary has been defined, reflecting the concepts and links found in the
+data structure of the ChEMBL database. This vocabulary has only partially been converted into
+an OWL ontology, and is being phased out and replaced by common ontologies. This has not happened
+for all data yet, and terms from the ChEMBL-RDF namespace (\textit{http://rdf.farmbio.uu.se/chembl/onto/\#},
+prefix: \textit{chembl}) are still in use.
 
 As a method to further test the access and possibilities of this Linked Data version of
 ChEMBL, a few new uses cases have been developed for this paper.
@@ -215,23 +225,12 @@ The data mappings between the ChemSpider IDs and the data source IDs are release
 the community under Creative Commons licenses (CC-BY-SA 3.0; attribution should be
 made to the original ChEMBL database, Open PHACTS, and ChemSpider).
 
-Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
-are also available via a CHEMINF representation:
- 
-\begin{tiny}
-\begin{verbatim}
-<http://rdf.chemspider.com/370>
- skos:exactMatch
- <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846> .
-\end{verbatim}
-\end{tiny}
-
-FIXME: add ChemSpider IDs with CHEMINF.
-
 \subsubsection{Data Structure}
 
-For each of the common resource classes a triple pattern was defined, following the
-data available in the relational database. ... see Figure~\ref{f1}.
+For each of the common resource classes, a triple pattern was defined, following the
+data available in the relational database. Figure~\ref{f1} shows how the various resource
+classes are linked together. This section will show how data in the ChEMBL database
+is exposed at an triple level.
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{figs/relations}
@@ -239,13 +238,44 @@ data available in the relational database. ... see Figure~\ref{f1}.
 of common classes, while others are instances.}\label{f1}
 \end{figure}
 
-Assays .... anything
+The core concept in the ChEMBL database is that of the biological activity. This
+is the type of information that the ChEMBL database extracts from literature.
+Activities are at this moment still using an informal, custom vocabulary: the
+type, fields and links to other resources are using the \textit{chembl}
+namespace. While ChEMBL provides both the original activities as found in literature
+and standardized values allowing comparison between studies, the triples only
+make the latter available. The CiTO ontology is used to point to the paper from
+which the data was extracted.
 
-\begin{small}
+\begin{footnotesize}
+\begin{verbatim}
+act:a31863
+ a       chembl:Activity ;
+ cito:citesAsDataSource
+  res:r6424 ;
+ chembl:forMolecule mol:m180094 ;
+ chembl:onAssay assay:a54505 ;
+ chembl:relation ">" ;
+ chembl:standardUnits
+  "nM" ;
+ chembl:standardValue
+  "100000"^^xsd:float ;
+ chembl:type "IC50" .
+\end{verbatim}
+\end{footnotesize}
+
+The activities themselves are measured against assays, which make up a second important
+resource type. Various assay types are found in the database: chembl:ADMET, chembl:Binding,
+chembl:Functional, chembl:Property, and chembl:Unassigned. The assay information link
+activities to a target (see below) and has a short description. The confidence information
+assigned by the ChEMBL is exposed too, and was previously used to improve activity
+prediction using Bayesian statistics~\cite{Willighagen2011}.
+
+\begin{footnotesize}
 \begin{verbatim}
 assay:a17
  a chembl:Assay ;
- chembl:extractedFrom
+ cito:citesAsDataSource
   res:r11347 ;
  chembl:hasAssayType chembl:ADMET ;
  chembl:hasConfScore "7"^^xsd:int ;
@@ -253,11 +283,15 @@ assay:a17
   "Inhibition of ... hydroxylase" ;
  chembl:hasTarget target:t100122 .
 \end{verbatim}
-\end{small}
+\end{footnotesize}
 
-Targets ... protein, other
+The assays measure activities against particular biological targets. The ChEMBL database
+recognizes various types: pro:PR\_0000001, chembl:ADMET, chembl:CELL-LINE,
+chembl:NUCLEIC-ACID, chembl:ORGANISM, chembl:SUBCELLULAR, chembl:TISSUE,
+chembl:UNCHECKED, and chembl:UNKNOWN. The latter two are currently defined as
+explicit types.
 
-\begin{small}
+\begin{footnotesize}
 \begin{verbatim}
 target:t1
  a chembl:Target ;
@@ -274,34 +308,13 @@ target:t1
   "Membrane" , "Sulfation" ;
  chembl:hasTaxonomy
   <http://bio2rdf.org/taxonomy:9606> ;
- chembl:organism "Homo sapiens" ;
- = <http://bio2rdf.org/uniprot:O43451> , 
-   <http://bio2rdf.org/ec:3.2.1.3> .
+ chembl:organism "Homo sapiens" .
 \end{verbatim}
-\end{small}
-
-Activities ...
-
-\begin{small}
-\begin{verbatim}
-act:a31863
- a       chembl:Activity ;
- cito:citesAsDataSource
-  res:r6424 ;
- chembl:forMolecule mol:m180094 ;
- chembl:onAssay assay:a54505 ;
- chembl:relation ">" ;
- chembl:standardUnits
-  "nM" ;
- chembl:standardValue
-  "100000"^^xsd:float ;
- chembl:type "IC50" .
-\end{verbatim}
-\end{small}
+\end{footnotesize}
 
 Compounds ... Three types of compounds, peptides, small chemicals, ...
 
-\begin{tiny}
+\begin{footnotesize}
 \begin{verbatim}
 m41:inchikey
  a cheminf:CHEMINF_000059 ;
@@ -332,14 +345,42 @@ mol:m41
   <http://bio2rdf.org/chebi:100041> ,
   chemblid:CHEMBL406142 .
 \end{verbatim}
+\end{footnotesize}
+
+The molecular properties available from ChEMBL are now too exposed in triple format,
+and like the InChI and InChIKey, these are provided using the CHEMINF ontology structure:
+
+\begin{footnotesize}
+\begin{verbatim}
+mol:m1
+ cheminf:CHEMINF_000200 m1:alogp .
+
+m1:alogp
+ a cheminf:CHEMINF_000305 ;
+ cheminf:SIO_000300
+  "3.344"^^xsd:double .
+\end{verbatim}
+\end{footnotesize}
+
+Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
+are also available via a CHEMINF representation:
+ 
+\begin{tiny}
+\begin{verbatim}
+<http://rdf.chemspider.com/370>
+ skos:exactMatch
+ <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846> .
+\end{verbatim}
 \end{tiny}
+
+FIXME: add ChemSpider IDs with CHEMINF.
 
 For documents little information is replicated from the database, taking advantage
 of PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs). URIs for the
 latter can be resolved online, providing curated information on the identified
 documents. For PubMed articles ...
 
-\begin{tiny}
+\begin{footnotesize}
 \begin{verbatim}
 journal:j6c706049c2e08871b7c46a6528065736
  a bibo:Journal ;
@@ -357,7 +398,7 @@ res:r1
  bibo:pmid "14695813" ;
  bibo:volume "47" .
 \end{verbatim}
-\end{tiny}
+\end{footnotesize}
 
 \subsection{Linked Open Data}
 
