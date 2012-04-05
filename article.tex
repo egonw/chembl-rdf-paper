@@ -264,6 +264,11 @@ act:a31863
 \end{verbatim}
 \end{footnotesize}
 
+More than five thousand different activity types are captured by the ChEMBL database.
+The top five types are Potency (43\%), IC50 (13\%), MIC (4.6\%), Inhibition (3.7\%),
+and Ki (3.6\%). The activity types in ChEMBL-RDF are currently not available as, or
+using, an ontology.
+
 The activities themselves are measured against assays, which make up a second important
 resource type. Various assay types are found in the database: chembl:ADMET, chembl:Binding,
 chembl:Functional, chembl:Property, and chembl:Unassigned. The assay information link
@@ -312,10 +317,29 @@ target:t1
 \end{verbatim}
 \end{footnotesize}
 
-Compounds ... Three types of compounds, peptides, small chemicals, ...
+For drug discovery, the drugs themselves are the main topic of study.
+ChEMBL contains many different drug types, mostly small molecules,
+but also peptides, proteins, oligosaccharides, oligonucleotides, and
+even antibodies. All compounds are represented as classes, following
+the design of the CHEMINF ontology. The compound typing is expressed
+by subclassing other classes. For example, proteins subclass the
+Protein concept from the PRotein Ontology (PR\_000000001), small
+molecules subclass the Chemical Entity concept from the CHEMINF
+ontology (CHEMINF\_000000), and oligosaccharides and oligonucleotides
+subclass their respective matches in the CHEBI ontology (CHEBI\_50699
+and CHEBI\_7754). For each drug compound the name and synonyms are
+provided as labels. When InChI and InChIKeys are available for a drug, then these are
+provided via the CHEMINF formalism (here abbreviated):
 
 \begin{footnotesize}
 \begin{verbatim}
+mol:m41
+ rdfs:label "CHEMBL406142" , 
+   "Bis(3-[1 .... yl]-propionamide)" ;
+ rdfs:subClassOf cheminf:CHEMINF_000000 ;
+ cheminf:CHEMINF_000200
+  m41:inchikey , m41:smiles , m41:inchi ;
+
 m41:inchikey
  a cheminf:CHEMINF_000059 ;
  cheminf:SIO_000300
@@ -333,22 +357,12 @@ m41:inchi
 
 chemblid:CHEMBL406142
  owl:equivalentClass mol:m41 .
-
-mol:m41
- rdfs:label "CHEMBL406142" , 
-   "Bis(3-[1 .... yl]-propionamide)" ;
- rdfs:subClassOf cheminf:CHEMINF_000000 ;
- cheminf:CHEMINF_000200
-  m41:inchikey , m41:smiles , m41:inchi ;
- owl:equivalentClass 
-  <http://rdf.openm .... 66+,67+,68+/m1/s1> ,
-  <http://bio2rdf.org/chebi:100041> ,
-  chemblid:CHEMBL406142 .
 \end{verbatim}
 \end{footnotesize}
 
-The molecular properties available from ChEMBL are now too exposed in triple format,
-and like the InChI and InChIKey, these are provided using the CHEMINF ontology structure:
+For small molecules, molecular properties are often available from ChEMBL, and as of ChEMBL-RDF 13
+these too are exposed in triple format. Like the InChI and InChIKey, these are provided using the
+CHEMINF ontology approach. Here is, for example, the ALogP value:
 
 \begin{footnotesize}
 \begin{verbatim}
@@ -362,23 +376,11 @@ m1:alogp
 \end{verbatim}
 \end{footnotesize}
 
-Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
-are also available via a CHEMINF representation:
- 
-\begin{tiny}
-\begin{verbatim}
-<http://rdf.chemspider.com/370>
- skos:exactMatch
- <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846> .
-\end{verbatim}
-\end{tiny}
-
-FIXME: add ChemSpider IDs with CHEMINF.
-
 For documents little information is replicated from the database, taking advantage
 of PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs). URIs for the
 latter can be resolved online, providing curated information on the identified
-documents. For PubMed articles ...
+documents. For each paper, basic properties are provided using the BIBO
+ontology:
 
 \begin{footnotesize}
 \begin{verbatim}
@@ -388,7 +390,6 @@ journal:j6c706049c2e08871b7c46a6528065736
 
 res:r1
  a bibo:Article ;
- rdfs:seeAlso <http://bio2rdf.org/pubmed:14695813> ;
  dc:date "2004" ;
  dc:isPartOf
   journal:j6c706049c2e08871b7c46a6528065736 ;
@@ -419,6 +420,18 @@ Edges are labeled by the predicates making the links.}\label{2}
 Peter/Egon: write up links to Bio2RDF for protein, pubmed, ...
 
 \subsubsection{Linking out to ChemSpider}
+
+Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
+are also available via a CHEMINF representation:
+ 
+\begin{tiny}
+\begin{verbatim}
+<http://rdf.chemspider.com/370>
+ skos:exactMatch
+ <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846> .
+\end{verbatim}
+\end{tiny}
+
 
 \subsubsection{Linking out to RDF OpenMolecules}
 
