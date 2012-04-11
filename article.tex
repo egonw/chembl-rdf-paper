@@ -311,8 +311,6 @@ target:t1
   "Maltase-glucoamylase, intestinal" ;
  chembl:hasKeyword "Glycosidase" , 
   "Membrane" , "Sulfation" ;
- chembl:hasTaxonomy
-  <http://bio2rdf.org/taxonomy:9606> ;
  chembl:organism "Homo sapiens" .
 \end{verbatim}
 \end{footnotesize}
@@ -403,11 +401,11 @@ res:r1
 
 \subsection{Linked Open Data}
 
-To make the data a proper citizen of the semantic web, we link out to various resources.
-The web resources linked to as well as the predicate used for that link is given in
-Figure~\ref{2}.
-Links out are made to ChemSpider and RDF OpenMolecules for compounds, Bio2RDF for
-protein targets, and CrossRef and Bio2RDF for DOIs and PubMed identifiers respectively.
+To make the data a proper citizen of the semantic web, we link out to various resources,
+which is visualized in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
+using the new complementary index and RDF OpenMolecules using InChI values, to Bio2RDF
+for protein targets using the uniprot identifier, and CrossRef and Bio2RDF for literature
+references using the DOIs and PubMed identifiers, respectively.
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{figs/lodgraph}
@@ -417,7 +415,34 @@ Edges are labeled by the predicates making the links.}\label{2}
 
 \subsubsection{Linking out to Bio2RDF}
 
-Peter/Egon: write up links to Bio2RDF for protein, pubmed, ...
+The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data
+server~\cite{Ansell2011} to access SPARQL endpoints for a range of scientific databases~\cite{Belleau2008}.
+A number of these databases are referenced in ChEMBL, including ChEBI, Pubmed, and both the
+Uniprot protein and taxonomy databases~\cite{TheUniProtConsortium2010}. These links are
+vital to provide context for use cases that require a correlation between chemical
+structures and other scientific data. 
+
+For protein links out are based on the FOOBAR for the species, the EC code for proteins,
+as well as UniProt identifiers.
+
+FIXME: should we link out to the new UniProt RDF?
+
+\begin{tiny}
+\begin{verbatim}
+target:t101191
+ chembl:hasTaxonomy <http://bio2rdf.org/taxonomy:9606> ;
+ owl:sameAs <http://bio2rdf.org/ec:2.7.11.1> ;
+ owl:sameAs <http://bio2rdf.org/uniprot:Q8IYT8> .
+\end{verbatim}
+\end{tiny}
+
+For papers with PubMed identifiers we also link out to Bio2RDF:
+
+\begin{tiny}
+\begin{verbatim}
+res:r23 rdfs:seeAlso <http://bio2rdf.org/pubmed:15149661> .
+\end{verbatim}
+\end{tiny}
 
 \subsubsection{Linking out to ChemSpider}
 
@@ -426,16 +451,39 @@ are also available via a CHEMINF representation:
  
 \begin{tiny}
 \begin{verbatim}
-<http://rdf.chemspider.com/370>
- skos:exactMatch
- <http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846> .
+<http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846>
+ skos:exactMatch <http://rdf.chemspider.com/370> .
 \end{verbatim}
 \end{tiny}
 
-
 \subsubsection{Linking out to RDF OpenMolecules}
 
+The InChI is a unique identifier for (small) organic molecules, and has been previously used
+to define unique IRIs for molecules~\cite{???}. While IRIs are theoretically unlimited in length,
+in practice web browsers and servers do limit the length of IRIs. Virtuoso is, unfortunately,
+a system which supports only IRIs of up to a certain length. Therefore, only for smaller molecules
+InChI-based links are created. Almost 1.3 million links are created, looking like:
+
+\begin{tiny}
+\begin{verbatim}
+mol:m62687 owl:equivalentClass
+ <http://rdf.openmolecules.net/?InChI=1S/CH4/h1H4> .
+\end{verbatim}
+\end{tiny}
+
+Notice here the use of owl:equivalentClass to match the formalism in CHEMINF that defines molecules
+are classes, rather than instances.
+
 \subsubsection{Linking out to CrossRef}
+
+Besides the PubMed identifiers used to link from literature references to Bio2RDF (see earlier),
+ChEMBL uses DOIs alternatively, which we use to link out to the RDF provided by CrossRef~\citep{CrossRefRDF}:
+
+\begin{tiny}
+\begin{verbatim}
+res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
+\end{verbatim}
+\end{tiny}
 
 \subsection{SPARQL end points}
 
@@ -455,13 +503,6 @@ of which subclasses are found in the data, as shown in Figure~\ref{f2}.
 \subsection{Bio2RDF}
 
 %Peter: write up the proxying... if that still works... It was broken through disuse, but is available again in its rdf.farmbio.uu.se configuration, separately from the bio2rdf-webapp at https://github.com/ansell/chembl-webapp/
-
-The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data
-server~\cite{Ansell2011} to access SPARQL endpoints for a range of scientific databases~\cite{Belleau2008}.
-A number of these databases are referenced in ChEMBL, including ChEBI, Pubmed, and both the
-Uniprot protein and taxonomy databases~\cite{TheUniProtConsortium2010}. These links are
-vital to provide context for use cases that require a correlation between chemical
-structures and other scientific data. 
 
 The Linked Data server used by Bio2RDF has been reconfigured for ChEMBL to provide URL
 based services for standard URI resolution, along with text and link searches
