@@ -1,5 +1,3 @@
 - look up proper name RDF OpenMolecule
 - rotable / rotational ?
-- clean up graphviz layouts to use springs or so
 - update Waagmeester2012 with CitedIn paper details
-- skos:exactMatch for bio2rdf pubmedid
