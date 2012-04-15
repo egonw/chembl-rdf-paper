@@ -174,8 +174,8 @@ querying is capped, based on the estimated computational effort. Second, resourc
 been made dereferencable using the Kasabi platform~\cite{kasabi}. The Kasabi hosting provides a SPARQL
 end point which requires a user account. A user account can be free for casual usage, or paid for consistent usage.
 
-Although many parts of the CHEMBL-RDF dataset use community based ontologies, some 
-terms from the previous ontology are still used. These terms were created under the 
+Although many parts of the CHEMBL-RDF 13 dataset now use community based ontologies, some 
+terms from the previous ad-hoc ontology are still used. These terms were created under the 
 URI namespace \textit{http://rdf.farmbio.uu.se/chembl/onto/\#}, and are referenced here using the
 prefix: \textit{chembl}.
 
@@ -184,47 +184,10 @@ prefix: \textit{chembl}.
 
 \section{Results}\label{s3}
 
-We here present the updated ChEMBL-RDF.
+We here present the updated ChEMBL-RDF, including a description of the mapping process 
+and the identification of links to other datasets.
 
 \subsection{ChEMBL-RDF}
-
-\subsubsection{Data Statistics}
-
-\# triples
-\# links out
-\# problems
-
-The full set of triples are available from the website http://semantics.bigcat.unimaas.nl/chembl12/.
-
-FIXME!
-
-In contrast to earlier releases of ChEMBL-RDF, it now contains the chemical properties
-provided by the ChEMBL database as calculated by ACD/Labs and XXXXX. The data includes
-chemical properties like polar surface area, pKa and logP, counts for hydrogen bond donor
-and acceptor, and rotational bonds. This data is provided for XXXXX structures.
-
-\subsubsection{Data Statistics and Validation}
-
-John/Anna: common statistics with SPARQL
-
-\subsubsection{Added Data}
-
-RSC's ChemSpider~\cite{Pence2010} is a free online database of over 26 million unique
-chemical compounds aggregated from over 400 data sources as well as chemical data extracted
-from RSC scientific articles and databases. Since its inception efforts have been made to
-utilize the platform as both a deposition platform for the community to contribute data as
-well as a platform for annotation and curation. Studies have shown that there are data
-quality issues in many of the public compound databases~\cite{Williams2011} and ChemSpider has become a
-valuable resource for curated data, especially chemical-compound name mappings. ChemSpider
-is presently providing the chemical services underpinning the Open PHACTS semantic web
-project~\cite{Williams2012} providing access to structure, substructure and similarity searching services
-to the core architecture of the project. Specific chemical data sources containing data
-mappings between ChemSpider identifiers (CSIDs) and the original data source identifiers
-have been provided to the triple store, together with chemical identifiers including
-validated chemical names (systematic, generic and trivial), SMILES () and InChIs (). 
-The data mappings between the ChemSpider IDs and the data source IDs are released to
-the community under Creative Commons licenses (CC-BY-SA 3.0; attribution should be
-made to the original ChEMBL database, Open PHACTS, and ChemSpider).
 
 \subsubsection{Data Structure}
 
@@ -241,7 +204,7 @@ of common classes, while others are instances.}\label{f1}
 
 The core concept in the ChEMBL database is that of the biological activity. This
 is the type of information that the ChEMBL database extracts from literature.
-Activities are at this moment still using an informal, custom vocabulary: the
+In CHEMBL-RDF activities are mostly represented using the custom CHEMBL-RDF vocabulary, where the
 type, fields and links to other resources are using the \textit{chembl}
 namespace. While ChEMBL provides both the original activities as found in literature
 and standardized values allowing comparison between studies, the triples only
@@ -411,6 +374,25 @@ res:r1
 \end{verbatim}
 \end{footnotesize}
 
+\subsubsection{Data Statistics}
+
+\# triples
+\# links out
+\# problems
+
+The full set of triples are available from the website http://semantics.bigcat.unimaas.nl/chembl12/.
+
+FIXME!
+
+In contrast to earlier releases of ChEMBL-RDF, it now contains the chemical properties
+provided by the ChEMBL database as calculated by ACD/Labs and XXXXX. The data includes
+chemical properties like polar surface area, pKa and logP, counts for hydrogen bond donor
+and acceptor, and rotational bonds. This data is provided for XXXXX structures.
+
+\subsubsection{Data Statistics and Validation}
+
+John/Anna: common statistics with SPARQL
+
 \subsection{Linked Open Data}
 
 To make the data a proper citizen of the semantic web, we link out to various resources,
@@ -458,6 +440,22 @@ res:r23 skos:exactMatch <http://bio2rdf.org/pubmed:15149661> .
 
 \subsubsection{Linking out to ChemSpider}
 
+ChemSpider~\cite{Pence2010} is a free online database provided by RSC. It contains over 26 million unique
+chemical compounds aggregated from over 400 data sources as well as chemical data extracted
+from RSC scientific articles and databases. Since its inception, efforts have been made to
+utilize it as both a deposition platform for the community to contribute novel data, as
+well as a platform for annotation and curation for existing data. Studies have shown that there are data
+quality issues in many of the public compound databases~\cite{Williams2011}. ChemSpider has become a
+valuable resource for curated data, especially chemical-compound name mappings. ChemSpider
+is presently providing the chemical structure, substructure and similarity searching services 
+underpinning the Open PHACTS semantic web project~\cite{Williams2012}. Specific chemical data 
+sources containing data mappings between ChemSpider identifiers (CSIDs) and the original data 
+source identifiers have been provided to the triple store, together with chemical identifiers 
+including validated chemical names (systematic, generic and trivial), SMILES () and InChIs (). 
+The data mappings between the CSIDs and ChEMBL IDs are released to the 
+community under the Creative Common Attribution-Share Alike license (CC-BY-SA 3.0). Attribution 
+should be made to the original ChEMBL database, Open PHACTS, and ChemSpider.
+
 Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
 are also available via a CHEMINF representation:
  
@@ -488,8 +486,8 @@ are classes, rather than instances.
 
 \subsubsection{Linking out to CrossRef}
 
-Besides the PubMed identifiers used to link from literature references to Bio2RDF (see earlier),
-ChEMBL uses DOIs alternatively, which we use to link out to the RDF provided by CrossRef~\citep{Bilder2011}:
+In addition to the PubMed identifiers used to link from literature references to Bio2RDF,
+ChEMBL provides DOIs, which we use to link out to the RDF provided by CrossRef~\citep{Bilder2011}:
 
 \begin{tiny}
 \begin{verbatim}
@@ -499,8 +497,8 @@ res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
 
 \section{Applications}
 
-The ChEMBL-RDF is increasingly used, and we here present a few applications. The first application
-describes how it uses the SPARQL end point can be used to make the data available as linked data
+ChEMBL-RDF can be used to explore interrelated scientific datasets, and we here present a few applications. 
+The first application describes how it uses the SPARQL end point can be used to make the data available as linked data
 via the Bio2RDF platform. The second application takes advantage of the bibliographic information
 exposed as machine readable data, in calculating citation statistics. The third application shows
 an integration of ChEMBL-RDF with ChemSpider to provide an extension for the decision support
@@ -510,15 +508,15 @@ with other life sciences databases, showing the power of the Linked Data approac
 \subsection{Bio2RDF}
 
 The Linked Data server used by Bio2RDF has been reconfigured for ChEMBL to provide URL
-based services for standard URI resolution, along with text and link searches
-\cite{WebAppGitHub}. It proxies the standard item
-URIs by translating URLs between those requested by users and the URIs that are available
-in the databases. For example, if the ChEMBL web application is running on the users
+based services for standard URI resolution, along with text and link searches~\cite{Ansell2011}. 
+The configuration files along with build scripts for the ChEMBL-RDF Linked Data server are available on GitHub~\cite{WebAppGitHub}. 
+It proxies the standard item URIs by translating URLs between those requested by users and the URIs that are available
+in SPARQL endpoints. For example, if the ChEMBL web application is running on the users
 local machine, e.g. \url{http://localhost:8080/chembl/}, then a request for the
 article with identifier ``a31863'', \url{http://localhost:8080/-chembl/article/a31863},
 will be resolved from the database using the full original URI,
 \url{http://data.kasabi.com/-dataset/chembl-rdf/13/activity/a31863}. If the
-user requested an RDF document, using content negotiation, the original URIs will be unchanged,
+user requested an RDF document using content negotiation, the original URIs will be unchanged,
 however, if the user requested an HTML document, the results will contain both the
 original RDF triples, represented using RDFa, with links that resolve using the users local machine.
 
@@ -546,9 +544,18 @@ for CitedIn.
 
 % Egon,Antony/Valery,Ola: develop and write up the Bioclipse Decision Support use case
 
-Bioclipse Decision Support (Bioclipse DS)~\cite{Spjuth:2011uq} is a user-oriented tool for providing on-time and on-demand information on chemical structures, based on the Bioclipse workbench. Such information can include calculated properties, data from database queries, and results from predictive models. Bioclipse DS has previously been demonstrated on predictive modeling in drug safety assessment~\cite{Spjuth:2011uq} and also been linked to invoke and present results from distributed toxicity predictions from the OpenTox infrastructure~\cite{Willighagen:2011kx}.
+Bioclipse Decision Support (Bioclipse DS)~\cite{Spjuth:2011uq} is a user-oriented tool for 
+providing on-time and on-demand information on chemical structures, based on the Bioclipse 
+workbench. Such information can include calculated properties, data from database queries, 
+and results from predictive models. Bioclipse DS has previously been demonstrated on predictive 
+modeling in drug safety assessment~\cite{Spjuth:2011uq} and also been linked to invoke and 
+present results from distributed toxicity predictions from the OpenTox infrastructure~\cite{Willighagen:2011kx}.
 
-In this study we extended Bioclipse DS with remote access to ChEMBL-RDF and Chemspider, which enables users to for chemical structures in Bioclipse look up near neighbors on Chemspider via the Chemspider Web API (SOAP) and query ChEMBL-RDF for properties regarding any measured interactions. The results are presented alongside predictive models in Bioclipse, and can be used as decision support when evaluating chemical structures and consider strategies for e.g. optimization.
+In this study we extended Bioclipse DS with remote access to ChEMBL-RDF and Chemspider. 
+This enables users browsing chemical structures in Bioclipse to look up near neighbors on Chemspider 
+via the Chemspider Web API (SOAP) and query ChEMBL-RDF for properties regarding any measured interactions. 
+The results are presented alongside predictive models in Bioclipse, and can be used as 
+decision support when evaluating chemical structures and consider strategies for optimization.
 
 [TODO: SCREENSHOT from Bioclipse-DS-ChEMBL-RDF]
 
