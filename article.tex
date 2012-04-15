@@ -78,14 +78,13 @@
 \address[G]{School of Informatics and Computing, Indiana University, Bloomington, IN, U.S.A.}
 
 \begin{abstract}
-Making data available as RDF has the advantages that integration with other web resources brings:
-we can link out to related data, others can link to this data, it makes the data machine readable,
-is easy to extend with additional information,  and enables a representation of the data in common
-vocabularies. This combination provides a clear, open interface.
+Making data available as Linked Data using RDF is advantageous because it promotes integration with other web resources.
+RDF documents can natively link to related data, and others can link back using URIs. RDF makes the data machine-readable,
+using extensible vocabularies for additional information. This combination provides a new, open, interface for scientists to use ChEMBL.
 This paper describes the continued conversion of data from the ChEMBL database into RDF triples.
-This updated version of ChEMBL-RDF now uses recently introduced, such as the CHEMINF and CiTO ontologies,
-exposes more information from the database, and is now available as dereferencable, linked data.
-To demonstrate the new features, we here present a few new use cases, showing integration with
+This updated version of ChEMBL-RDF now uses recently introduced ontologies, including CHEMINF and CiTO,
+exposes more information from the database, and is now available as dereferencable, Linked Data.
+To demonstrate the new features, we present new use cases showing the benefits of integration with
 other web resources using semantic web technologies.
 \end{abstract}
 
@@ -100,42 +99,46 @@ Resource Description Framework, ChEMBL
 
 \section{Introduction}\label{s1}
 
-Despite the data deluge, finding new, unique, but significant patterns explaining biological
-phenomena not yet understood is limited by the availability of data. Such data analysis is
-beyond the scope of single data sets; it requires data integration from many sources, for
-example, systems biology integrating micro-array differential expression to biological
-pathways~\cite{}. Another prominent example is drug discovery where a new unique chemical entity is
-searched with just the right biological properties. This too requires linking many
-data sets~\cite{Samwald2011,OpenPHACTS}.
 
-ChEMBL contains biological activities for over a million chemical entities, extracted from
-literature, providing a unique resource for drug discovers~\cite{Gaulton2012,Warr2009}.
-It is updated on a fairly frequent basis as the existing data is further curated and new data is added. Originally, this
-data was available for download and via a web interface. The former requires setting up
-the data in a relational database, while the latter limits the machine access to the data.
-Two independent teams created RDF triples for the ChEMBL data, resulting in exposure
-via Chem2Bio2RDF~\cite{Chen2010} and ChEMBL-RDF~\cite{Willighagen2011}.
+The current scientific data deluge, in which datasets are growing faster than scientists can analyse and 
+curate them, provides several new challenges for information systems. Scientists wish to 
+discover new, unique, and significant patterns in datasets, which explaining biological 
+phenomena not yet understood. This process requires integration of datasets that are both 
+sparse, and growing independent of one another. The discovery of new patterns showing the 
+causes and effects of various biological phenomena is beyond the scope of single datasets.
+For example, systems biologists integrate micro-array differential expression datasets to 
+biological pathways, using various other datasets to provide evidence for the links~\cite{}. 
+Another prominent example is drug discovery where a new unique chemical entity is discovered 
+based on descriptions of its biological properties. This process requires the effective 
+linkage of many scientific datasets~\cite{Samwald2011,OpenPHACTS}.
 
-This paper presents the history of the ChEMBL-RDF data set, details of the latest structures
-and ontologies used for the RDF version of ChEMBL 13, and a few new example use cases,
-exemplifying how the data set can be linked to other data sources to further support
-research in the life sciences.
+ChEMBL contains descriptions for biological activities involving over a million chemical 
+entities, extracted from literature. This provides a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
+It is updated on a fairly frequent basis as the existing data is further curated and new data is added. 
+The ChEMBL dataset is available for download and can be browsed using a web interface. 
+The former requires scientists to import the data into a relational database, while the 
+latter limits the machine access to the data. Two independent teams have previously mapped 
+the ChEMBL dataset to RDF, Chem2Bio2RDF~\cite{Chen2010} and ChEMBL-RDF~\cite{Willighagen2011}.
+
+This paper presents the current state of the ChEMBL-RDF dataset, details of the latest structures
+and ontologies used to map version 13 of ChEMBL to RDF, along with new example use cases, showing 
+links to other datasets using their RDF URIs to further support research in the life sciences.
 
 \section{Methods}\label{s2}
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
-RDF triples were created from a local MySQL database to which the SQL data dump of ChEMBL was
-inserted, using a PHP script, available from the source code hosting service
-GitHub~\citep{ChEMBLRDFGitHub}, a process outlined earlier in a best practices note by
-the international Health Care and Life Sciences XXX Working Group~\cite{Marshall2012}.
+The SQL datadump provided by EMBL was inserted into a local MySQL database. A set of SQL queries 
+were then executed to generate RDF files using a set of PHP scripts. These scripts are Open Source 
+and are available from the source code hosting service, GitHub~\citep{ChEMBLRDFGitHub}. This process 
+has been outlined in a best practices note by the W3C Health Care and Life Sciences XXX Working Group~\cite{Marshall2012}.
 
-During the life time of this project, the ontologies used in ChEMBL-RDF have changed,
-initially using a custom, ad-hoc ontology, but increasingly with community-proposed
+In the previous RDF conversion the RDF triples in ChEMBL-RDF were represented using properties and c
+lasses from a custom, ad-hoc ontology~\cite{Willighagen2011}. The current version used community-proposed
 ontologies, making the RDF more interoperable. The ChEMBL-RDF 13 dataset uses ontology
-standards such as the Bibliography Ontology for Citation Typing Ontology for literature
-references, and domain ontologies like the Protein Ontology and the Chemical Information
-Ontology. Throughout this paper, various prefixes are used to simplify the RDF output and they are outlined
-in Table~\ref{namespaces}.
+standards such as the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology~\cite{Hastings2011} for literature
+references, and domain ontologies like the Protein Ontology\cite{Sidhu2006} and the Chemical Information
+Ontology\cite{Hastings2011}. Throughout this paper, various shorthand prefixes are used to denote different ontology 
+namespaces to simplify the RDF examples. These prefixes are outlined in Table~\ref{namespaces}.
 
 \begin{table*}
 \caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
@@ -168,17 +171,16 @@ res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
 To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
 hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
 querying is capped, based on the estimated computational effort. Second, resources have
-been made dereferencable using the Kasabi platform~\cite{kasabi}. This platform also provides a SPARQL
-end point, but requires a user account.
+been made dereferencable using the Kasabi platform~\cite{kasabi}. The Kasabi hosting provides a SPARQL
+end point which requires a user account. A user account can be free for casual usage, or paid for consistent usage.
 
-An initial custom vocabulary has been defined, reflecting the concepts and links found in the
-data structure of the ChEMBL database. This vocabulary has only partially been converted into
-an OWL ontology, and is being phased out and replaced by common ontologies. This has not happened
-for all data yet, and terms from the ChEMBL-RDF namespace (\textit{http://rdf.farmbio.uu.se/chembl/onto/\#},
-prefix: \textit{chembl}) are still in use.
+Although many parts of the CHEMBL-RDF dataset use community based ontologies, some 
+terms from the previous ontology are still used. These terms were created under the 
+URI namespace \textit{http://rdf.farmbio.uu.se/chembl/onto/\#}, and are referenced here using the
+prefix: \textit{chembl}.
 
-As a method to further test the access and possibilities of this Linked Data version of
-ChEMBL, a few new uses cases have been developed for this paper.
+%As a method to further test the access and possibilities of this Linked Data version of
+%ChEMBL,  new uses cases have been developed for this paper.
 
 \section{Results}\label{s3}
 
