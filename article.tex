@@ -144,12 +144,14 @@ in Table~\ref{namespaces}.
 \multicolumn{2}{l}{\textbf{Common Vocabularies}} \\
 bibo    & Bibliography Ontology~\cite{Giasson2011} \\
         & http://purl.org/ontology/bibo/ \\
+chebi   & Chemical Entities of Biological Interest~\cite{DeMatos2010} \\
+        & http://purl.org/obo/owl/CHEBI\# \\
 cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
         & http://semanticscience.org/resource/ \\
 cito    & Citation Typing Ontology~\cite{Shotton2010} \\
         & http://purl.org/spar/cito/ \\
-pro     & PRotein Ontology~\cite{Sidhu2006} \\
-        & http://purl.obolibrary.org/obo/ \\
+obo / pro & OBO \& PRotein Ontology~\cite{Sidhu2006} \\
+          & http://purl.obolibrary.org/obo/ \\
 
 \multicolumn{2}{l}{\textbf{ChEMBL-RDF Namespace}} \\
 chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
@@ -314,9 +316,20 @@ target:t1
 
 For drug discovery, the drugs themselves are the main topic of study.
 ChEMBL contains many different drug types, mostly small molecules,
-but also peptides, proteins, oligosaccharides, oligonucleotides, and
-even antibodies. All compounds are represented as classes, following
-the design of the CHEMINF ontology. The compound typing is expressed
+but also peptides, proteins, antibodies, oligosaccharides, oligonucleotides, and
+even cells. All compounds are represented as classes, following
+the design of the CHEMINF ontology. These entities do not have a common
+superclass in common, but can easily be identified as having the 
+the role of being a drug. This is triplified using the OBO and ChEBI
+ontologies:
+
+\begin{footnotesize}
+\begin{verbatim}
+mol:m4 obo:has_role chebi:CHEBI_23888 .
+\end{verbatim}
+\end{footnotesize}
+
+The entity typing is expressed
 by subclassing other classes. For example, proteins subclass the
 Protein concept from the PRotein Ontology (PR\_000000001), small
 molecules subclass the Chemical Entity concept from the CHEMINF
