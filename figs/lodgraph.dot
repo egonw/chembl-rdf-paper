@@ -10,7 +10,7 @@ digraph G {
   bio2rdfuniprot [label="Bio2RDF\nUniprot"];
   bio2rdfpubmed [label="Bio2RDF\nPubMed"];
   crossref [label="CrossRef"];
-  ron [label="RDF OpenMolecule"];
+  ron [label="OpenMolecules\nRDF"];
 
   chembl -> chemspider [label="skos:exactMatch"];
   chembl -> bio2rdfuniprot [label="owl:sameAs"];

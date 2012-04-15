@@ -403,7 +403,7 @@ res:r1
 
 To make the data a proper citizen of the semantic web, we link out to various resources,
 which is visualized in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
-using the new complementary index and RDF OpenMolecules using InChI values, to Bio2RDF
+using the new complementary index and OpenMolecules RDF using InChI values, to Bio2RDF
 for protein targets using the uniprot identifier, and CrossRef and Bio2RDF for literature
 references using the DOIs and PubMed identifiers, respectively.
 
@@ -456,10 +456,10 @@ are also available via a CHEMINF representation:
 \end{verbatim}
 \end{tiny}
 
-\subsubsection{Linking out to RDF OpenMolecules}
+\subsubsection{Linking out to OpenMolecules RDF}
 
 The InChI is a unique identifier for (small) organic molecules, and has been previously used
-to define unique IRIs for molecules~\cite{???}. While IRIs are theoretically unlimited in length,
+to define unique IRIs for molecules~\cite{Bradley2009,Willighagen2011}. While IRIs are theoretically unlimited in length,
 in practice web browsers and servers do limit the length of IRIs. Virtuoso is, unfortunately,
 a system which supports only IRIs of up to a certain length. Therefore, only for smaller molecules
 InChI-based links are created. Almost 1.3 million links are created, looking like:
