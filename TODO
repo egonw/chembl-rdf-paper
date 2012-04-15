@@ -1,7 +1,6 @@
 - look up proper name RDF OpenMolecule
 - complete all addresses
-- add IMI/EU/OPS thanx
-- ask about ChEMBL vs ChEMBLdb
 - rotable / rotational ?
 - clean up graphviz layouts to use springs or so
 - update Waagmeester2012 with CitedIn paper details
+- skos:exactMatch for bio2rdf pubmedid
