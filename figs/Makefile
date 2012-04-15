@@ -4,7 +4,7 @@ lodgraph.tex: lodgraph.dot
 	dot2tex --figonly lodgraph.dot > lodgraph.tex
 
 lodgraph.png: lodgraph.dot
-	dot -Tpng lodgraph.dot > lodgraph.png
+	twopi -Tpng lodgraph.dot > lodgraph.png
 
 relations.tex: relations.dot
 	dot2tex --figonly relations.dot > relations.tex

@@ -1,12 +1,14 @@
 
 digraph G {
 
-  center=""
+  root = chembl ;
+  overlap = false ;
+  ranksep = 2.75 ;
 
-  chembl [label="ChEMBL-RDF"];
+  chembl [label="ChEMBL\nRDF"];
   chemspider [label="ChemSpider"];
-  bio2rdfuniprot [label="Bio2RDF Uniprot"];
-  bio2rdfpubmed [label="Bio2RDF PubMed"];
+  bio2rdfuniprot [label="Bio2RDF\nUniprot"];
+  bio2rdfpubmed [label="Bio2RDF\nPubMed"];
   crossref [label="CrossRef"];
   ron [label="RDF OpenMolecule"];
 
