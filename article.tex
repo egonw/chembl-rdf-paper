@@ -174,7 +174,7 @@ querying is capped, based on the estimated computational effort. Second, resourc
 been made dereferencable using the Kasabi platform~\cite{kasabi}. The Kasabi hosting provides a SPARQL
 end point which requires a user account. A user account can be free for casual usage, or paid for consistent usage.
 
-Although many parts of the CHEMBL-RDF 13 dataset now use community based ontologies, some 
+Although many parts of the ChEMBL-RDF 13 dataset now use community based ontologies, some 
 terms from the previous ad-hoc ontology are still used. These terms were created under the 
 URI namespace \textit{http://rdf.farmbio.uu.se/chembl/onto/\#}, and are referenced here using the
 prefix: \textit{chembl}.
@@ -204,7 +204,7 @@ of common classes, while others are instances.}\label{f1}
 
 The core concept in the ChEMBL database is that of the biological activity. This
 is the type of information that the ChEMBL database extracts from literature.
-In CHEMBL-RDF activities are mostly represented using the custom CHEMBL-RDF vocabulary, where the
+In ChEMBL-RDF activities are mostly represented using the custom ChEMBL-RDF vocabulary, where the
 type, fields and links to other resources are using the \textit{chembl}
 namespace. While ChEMBL provides both the original activities as found in literature
 and standardized values allowing comparison between studies, the triples only
@@ -307,7 +307,7 @@ provided via the CHEMINF formalism (here abbreviated):
 \begin{footnotesize}
 \begin{verbatim}
 mol:m41
- rdfs:label "CHEMBL406142" , 
+ rdfs:label "ChEMBL406142" , 
    "Bis(3-[1 .... yl]-propionamide)" ;
  rdfs:subClassOf cheminf:CHEMINF_000000 ;
  cheminf:CHEMINF_000200
@@ -328,7 +328,7 @@ m41:inchi
  cheminf:SIO_000300
   "InChI=1S/C82H102N .... 66+,67+,68+/m1/s1" .
 
-chemblid:CHEMBL406142
+chemblid:ChEMBL406142
  owl:equivalentClass mol:m41 .
 \end{verbatim}
 \end{footnotesize}
@@ -395,11 +395,11 @@ John/Anna: common statistics with SPARQL
 
 \subsection{Linked Open Data}
 
-To make the data a proper citizen of the semantic web, we link out to various resources,
-which is visualized in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
-using the new complementary index and OpenMolecules RDF using InChI values, to Bio2RDF
-for protein targets using the uniprot identifier, and CrossRef and Bio2RDF for literature
-references using the DOIs and PubMed identifiers, respectively.
+To integrate ChEMBL-RDF with other RDF versions of scientific datasets, we link out to various resources.
+These links are shown in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
+using the complementary index and OpenMolecules RDF using InChI values. Protein links are given to Bio2RDF
+using the Uniprot identifier. Literature references are directed to CrossRef and Bio2RDF 
+using the DOIs and PubMed identifiers, respectively.
 
 \begin{figure}[t]
 \includegraphics[width=0.45\textwidth]{figs/lodgraph}
@@ -416,10 +416,11 @@ Uniprot protein and taxonomy databases~\cite{TheUniProtConsortium2010}. These li
 vital to provide context for use cases that require a correlation between chemical
 structures and other scientific data. 
 
+%FIXME:
 For protein links out are based on the FOOBAR for the species, the EC code for proteins,
 as well as UniProt identifiers.
 
-FIXME: should we link out to the new UniProt RDF?
+FIXME: should we link out to the new UniProt RDF? PA: Code is available on the OpenPHACTS branch to link to http://purl.uniprot.org/uniprot/
 
 \begin{tiny}
 \begin{verbatim}
@@ -461,7 +462,7 @@ are also available via a CHEMINF representation:
  
 \begin{tiny}
 \begin{verbatim}
-<http://data.kasabi.com/dataset/chembl-rdf/chemblid/CHEMBL324846>
+<http://data.kasabi.com/dataset/chembl-rdf/chemblid/ChEMBL324846>
  skos:exactMatch <http://rdf.chemspider.com/370> .
 \end{verbatim}
 \end{tiny}
@@ -470,9 +471,9 @@ are also available via a CHEMINF representation:
 
 The InChI is a unique identifier for (small) organic molecules, and has been previously used
 to define unique IRIs for molecules~\cite{Bradley2009,Willighagen2011}. While IRIs are theoretically unlimited in length,
-in practice web browsers and servers do limit the length of IRIs. Virtuoso is, unfortunately,
-a system which supports only IRIs of up to a certain length. Therefore, only for smaller molecules
-InChI-based links are created. Almost 1.3 million links are created, looking like:
+in practice web browsers and servers limit the length of IRIs. Virtuoso is, unfortunately,
+a system which supports only IRIs of up to a certain length. Therefore, InChI-based links are only created for smaller molecules. 
+Almost 1.3 million links to OpenMolecules RDF were created in a similar manner to:
 
 \begin{tiny}
 \begin{verbatim}
@@ -510,7 +511,7 @@ with other life sciences databases, showing the power of the Linked Data approac
 The Linked Data server used by Bio2RDF has been reconfigured for ChEMBL to provide URL
 based services for standard URI resolution, along with text and link searches~\cite{Ansell2011}. 
 The configuration files along with build scripts for the ChEMBL-RDF Linked Data server are available on GitHub~\cite{WebAppGitHub}. 
-It proxies the standard item URIs by translating URLs between those requested by users and the URIs that are available
+It proxies the standard ChEMBL-RDF URIs by translating URLs between those requested by users and the URIs that are available
 in SPARQL endpoints. For example, if the ChEMBL web application is running on the users
 local machine, e.g. \url{http://localhost:8080/chembl/}, then a request for the
 article with identifier ``a31863'', \url{http://localhost:8080/-chembl/article/a31863},
@@ -522,14 +523,14 @@ original RDF triples, represented using RDFa, with links that resolve using the 
 
 The links services enables the ChEMBL application to derive both forward links, originating in
 ChEMBL, e.g. \url{http://localhost:8080/chembl/linkstonamespace/-targetns/originalns:identifier},
-and backward links, originating in other databases, such as LODD, Bio2RDF, e.g.
-\url{http://bio2rdf.org/linksns/targetns/originalns:ident-ifier}, or Chem2Bio2RDF.
+and backward links, originating in other databases, such as LODD, Bio2RDF,
+\footnote{\url{http://bio2rdf.org/linksns/targetns/originalns:identifier}}, and Chem2Bio2RDF.
 These services are vital to efficiently navigate the Linked Data web, as it is both
-impractical and inefficient to require users to crawl the web before they can discover all of the
+impractical and inefficient to require users to crawl the entire web before they can discover 
 relevant resources. These services are currently only supplied as web services from ChEMBL and
 Bio2RDF, but it is hoped that similar services will be provided by other scientific Linked Data
 providers in the future. Datasets that are available in SPARQL endpoints can be queried for
-links efficiently using templated queries in the ChEMBL web application.
+links efficiently using simple queries as demonstrated in the ChEMBL web application.
 
 \subsection{CitedIn}
 
@@ -565,10 +566,10 @@ David/Bin: Chem2Bio2RDF
 
 \section{Discussion}
 
-While we show here that the triple version of the ChEMBL data is very useful, the current triples are by no means static: ChEMBL-RDF
+While we show here that the RDF version of the ChEMBL data is very useful, the current RDF triples are by no means static: ChEMBL-RDF
 will keep evolve, following new developments in the Linked Open Data world. For example, it is likely that over time we will link out
 to more Linked Data resources. More importantly, we wish to adopt more common ontologies, of which the BioAssay Ontology is planned
-to be the first next to be adopted~\cite{Visser2011}. This should make the ChEMBL-RDF triples even more interoperable.
+to be the next~\cite{Visser2011}. These steps will make the ChEMBL-RDF triples even more interoperable.
 
 \section{Acknowledgements}
 
