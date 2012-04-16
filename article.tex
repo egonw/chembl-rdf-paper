@@ -641,6 +641,93 @@ decision support when evaluating chemical structures and consider strategies for
 
 David/Bin: Chem2Bio2RDF
 
+\subsection{Compound Selectivity}
+
+NOTE: May want to exclude this Use Case as query has not successful run yet, keeps causing virtuoso 
+to timeout or run out of memory. Currently playing with local server setup to get query to run.
+
+Designing a molecule, which is selective to one target over another will often be considered a 
+successful outcome in a drug design process. If the target in question is a protein, it is easy
+to understand that as sequence identity amongst residues, which contribute to potential small 
+molecule binding sites remains high so does the issue of selectivity. That is, the molecule being 
+designed may also bind to the equivalent binding site in the  closely related protein 
+target and may lead to undesirable consequences. The ChEMBL data model links molecules to 
+targets using different activity types recorded in the literature. Using activity types, 
+which act as a measure of binding affinity, such as IC50 or Ki and applying activity value cuts
+offs it is possible to identify molecules which have higher binding affinity to certain targets 
+compared to others. Taking this one step further it is possible to identify a set molecules, 
+which have a high affinity to protein A (e.g. IC50 value < 50nM) and low affinity to protein 
+B (e.g. IC50 value > 200nM). 
+
+The following SPARQL query identifies a set of molecules, which based on data curated from the 
+literature and stored in the ChEMBL-RDF data model, selectively bind Human Cyclin-Dependent Kinase 2 
+(UniProt: P24941) over Human Cyclin-Dependent Kinase 4 (UniProt: P11802). 
+
+NOTE: Query should return 65 molecules
+
+\begin{tiny}
+\begin{verbatim}
+select distinct ?molecule WHERE 
+{ 
+  ?assay ?p chembl:Assay ;
+  chembl:hasTarget ?target .
+  ?activity ?p chembl:Activity ;
+  chembl:forMolecule ?molecule ;
+  chembl:onAssay ?assay ;
+  chembl:type ?type ;
+  chembl:standardUnits ?unit ;
+  chembl:standardValue ?value;
+  chembl:relation ?relation
+  FILTER (
+    ?type = "IC50"  &&
+    ?unit = "nM"    &&
+    ?value  < 50    &&
+    ?relation = "="
+  ) .
+  ?target ?p chembl:Target;
+  dc:identifier ?id
+  FILTER (
+    ?id = "uniprot:P24941"
+  ) .
+  { 
+    select ?molecule WHERE 
+    {
+      ?assay ?p chembl:Assay ;
+      chembl:hasTarget ?target .
+      ?activity ?p chembl:Activity ;
+      chembl:forMolecule ?molecule ;
+      chembl:onAssay ?assay;
+      chembl:type ?type ;
+      chembl:standardUnits ?unit ;
+      chembl:standardValue ?value ;
+      chembl:relation ?relation
+      FILTER (
+        ?type = "IC50"  &&
+        ?unit = "nM"    &&
+        ?value  > 200   &&
+        ?relation = "="
+      ) .
+      ?target ?p chembl:Target;
+      dc:identifier ?id
+      FILTER (
+        ?id = "uniprot:P11802"
+      ) .
+    }
+  }
+}
+\end{verbatim}
+\end{tiny}
+
+Analysis on the set of molecules returned by this query can be used to help identify small 
+molecule features, which may increase target-binding specificity. For queries which link 
+small molecules to targets, by traversing bioactivity data in the ChEMBL database, it is 
+also important to consider the parameters associated with the assay to target mappings. 
+These additional parameters include a relationship type, a multi flag (for poorly defined
+targets) a complex flag (for protein complex targets) and a curation level. These different 
+factors are summarized in the ChEMBL confidence score, which ranges from 9 (direct single 
+protein target) to 0 (uncurated). In order to return the largest possible dataset, the 
+confidence score has been ignored in this example compound selectivity use case.
+
 \section{Discussion}
 
 While we show here that the RDF version of the ChEMBL data is very useful, the current RDF triples are by no means static: ChEMBL-RDF
