@@ -391,7 +391,84 @@ and acceptor, and rotational bonds. This data is provided for XXXXX structures.
 
 \subsubsection{Data Statistics and Validation}
 
-John/Anna: common statistics with SPARQL
+Each release of the ChEMBL database is accompanied by set of release counts, which help 
+provide a concise content overview of the release in question. The ChEMBL 13 release counts
+are as follows:
+
+\begin{itemize}
+  \item 8,845 targets
+  \item 1,143,682 distinct molecules
+  \item 6,933,068 activities
+  \item 617,681 assays
+  \item 44,682 documents
+\end{itemize}
+
+These counts are important as firstly they show continued growth in ChEMBL data, as seen 
+in all previous releases. Secondly, these counts can help validate any transformations, 
+which have been applied to the relational data model traditionally used to store the ChEMBL 
+data. The following SPARQL queries attempt to provide a high level validation of the 
+ChEMBL-RDF by regenerating the ChEMBL 13 release statistics.
+
+The following SPARQL query returns 8,845 ChEMBL targets:
+     
+\begin{tiny}
+\begin{verbatim}
+select count(*) WHERE {
+  ?s ?p chembl:Target .
+}
+\end{verbatim}
+\end{tiny}
+
+The following SPARQL query returns 1,143,682 ChEMBL molecules:
+
+NOTE: Full set of ChEMBL molecules have been created by querying molecule_dictionary table
+NOTE: I have added extra triple for each molecule: <http://data.kasabi.com/dataset/chembl-rdf/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
+NOTE: Modified molecule compound structure can be queried here: https://wwwdev.ebi.ac.uk/chembl/sparql
+
+\begin{tiny}
+\begin{verbatim}
+select count(*) WHERE {
+  ?s ?p chembl:Molecule .
+}
+\end{verbatim}
+\end{tiny}
+
+The following SPARQL query returns 617,681 ChEMBL assays:
+
+\begin{tiny}
+\begin{verbatim}
+select count(*) WHERE {
+  ?s ?p chembl:Assay .
+}
+\end{verbatim}
+\end{tiny}
+
+The following SPARQL query returns the 6,933,068 ChEMBL activities:
+
+\begin{tiny}
+\begin{verbatim}
+select count(*) WHERE {
+  ?s ?p chembl:Activity .
+}
+\end{verbatim}
+\end{tiny}
+
+The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 less than appears 
+in ChEMBL 13 release notes, as it does not include doc_id -1, which refers to the 
+unpublished dataset.
+
+\begin{tiny}
+\begin{verbatim}
+select count(*) WHERE {
+  ?s ?p bibo:Article .
+}
+\end{verbatim}
+\end{tiny}
+
+Recreation of the ChEMBL release statistics, by querying the ChEMBL-RDF with SPARQL 
+provides end users with high degree of confidence that the ChEMBL-RDF contains same 
+core content as source relational database. 
+
 
 \subsection{Linked Open Data}
 
