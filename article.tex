@@ -421,9 +421,10 @@ select count(*) WHERE {
 
 The following SPARQL query returns 1,143,682 ChEMBL molecules:
 
-NOTE: Full set of ChEMBL molecules have been created by querying molecule_dictionary table
-NOTE: I have added extra triple for each molecule: <http://data.kasabi.com/dataset/chembl-rdf/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
-NOTE: Modified molecule compound structure can be queried here: https://wwwdev.ebi.ac.uk/chembl/sparql
+%Mark Davies notes:
+%NOTE: Full set of ChEMBL molecules have been created by querying molecule\_dictionary table
+%NOTE: I have added extra triple for each molecule: <http://data.kasabi.com/dataset/chembl-rdf/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
+%NOTE: Modified molecule compound structure can be queried here: https://wwwdev.ebi.ac.uk/chembl/sparql
 
 \begin{tiny}
 \begin{verbatim}
@@ -454,7 +455,7 @@ select count(*) WHERE {
 \end{tiny}
 
 The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 less than appears 
-in ChEMBL 13 release notes, as it does not include doc_id -1, which refers to the 
+in ChEMBL 13 release notes, as it does not include doc\_id -1, which refers to the 
 unpublished dataset.
 
 \begin{tiny}
