@@ -1,103 +1,107 @@
-% PLEASE USE THIS FILE AS A TEMPLATE
-% Check file iosart2c.tex for more examples
-%
-% Journal:
-%   Journal of Ambient Intelligence and Smart Environments (jaise)
-%   Web Intelligence and Agent Systems: An International Journal (wias)
-%   Semantic Web: Interoperability, Usability, Applicability (SW)
-% IOS Press
-% Latex 2e
+\documentclass[10pt]{bmc_article}
 
-% options: jaise|wias|sw
-% add. options: [seceqn,secfloat,secthm,crcready,onecolumn]
+\usepackage{a4wide}  % Formatting web addresses  
+\usepackage{url}  % Formatting web addresses  
+\usepackage{ifthen}  % Conditional 
+\usepackage{multicol}   %Columns
+\usepackage[utf8]{inputenc} %unicode support
+%\usepackage[applemac]{inputenc} %applemac support if unicode package fails
+%\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
+\urlstyle{rm}
+\usepackage[citestyle=numeric-comp]{biblatex}                                                                     
+\setlength{\bibitemsep}{0cm}                                                                                                                
+\renewbibmacro{in:}{%                                                                                                                       
+  \ifentrytype{article}{}{%                                                                                                                 
+  \printtext{\bibstring{in}\intitlepunct}}}                                                                                                 
+\addbibresource{article.bib}                                                                                                                    
 
-
-\documentclass[sw]{iosart2c}
-
-%\documentclass[sw]{iosart2c}
-%\documentclass[wias]{iosart2c}
-%\documentclass[jaise]{iosart2c}
-
-\usepackage[T1]{fontenc}
-\usepackage{times}%
-\usepackage{natbib}% for bibliography sorting/compressing
 %\usepackage{amsmath}
 %\usepackage{endnotes}
 \usepackage{graphicx}
 %\usepackage{tikz}
-%\usetikzlibrary{snakes,arrows,shapes}
 
-%%%%%%%%%%% Put your definitions here
+\newboolean{publ}
 
-% \bibliographystyle{plain} 
-\bibliographystyle{unsrt} 
+%Review style settings
+\newenvironment{bmcformat}{\begin{raggedright}\baselineskip20pt\sloppy\setboolean{publ}{false}}{\end{raggedright}\baselineskip20pt\sloppy}
 
-%%%%%%%%%%% End of definitions
-
-\pubyear{0000}
-\volume{0}
-\firstpage{1}
-\lastpage{1}
+%Publication style settings
+%\newenvironment{bmcformat}{\fussy\setboolean{publ}{true}}{\fussy}
 
 \begin{document}
-
-\newcommand{\url}[1]{#1}
-
-\begin{frontmatter}
+\begin{bmcformat}
 
 %\pretitle{}
 \title{The ChEMBL database as Linked Open Data}
-\runningtitle{ChEMBL-RDF}
-%\subtitle{}
+ 
+\author{
+  Egon L Willighagen$^{1}$% // FIXED FIRST AUTHOR
+  \email{Egon L Willighagen - egon.willighagen@maastrichtuniversity.nl}
+\and
+  Andra Waagmeester$^1$%
+  \email{Andra Waagmeester - FIXME}
+\and
+  Ola Spjuth$^2$%
+  \email{Ola Spjuth - FIXME}
+\and
+  Peter Ansell$^3$%
+  \email{Peter Ansell - FIXME}
+\and
+  Antony Williams$^4$%
+  \email{Antony Williams - FIXME}
+\and
+  Valery Tkachenko$^4$%
+  \email{Valery Tkachenko - FIXME}
+\and
+  Janna Hastings$^5$%
+  \email{Janna Hastings - FIXME}
+\and
+  John Overington$^6$%
+  \email{John Overington - FIXME}
+\and
+  Anna Gaulton$^6$%
+  \email{Anna Gaulton - FIXME}
+\and
+  Mark Davies$^6$%
+  \email{Mark Davies - FIXME}
+\and
+  Bin Chen$^7$%
+  \email{Bin Chen - FIXME}
+\and
+  David Wild$^7$%
+  \email{David Wild - FIXME}
+}
 
-%\review{}{}{}
+\address{
+    \iid(1)Department of Bioinformatics - BiGCaT, Maastricht University, P.O. Box 616, UNS50 Box 19, NL-6200 MD, Maastricht, The Netherlands  \\
+    \iid(2)Department of Pharmaceutical Biosciences, Uppsala University, PO Box 591, SE-751 24, Uppsala, Sweden \\
+    \iid(3)University of Queensland, St Lucia, Qld 4072, Australia \\
+    \iid(4)Royal Society of Chemistry, 904 Tamaras Circle, Wake Forest, NC 27587, U.S.A. \\
+    \iid(5)Chemoinformatics and Metabolism, European Bioinformatics Institute, POSTAL CODE, Hinxton, United Kingdom \\
+    \iid(6)EMBL-European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, United Kingdom \\ 
+    \iid(7)School of Informatics and Computing, Indiana University, Bloomington, IN, U.S.A.
+}
 
-
-% For one author:
-\author[A]{\fnms{Egon} \snm{Willighagen}\thanks{Corresponding author.\\ E-mail: egon.willighagen@maastrichtuniversity.nl.}}
-\runningauthor{E.L. Willighagen et al.}
-% Two or more authors (order to be determined):
-\author[A]{\fnms{Andra} \snm{Waagmeester}}
-\author[B]{\fnms{Ola} \snm{Spjuth}},
-\author[C]{\fnms{Peter} \snm{Ansell}},
-\author[D]{\fnms{Antony} \snm{Williams}},
-\author[D]{\fnms{Valery} \snm{Tkachenko}},
-\author[E]{\fnms{Janna} \snm{Hastings}},
-\author[F]{\fnms{John} \snm{Overington}},
-\author[F]{\fnms{Anna} \snm{Gaulton}},
-\author[F]{\fnms{Mark} \snm{Davies}},
-\author[G]{\fnms{Bin} \snm{Chen}},
-\author[G]{\fnms{David} \snm{Wild}}
-
-\address[A]{Department of Bioinformatics - BiGCaT, Maastricht University, P.O. Box 616, UNS50 Box 19, NL-6200 MD, Maastricht, The Netherlands}
-\address[B]{Department of Pharmaceutical Biosciences, Uppsala University, PO Box 591, SE-751 24, Uppsala, Sweden}
-\address[C]{University of Queensland, St Lucia, Qld 4072, Australia}
-\address[D]{Royal Society of Chemistry, 904 Tamaras Circle, Wake Forest, NC 27587, U.S.A.}
-\address[E]{Chemoinformatics and Metabolism, European Bioinformatics Institute, POSTAL CODE, Hinxton, United Kingdom}
-\address[F]{EMBL-European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, United Kingdom}
-\address[G]{School of Informatics and Computing, Indiana University, Bloomington, IN, U.S.A.}
+\maketitle
 
 \begin{abstract}
+\paragraph*{Background:}
 Making data available as Linked Data using RDF is advantageous because it promotes integration with other web resources.
 RDF documents can natively link to related data, and others can link back using URIs. RDF makes the data machine-readable,
 using extensible vocabularies for additional information. This combination provides a new, open, interface for scientists to use ChEMBL.
+\paragraph*{Results:}
 This paper describes the continued conversion of data from the ChEMBL database into RDF triples.
 This updated version of ChEMBL-RDF now uses recently introduced ontologies, including CHEMINF and CiTO,
 exposes more information from the database, and is now available as dereferencable, Linked Data.
 To demonstrate the new features, we present new use cases showing the benefits of integration with
 other web resources using semantic web technologies.
+\paragraph*{Conclusions:}
 \end{abstract}
 
-\begin{keyword}
-% \sep 
-Resource Description Framework, ChEMBL
-\end{keyword}
-
-\end{frontmatter}
 
 %%%%%%%%%%% The article body starts:
 
-\section{Introduction}\label{s1}
+\section*{Introduction}\label{s1}
 
 
 The current scientific data deluge, in which datasets are growing faster than scientists can analyse and 
@@ -124,12 +128,12 @@ This paper presents the current state of the ChEMBL-RDF dataset, details of the 
 and ontologies used to map version 13 of ChEMBL to RDF, along with new example use cases, showing 
 links to other datasets using their RDF URIs to further support research in the life sciences.
 
-\section{Methods}\label{s2}
+\section*{Methods}\label{s2}
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
 The SQL datadump provided by EMBL was inserted into a local MySQL database. A set of SQL queries 
 were then executed to generate RDF files using a set of PHP scripts. These scripts are Open Source 
-and are available from the source code hosting service, GitHub~\citep{ChEMBLRDFGitHub}. This process 
+and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
 has been outlined in a best practices note by the W3C Health Care and Life Sciences XXX Working Group~\cite{Marshall2012}.
 
 In the previous RDF conversion the RDF triples in ChEMBL-RDF were represented using properties and c
@@ -182,7 +186,7 @@ prefix: \textit{chembl}.
 %As a method to further test the access and possibilities of this Linked Data version of
 %ChEMBL,  new uses cases have been developed for this paper.
 
-\section{Results}\label{s3}
+\section*{Results}\label{s3}
 
 We here present the updated ChEMBL-RDF, including a description of the mapping process 
 and the identification of links to other datasets.
@@ -566,7 +570,7 @@ are classes, rather than instances.
 \subsubsection{Linking out to CrossRef}
 
 In addition to the PubMed identifiers used to link from literature references to Bio2RDF,
-ChEMBL provides DOIs, which we use to link out to the RDF provided by CrossRef~\citep{Bilder2011}:
+ChEMBL provides DOIs, which we use to link out to the RDF provided by CrossRef~\cite{Bilder2011}:
 
 \begin{tiny}
 \begin{verbatim}
@@ -574,7 +578,7 @@ res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
 \end{verbatim}
 \end{tiny}
 
-\section{Applications}
+\section*{Applications}
 
 ChEMBL-RDF can be used to explore interrelated scientific datasets, and we here present a few applications. 
 The first application describes how it uses the SPARQL end point can be used to make the data available as linked data
@@ -737,29 +741,36 @@ factors are summarized in the ChEMBL confidence score, which ranges from 9 (dire
 protein target) to 0 (uncurated). In order to return the largest possible dataset, the 
 confidence score has been ignored in this example compound selectivity use case.
 
-\section{Discussion}
+\section*{Discussion}
 
 While we show here that the RDF version of the ChEMBL data is very useful, the current RDF triples are by no means static: ChEMBL-RDF
 will keep evolve, following new developments in the Linked Open Data world. For example, it is likely that over time we will link out
 to more Linked Data resources. More importantly, we wish to adopt more common ontologies, of which the BioAssay Ontology is planned
 to be the next~\cite{Visser2011}. These steps will make the ChEMBL-RDF triples even more interoperable.
 
-\section{Acknowledgements}
+\section*{Authors contributions}
+EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
+AW extended CitedIn to support citation info in ChEMBL-RDF.
+OS, AW, and VT developed the nearest neighbor application of Bioclipse and ChemSpider.
+JH supported the project with CHEMINF representations.
+PA integrated ChEMBL-RDF into Bio2RDF.
+JO, AG, and MD critically validated and summarized the ChEMBL data statistics.
+All authors contributed to the continued development of ChEMBL-RDF, as well as to the writing of the paper,
+and approved the final version.
+
+\section*{Acknowledgements}
 
 Tim Hodson and Zach Beauvais of Kasabi and A. L\"ovgren at the BMC Computing Department at Uppsala University for their
 support. OS acknowledges funding from the Swedish VR (2011-6129) and eSSENCE.
 
 The data in ChEMBL is made available by funding from the Wellcome Trust [086151/Z/08/Z]
 
-\bibliography{article}
+{\ifthenelse{\boolean{publ}}{\footnotesize}{\small}
+\printbibliography
+}
 
-%%%%%%%%%%% The bibliography starts:
-%\begin{thebibliography}{9}
-%
-%\bibitem{r1}
-%
-%\bibitem{r2}
-%
-%\end{thebibliography}
+\ifthenelse{\boolean{publ}}{\end{multicols}}{}
 
+
+\end{bmcformat}
 \end{document}
