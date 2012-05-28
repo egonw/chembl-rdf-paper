@@ -86,7 +86,7 @@ phenomena not yet understood. This process requires integration of datasets that
 sparse, and growing independent of one another. The discovery of new patterns showing the 
 causes and effects of various biological phenomena is beyond the scope of single datasets.
 For example, systems biologists integrate micro-array differential expression datasets to 
-biological pathways, using various other datasets to provide evidence for the links~\cite{FIXME}. 
+biological pathways, using various other datasets to provide evidence for the links~\cite{Staab2007}. 
 Another prominent example is drug discovery where a new unique chemical entity is discovered 
 based on descriptions of its biological properties. This process requires the effective 
 linkage of many scientific datasets~\cite{Samwald2011,OpenPHACTS}.
@@ -168,9 +168,9 @@ prefix: \textit{chembl}.
 We here present the updated ChEMBL-RDF, including a description of the mapping process 
 and the identification of links to other datasets.
 
-\subsection{ChEMBL-RDF}
+\subsection*{ChEMBL-RDF}
 
-\subsubsection{Data Structure}
+\subsubsection*{Data Structure}
 
 For each of the common resource classes, a triple pattern was defined, following the
 data available in the relational database. Figure~\ref{f1} shows how the various resource
@@ -372,12 +372,11 @@ provided by the ChEMBL database as calculated by ACD/Labs and XXXXX. The data in
 chemical properties like polar surface area, pKa and logP, counts for hydrogen bond donor
 and acceptor, and rotational bonds. This data is provided for XXXXX structures.
 
-\subsubsection{Data Statistics and Validation}
+\subsubsection*{Data Statistics and Validation}
 
 Each release of the ChEMBL database is accompanied by set of release counts, which help 
 provide a concise content overview of the release in question. The ChEMBL 13 release counts
 are as follows:
-
 \begin{itemize}
   \item 8,845 targets
   \item 1,143,682 distinct molecules
@@ -394,13 +393,13 @@ ChEMBL-RDF by regenerating the ChEMBL 13 release statistics.
 
 The following SPARQL query returns 8,845 ChEMBL targets:
      
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 select count(*) WHERE {
   ?s ?p chembl:Target .
 }
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 The following SPARQL query returns 1,143,682 ChEMBL molecules:
 
@@ -409,33 +408,33 @@ The following SPARQL query returns 1,143,682 ChEMBL molecules:
 %NOTE: I have added extra triple for each molecule: <http://data.kasabi.com/dataset/chembl-rdf/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
 %NOTE: Modified molecule compound structure can be queried here: https://wwwdev.ebi.ac.uk/chembl/sparql
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 select count(*) WHERE {
   ?s ?p chembl:Molecule .
 }
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 The following SPARQL query returns 617,681 ChEMBL assays:
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 select count(*) WHERE {
   ?s ?p chembl:Assay .
 }
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 The following SPARQL query returns the 6,933,068 ChEMBL activities:
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 select count(*) WHERE {
   ?s ?p chembl:Activity .
 }
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 less than appears 
 in ChEMBL 13 release notes, as it does not include doc\_id -1, which refers to the 
@@ -454,7 +453,7 @@ provides end users with high degree of confidence that the ChEMBL-RDF contains s
 core content as source relational database. 
 
 
-\subsection{Linked Open Data}
+\subsection*{Linked Open Data}
 
 To integrate ChEMBL-RDF with other RDF versions of scientific datasets, we link out to various resources.
 These links are shown in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
@@ -470,7 +469,7 @@ Edges are labeled by the predicates making the links.}\label{2}
 }
 \end{figure}
 
-\subsubsection{Linking out to Bio2RDF}
+\subsubsection*{Linking out to Bio2RDF}
 
 The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data
 server~\cite{Ansell2011} to access SPARQL endpoints for a range of scientific databases~\cite{Belleau2008}.
@@ -485,24 +484,24 @@ as well as UniProt identifiers.
 
 FIXME: should we link out to the new UniProt RDF? PA: Code is available on the OpenPHACTS branch to link to http://purl.uniprot.org/uniprot/
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 target:t101191
  chembl:hasTaxonomy <http://bio2rdf.org/taxonomy:9606> ;
  owl:sameAs <http://bio2rdf.org/ec:2.7.11.1> ;
  owl:sameAs <http://bio2rdf.org/uniprot:Q8IYT8> .
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 For papers with PubMed identifiers we also link out to Bio2RDF:
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 res:r23 skos:exactMatch <http://bio2rdf.org/pubmed:15149661> .
 \end{verbatim}
-\end{tiny}
+\end{small}
 
-\subsubsection{Linking out to ChemSpider}
+\subsubsection*{Linking out to ChemSpider}
 
 ChemSpider~\cite{Pence2010} is a freely accessible, online database provided by RSC. It contains over 26 million unique
 chemical compounds aggregated from over 400 data sources as well as chemical data extracted
@@ -523,14 +522,14 @@ should be made to the original ChEMBL database, Open PHACTS, and ChemSpider.
 Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
 are also available via a CHEMINF representation:
  
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 <http://data.kasabi.com/dataset/chembl-rdf/chemblid/ChEMBL324846>
  skos:exactMatch <http://rdf.chemspider.com/370> .
 \end{verbatim}
-\end{tiny}
+\end{small}
 
-\subsubsection{Linking out to OpenMolecules RDF}
+\subsubsection*{Linking out to OpenMolecules RDF}
 
 The InChI is a unique identifier for (small) organic molecules, and has been previously used
 to define unique IRIs for molecules~\cite{Bradley2009,Willighagen2011}. While IRIs are theoretically unlimited in length,
@@ -538,26 +537,26 @@ in practice web browsers and servers limit the length of IRIs. Virtuoso is, unfo
 a system which supports only IRIs of up to a certain length. Therefore, InChI-based links are only created for smaller molecules. 
 Almost 1.3 million links to OpenMolecules RDF were created in a similar manner to:
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 mol:m62687 owl:equivalentClass
  <http://rdf.openmolecules.net/?InChI=1S/CH4/h1H4> .
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 Notice here the use of owl:equivalentClass to match the formalism in CHEMINF that defines molecules
 are classes, rather than instances.
 
-\subsubsection{Linking out to CrossRef}
+\subsubsection*{Linking out to CrossRef}
 
 In addition to the PubMed identifiers used to link from literature references to Bio2RDF,
 ChEMBL provides DOIs, which we use to link out to the RDF provided by CrossRef~\cite{Bilder2011}:
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 \section*{Applications}
 
@@ -569,7 +568,7 @@ an integration of ChEMBL-RDF with ChemSpider to provide an extension for the dec
 platform in Bioclipse. The last application shows how Chem2Bio2RDF can combine the ChEMBL data
 with other life sciences databases, showing the power of the Linked Data approach.
 
-\subsection{Bio2RDF}
+\subsection*{Bio2RDF}
 
 The Linked Data server used by Bio2RDF has been reconfigured for ChEMBL to provide URL
 based services for standard URI resolution, along with text and link searches~\cite{Ansell2011}. 
@@ -595,7 +594,7 @@ Bio2RDF, but it is hoped that similar services will be provided by other scienti
 providers in the future. Datasets that are available in SPARQL endpoints can be queried for
 links efficiently using simple queries as demonstrated in the ChEMBL web application.
 
-\subsection{CitedIn}
+\subsection*{CitedIn}
 
 Andra: use the SPARQL end point to find which entries in ChEMBL cite what papers
  
@@ -604,7 +603,7 @@ attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
 ChEMBL contains many literature references, and we wish to query this data
 for CitedIn.
 
-\subsection{Bioclipse Decision Support}
+\subsection*{Bioclipse Decision Support}
 
 % Egon,Antony/Valery,Ola: develop and write up the Bioclipse Decision Support use case
 
@@ -631,11 +630,11 @@ strategies for optimization.
 \end{figure*}
 
 
-\subsection{Chem2Bio2RDF}
+\subsection*{Chem2Bio2RDF}
 
 David/Bin: Chem2Bio2RDF
 
-\subsection{Compound Selectivity}
+\subsection*{Compound Selectivity}
 
 NOTE: May want to exclude this Use Case as query has not successful run yet, keeps causing virtuoso 
 to timeout or run out of memory. Currently playing with local server setup to get query to run.
@@ -727,7 +726,8 @@ confidence score has been ignored in this example compound selectivity use case.
 While we show here that the RDF version of the ChEMBL data is very useful, the current RDF triples are by no means static: ChEMBL-RDF
 will keep evolve, following new developments in the Linked Open Data world. For example, it is likely that over time we will link out
 to more Linked Data resources. More importantly, we wish to adopt more common ontologies, of which the BioAssay Ontology is planned
-to be the next~\cite{Visser2011}. These steps will make the ChEMBL-RDF triples even more interoperable.
+to be the next~\cite{Visser2011}. These steps will make the ChEMBL-RDF triples even more interoperable. Part of this future work
+is already being performed within the context of the Open PHACTS project~\cite{Williams2012}.
 
 \section*{Authors contributions}
 EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
