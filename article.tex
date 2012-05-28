@@ -86,7 +86,7 @@ phenomena not yet understood. This process requires integration of datasets that
 sparse, and growing independent of one another. The discovery of new patterns showing the 
 causes and effects of various biological phenomena is beyond the scope of single datasets.
 For example, systems biologists integrate micro-array differential expression datasets to 
-biological pathways, using various other datasets to provide evidence for the links~\cite{}. 
+biological pathways, using various other datasets to provide evidence for the links~\cite{FIXME}. 
 Another prominent example is drug discovery where a new unique chemical entity is discovered 
 based on descriptions of its biological properties. This process requires the effective 
 linkage of many scientific datasets~\cite{Samwald2011,OpenPHACTS}.
@@ -106,10 +106,10 @@ links to other datasets using their RDF URIs to further support research in the 
 \section*{Methods}\label{s2}
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
-The SQL datadump provided by EMBL was inserted into a local MySQL database. A set of SQL queries 
+The SQL datadump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
 were then executed to generate RDF files using a set of PHP scripts. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
-has been outlined in a best practices note by the W3C Health Care and Life Sciences XXX Working Group~\cite{Marshall2012}.
+has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest Group~\cite{Marshall2012}.
 
 In the previous RDF conversion the RDF triples in ChEMBL-RDF were represented using properties and c
 lasses from a custom, ad-hoc ontology~\cite{Willighagen2011}. The current version used community-proposed
@@ -121,6 +121,7 @@ namespaces to simplify the RDF examples. These prefixes are outlined in Table~\r
 
 \begin{table*}
 \caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
+\begin{center}
 \begin{tabular}{ll}
 \hline
 \multicolumn{2}{l}{\textbf{Common Vocabularies}} \\
@@ -145,6 +146,7 @@ mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
 res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
 \hline
 \end{tabular}
+\end{center}
 \end{table*}
 
 To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
@@ -176,9 +178,11 @@ classes are linked together. This section will show how data in the ChEMBL datab
 is exposed at an triple level.
 
 \begin{figure}[t]
-\includegraphics[width=0.45\textwidth]{figs/relations}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{figs/relations}
 \caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
 of common classes, while others are instances.}\label{f1}
+\end{center}
 \end{figure}
 
 The core concept in the ChEMBL database is that of the biological activity. This
@@ -190,7 +194,7 @@ and standardized values allowing comparison between studies, the triples only
 make the latter available. The CiTO ontology is used to point to the paper from
 which the data was extracted.
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 act:a31863
  a       chembl:Activity ;
@@ -205,7 +209,7 @@ act:a31863
   "100000"^^xsd:float ;
  chembl:type "IC50" .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 More than five thousand different activity types are captured by the ChEMBL database.
 The top five types are Potency (43\%), IC50 (13\%), MIC (4.6\%), Inhibition (3.7\%),
@@ -219,7 +223,7 @@ activities to a target (see below) and has a short description. The confidence i
 assigned by the ChEMBL is exposed too, and was previously used to improve activity
 prediction using Bayesian statistics~\cite{Willighagen2011}.
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 assay:a17
  a chembl:Assay ;
@@ -231,7 +235,7 @@ assay:a17
   "Inhibition of ... hydroxylase" ;
  chembl:hasTarget target:t100122 .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 The assays measure activities against particular biological targets. The ChEMBL database
 recognizes various types: pro:PR\_0000001, chembl:ADMET, chembl:CELL-LINE,
@@ -239,7 +243,7 @@ chembl:NUCLEIC-ACID, chembl:ORGANISM, chembl:SUBCELLULAR, chembl:TISSUE,
 chembl:UNCHECKED, and chembl:UNKNOWN. The latter two are currently defined as
 explicit types.
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 target:t1
  a chembl:Target ;
@@ -256,7 +260,7 @@ target:t1
   "Membrane" , "Sulfation" ;
  chembl:organism "Homo sapiens" .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 For drug discovery, the drugs themselves are the main topic of study.
 ChEMBL contains many different drug types, mostly small molecules,
@@ -267,11 +271,11 @@ superclass in common, but can easily be identified as having the
 the role of being a drug. This is triplified using the OBO and ChEBI
 ontologies:
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 mol:m4 obo:has_role chebi:CHEBI_23888 .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 The entity typing is expressed
 by subclassing other classes. For example, proteins subclass the
@@ -283,7 +287,7 @@ and CHEBI\_7754). For each drug compound the name and synonyms are
 provided as labels. When InChI and InChIKeys are available for a drug, then these are
 provided via the CHEMINF formalism (here abbreviated):
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 mol:m41
  rdfs:label "ChEMBL406142" , 
@@ -310,13 +314,13 @@ m41:inchi
 chemblid:ChEMBL406142
  owl:equivalentClass mol:m41 .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 For small molecules, molecular properties are often available from ChEMBL, and as of ChEMBL-RDF 13
 these too are exposed in triple format. Like the InChI and InChIKey, these are provided using the
 CHEMINF ontology approach. Here is, for example, the ALogP value:
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 mol:m1
  cheminf:CHEMINF_000200 m1:alogp .
@@ -326,7 +330,7 @@ m1:alogp
  cheminf:SIO_000300
   "3.344"^^xsd:double .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 For documents little information is replicated from the database, taking advantage
 of PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs). URIs for the
@@ -334,7 +338,7 @@ latter can be resolved online, providing curated information on the identified
 documents. For each paper, basic properties are provided using the BIBO
 ontology:
 
-\begin{footnotesize}
+\begin{small}
 \begin{verbatim}
 journal:j6c706049c2e08871b7c46a6528065736
  a bibo:Journal ;
@@ -351,7 +355,7 @@ res:r1
  bibo:pmid "14695813" ;
  bibo:volume "47" .
 \end{verbatim}
-\end{footnotesize}
+\end{small}
 
 \subsubsection{Data Statistics}
 
@@ -437,13 +441,13 @@ The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 less t
 in ChEMBL 13 release notes, as it does not include doc\_id -1, which refers to the 
 unpublished dataset.
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 select count(*) WHERE {
   ?s ?p bibo:Article .
 }
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 Recreation of the ChEMBL release statistics, by querying the ChEMBL-RDF with SPARQL 
 provides end users with high degree of confidence that the ChEMBL-RDF contains same 
@@ -459,9 +463,11 @@ using the Uniprot identifier. Literature references are directed to CrossRef and
 using the DOIs and PubMed identifiers, respectively.
 
 \begin{figure}[t]
+{\center
 \includegraphics[width=0.45\textwidth]{figs/lodgraph}
 \caption{The links out of the ChEMBL-RDF data into the Linked Open Data cloud.
 Edges are labeled by the predicates making the links.}\label{2}
+}
 \end{figure}
 
 \subsubsection{Linking out to Bio2RDF}
