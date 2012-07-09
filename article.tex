@@ -266,7 +266,8 @@ The ChEMBL database
 recognizes various types: pro:PR\_0000001, chembl:ADMET, chembl:CELL-LINE,
 chembl:NUCLEIC-ACID, chembl:ORGANISM, chembl:SUBCELLULAR, chembl:TISSUE,
 chembl:UNCHECKED, and chembl:UNKNOWN. The latter two are currently defined as
-explicit types.
+explicit types, and effectively uses a closed-world approach. A target
+specification can then look like:
 
 \begin{small}
 \begin{verbatim}
@@ -290,11 +291,20 @@ target:t1
 For drug discovery, the drugs themselves are the main topic of study.
 ChEMBL contains many different drug types, mostly small molecules,
 but also peptides, proteins, antibodies, oligosaccharides, oligonucleotides, and
-even cells. All compounds are represented as classes, following
-the design of the CHEMINF ontology. These entities do not have a common
-superclass in common, but can easily be identified as having the 
+even cells. ChEMBL-RDF follows the approach used by the CHEMINF ontology,
+and encodes drugs as classes, rather than instances, and they subclass
+classes defined by several ontologies for these drug types. For example, proteins subclass the
+Protein concept from the PRotein Ontology (PR\_000000001), small
+molecules subclass the Chemical Entity concept from the CHEMINF
+ontology (CHEMINF\_000000), and oligosaccharides and oligonucleotides
+subclass their respective matches in the CHEBI ontology (CHEBI\_50699
+and CHEBI\_7754).
+
+It should also be noted that the drugs are not subclassed from
+a general drug class, or any other common superclass. However, to annotate
+the drugs to be drugs, they are identified as having the 
 the role of being a drug. This is triplified using the OBO and ChEBI
-ontologies:
+ontologies, where CHEBI\_23888 is the drug role:
 
 \begin{small}
 \begin{verbatim}
@@ -302,13 +312,7 @@ mol:m4 obo:has_role chebi:CHEBI_23888 .
 \end{verbatim}
 \end{small}
 
-The entity typing is expressed
-by subclassing other classes. For example, proteins subclass the
-Protein concept from the PRotein Ontology (PR\_000000001), small
-molecules subclass the Chemical Entity concept from the CHEMINF
-ontology (CHEMINF\_000000), and oligosaccharides and oligonucleotides
-subclass their respective matches in the CHEBI ontology (CHEBI\_50699
-and CHEBI\_7754). For each drug compound the name and synonyms are
+The name and synonyms for each drug are
 provided as labels. When InChI and InChIKeys are available for a drug, then these are
 provided via the CHEMINF formalism (here abbreviated):
 
@@ -341,7 +345,7 @@ chemblid:ChEMBL406142
 \end{verbatim}
 \end{small}
 
-For small molecules, molecular properties are often available from ChEMBL, and as of ChEMBL-RDF 13
+Similarly, properties of small molecules are available from ChEMBL, and as of ChEMBL-RDF 13
 these too are exposed in triple format. Like the InChI and InChIKey, these are provided using the
 CHEMINF ontology approach. Here is, for example, the ALogP value:
 
@@ -357,18 +361,14 @@ m1:alogp
 \end{verbatim}
 \end{small}
 
-For documents little information is replicated from the database, taking advantage
-of PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs). URIs for the
-latter can be resolved online, providing curated information on the identified
-documents. For each paper, basic properties are provided using the BIBO
-ontology:
+The literature from which all this data was extracted, is replicated from the database,
+but only a subset of information about that literature is provided. In all cases,
+it uses the PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs) to link
+to authoritative databases to provide full detail, as outlined later in this paper.
+The provided properties are using the BIBO ontology:
 
 \begin{small}
 \begin{verbatim}
-journal:j6c706049c2e08871b7c46a6528065736
- a bibo:Journal ;
- dc:title "J. Med. Chem." .
-
 res:r1
  a bibo:Article ;
  dc:date "2004" ;
@@ -379,6 +379,10 @@ res:r1
  bibo:pageStart "1" ;
  bibo:pmid "14695813" ;
  bibo:volume "47" .
+
+journal:j6c706049c2e08871b7c46a6528065736
+ a bibo:Journal ;
+ dc:title "J. Med. Chem." .
 \end{verbatim}
 \end{small}
 
