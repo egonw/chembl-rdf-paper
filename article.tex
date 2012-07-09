@@ -84,8 +84,8 @@ to other databases, such that the integration can understood by software.
 \label{s1}
 
 
-The current scientific data deluge, in which datasets are growing faster than scientists can analyse and 
-curate them, provides several new challenges for information systems. Scientists wish to 
+The current scientific data deluge, in which datasets grow faster in size and complexity than scientists can handle,
+provides several new challenges for information systems. Scientists wish to 
 discover new, unique, and significant patterns in datasets, which explaining biological 
 phenomena not yet understood. This process requires integration of datasets that are both 
 sparse, and growing independent of one another. The discovery of new patterns showing the 
@@ -101,11 +101,20 @@ entities, extracted from literature. This provides a unique resource for drug re
 It is updated on a fairly frequent basis as the existing data is further curated and new data is added. 
 The ChEMBL dataset is available for download and can be browsed using a web interface. 
 The former requires scientists to import the data into a relational database, while the 
-latter limits the machine access to the data. Two independent teams have previously mapped 
-the ChEMBL dataset to RDF, Chem2Bio2RDF~\cite{Chen2010} and ChEMBL-RDF~\cite{Willighagen2011}.
+latter limits the machine access to the data.
 
-This paper presents the current state of the ChEMBL-RDF dataset, details of the latest structures
-and ontologies used to map version 13 of ChEMBL to RDF, along with new example use cases, showing 
+Using the right to download, modify, and redistribute the ChEMBL data, two independent teams
+have previously mapped  the ChEMBL dataset to the Resource Description Framework (RDF),
+Chem2Bio2RDF~\cite{Chen2010} and ChEMBL-RDF~\cite{Willighagen2011}. RDF is a framework where
+knowledge is represented by small, so-called triples reflecting very basic facts. Things
+in RDF are represented by Universal Resource Identifiers (URI) and when the more specialized
+Universal Resource Locator (URL) is used, it creates \emph{linked data}~\cite{Samwald2011}. RDF is
+developed as an open standard by the World Wide Web Consortium, and provides a knowledge
+representation framework that applies to many, if not any, domain, making it a perfect
+approach for data integration in the life sciences.
+
+This paper presents an update on the ChEMBL-RDF dataset, and details of the latest structures
+and ontologies used to map ChEMBL 13 to RDF, along with new use cases, showing 
 links to other datasets using their RDF URIs to further support research in the life sciences.
 
 \section*{Methods}
@@ -115,14 +124,15 @@ The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 Feb
 The SQL datadump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
 were then executed to generate RDF files using a set of PHP scripts. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
-has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest Group~\cite{Marshall2012}.
+has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest
+Group~\cite{Marshall2012}. This process has not changed much.
 
-In the previous RDF conversion the RDF triples in ChEMBL-RDF were represented using properties and c
-lasses from a custom, ad-hoc ontology~\cite{Willighagen2011}. The current version used community-proposed
-ontologies, making the RDF more interoperable. The ChEMBL-RDF 13 dataset uses ontology
-standards such as the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology~\cite{Hastings2011} for literature
-references, and domain ontologies like the Protein Ontology\cite{Sidhu2006} and the Chemical Information
-Ontology\cite{Hastings2011}. Throughout this paper, various shorthand prefixes are used to denote different ontology 
+The previous ChEMBL-RDF conversion used, however, custom predicates and classes to represent RDF triples, defining
+an ad-hoc ontology~\cite{Willighagen2011}. The current version, instead, uses community-proposed
+ontologies, making the RDF more interoperable. The new triple dataset uses standard ontologies
+including the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology~\cite{Hastings2011} for literature
+references and citations, and domain ontologies like the Protein Ontology\cite{Sidhu2006} and the Chemical Information
+Ontology\cite{Hastings2011}. Throughout this paper, various prefixes are used to denote different ontology 
 namespaces to simplify the RDF examples. These prefixes are outlined in Table~\ref{namespaces}.
 
 \begin{table*}
@@ -159,7 +169,8 @@ To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL
 hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
 querying is capped, based on the estimated computational effort. Second, resources have
 been made dereferencable using the Kasabi platform~\cite{kasabi}. The Kasabi hosting provides a SPARQL
-end point which requires a user account. A user account can be free for casual usage, or paid for consistent usage.
+end point which requires a user account. A user account can be acquired for free for casual usage,
+or paid for uncapped  use.
 
 Although many parts of the ChEMBL-RDF 13 dataset now use community based ontologies, some 
 terms from the previous ad-hoc ontology are still used. These terms were created under the 
