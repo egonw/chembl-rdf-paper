@@ -471,8 +471,8 @@ core content as source relational database.
 
 To integrate ChEMBL-RDF with other RDF versions of scientific datasets, we link out to various resources.
 These links are shown in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
-using the complementary index and OpenMolecules RDF using InChI values. Protein links are given to Bio2RDF
-using the Uniprot identifier. Literature references are directed to CrossRef and Bio2RDF 
+using the complementary index and OpenMolecules RDF using InChI values. Protein links are given to Bio2RDF~\cite{Belleau2008}
+using the Uniprot identifier~\cite{TheUniProtConsortium2010}. Literature references are directed to CrossRef and Bio2RDF 
 using the DOIs and PubMed identifiers, respectively.
 
 \begin{figure}[t]
@@ -493,10 +493,12 @@ vital to provide context for use cases that require a correlation between chemic
 structures and other scientific data. 
 
 %FIXME:
-For protein links out are based on the FOOBAR for the species, the EC code for proteins,
-as well as UniProt identifiers.
-
-FIXME: should we link out to the new UniProt RDF? PA: Code is available on the OpenPHACTS branch to link to http://purl.uniprot.org/uniprot/
+%For protein links out are based on the FOOBAR for the species, the EC code for proteins,
+%as well as UniProt identifiers.
+%
+%FIXME: should we link out to the new UniProt RDF? PA: Code is available on the OpenPHACTS branch to link to http://purl.uniprot.org/uniprot/
+%
+% Egon: I suggest to skip that for now, as I don't want to taint these results with Open PHACTS work
 
 \begin{small}
 \begin{verbatim}
