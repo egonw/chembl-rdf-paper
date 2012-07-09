@@ -186,14 +186,11 @@ prefix: \textit{chembl}.
 We here present the updated ChEMBL-RDF, including a description of the mapping process 
 and the identification of links to other datasets.
 
-\subsection*{ChEMBL-RDF}
-
-\subsubsection*{Data Structure}
+\subsection*{Data Structure}
 
 For each of the common resource classes, a triple pattern was defined, following the
 data available in the relational database. Figure~\ref{f1} shows how the various resource
-classes are linked together. This section will show how data in the ChEMBL database
-is exposed at an triple level.
+classes are linked together, detailed in this section at a triple level.
 
 \begin{figure}[t]
 \begin{center}
@@ -205,12 +202,13 @@ of common classes, while others are instances.}\label{f1}
 
 The core concept in the ChEMBL database is that of the biological activity. This
 is the type of information that the ChEMBL database extracts from literature.
-In ChEMBL-RDF activities are mostly represented using the custom ChEMBL-RDF vocabulary, where the
-type, fields and links to other resources are using the \textit{chembl}
+Standard ontologies are being explored for future release for annotation
+of activities, but, currently, the
+type, fields and links to other resources are still using the \textit{chembl}
 namespace. While ChEMBL provides both the original activities as found in literature
 and standardized values allowing comparison between studies, the triples only
-make the latter available. The CiTO ontology is used to point to the paper from
-which the data was extracted.
+make the latter available. The link to literature is encoded using the CiTO ontology.
+This results in a set of triples that look like:
 
 \begin{small}
 \begin{verbatim}
@@ -229,17 +227,15 @@ act:a31863
 \end{verbatim}
 \end{small}
 
-More than five thousand different activity types are captured by the ChEMBL database.
+More than five thousand different activity types, represented by the chembl:type predicate,
+are captured by the ChEMBL database.
 The top five types are Potency (43\%), IC50 (13\%), MIC (4.6\%), Inhibition (3.7\%),
 and Ki (3.6\%). The activity types in ChEMBL-RDF are currently not available as, or
 using, an ontology.
 
 The activities themselves are measured against assays, which make up a second important
 resource type. Various assay types are found in the database: chembl:ADMET, chembl:Binding,
-chembl:Functional, chembl:Property, and chembl:Unassigned. The assay information link
-activities to a target (see below) and has a short description. The confidence information
-assigned by the ChEMBL is exposed too, and was previously used to improve activity
-prediction using Bayesian statistics~\cite{Willighagen2011}.
+chembl:Functional, chembl:Property, and chembl:Unassigned.
 
 \begin{small}
 \begin{verbatim}
@@ -248,14 +244,25 @@ assay:a17
  cito:citesAsDataSource
   res:r11347 ;
  chembl:hasAssayType chembl:ADMET ;
- chembl:hasConfScore "7"^^xsd:int ;
  chembl:hasDescription
-  "Inhibition of ... hydroxylase" ;
- chembl:hasTarget target:t100122 .
+  "Inhibition of ... hydroxylase" .
 \end{verbatim}
 \end{small}
 
-The assays measure activities against particular biological targets. The ChEMBL database
+Each assay measures activities against one or more particular biological targets. To each
+target the ChEMBL database associates a confidence score. Because this score is specific
+for each target, the following construct is used:
+
+\begin{small}
+\begin{verbatim}
+assay:a17 chembl:hasTargetScore assay:a17/score/t100122 .
+assay:a17/score/t100122
+ chembl:forTarget target:t100122 ;
+ chembl:hasConfScore "7"^^xsd:int .  
+\end{verbatim}
+\end{small}
+
+The ChEMBL database
 recognizes various types: pro:PR\_0000001, chembl:ADMET, chembl:CELL-LINE,
 chembl:NUCLEIC-ACID, chembl:ORGANISM, chembl:SUBCELLULAR, chembl:TISSUE,
 chembl:UNCHECKED, and chembl:UNKNOWN. The latter two are currently defined as
@@ -375,22 +382,7 @@ res:r1
 \end{verbatim}
 \end{small}
 
-\subsubsection{Data Statistics}
-
-\# triples
-\# links out
-\# problems
-
-The full set of triples are available from the website http://semantics.bigcat.unimaas.nl/chembl12/.
-
-FIXME!
-
-In contrast to earlier releases of ChEMBL-RDF, it now contains the chemical properties
-provided by the ChEMBL database as calculated by ACD/Labs and XXXXX. The data includes
-chemical properties like polar surface area, pKa and logP, counts for hydrogen bond donor
-and acceptor, and rotational bonds. This data is provided for XXXXX structures.
-
-\subsubsection*{Data Statistics and Validation}
+\subsection*{Data Statistics and Validation}
 
 Each release of the ChEMBL database is accompanied by set of release counts, which help 
 provide a concise content overview of the release in question. The ChEMBL 13 release counts
