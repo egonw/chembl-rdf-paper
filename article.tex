@@ -634,8 +634,9 @@ present results from distributed toxicity predictions from the OpenTox infrastru
 In this study we extended Bioclipse DS with remote access to ChEMBL-RDF and ChemSpider. 
 This enables users browsing chemical structures in Bioclipse to look up near neighbors in ChemSpider 
 via the ChemSpider Web API (SOAP), and for the found compounds to query ChEMBL-RDF for 
-available interaction data. The results are presented alongside predictive models in Bioclipse (see Fig \ref{fig:bioclipse-ds}, and can be used for decision support when evaluating chemical structures and consider 
-strategies for optimization.
+available interaction data. The results are presented alongside predictive models in Bioclipse
+(see Fig~\ref{fig:bioclipse-ds}), and can be used for decision support when evaluating chemical
+structures and consider strategies for optimization.
 
 \begin{figure*}[!ht]
 		\begin{center}
@@ -663,11 +664,11 @@ molecule binding sites remains high so does the issue of selectivity. That is, t
 designed may also bind to the equivalent binding site in the  closely related protein 
 target and may lead to undesirable consequences. The ChEMBL data model links molecules to 
 targets using different activity types recorded in the literature. Using activity types, 
-which act as a measure of binding affinity, such as IC50 or Ki and applying activity value cuts
+which act as a measure of binding affinity, such as IC$_{50}$ or K$_{i}$ and applying activity value cuts
 offs it is possible to identify molecules which have higher binding affinity to certain targets 
 compared to others. Taking this one step further it is possible to identify a set molecules, 
-which have a high affinity to protein A (e.g. IC50 value < 50nM) and low affinity to protein 
-B (e.g. IC50 value > 200nM). 
+which have a high affinity to protein A (e.g. IC$_{50}$ value $<$ 50~nM) and low affinity to protein 
+B (e.g. IC$_{50}$ value $>$ 200~nM). 
 
 The following SPARQL query identifies a set of molecules, which based on data curated from the 
 literature and stored in the ChEMBL-RDF data model, selectively bind Human Cyclin-Dependent Kinase 2 
@@ -675,7 +676,7 @@ literature and stored in the ChEMBL-RDF data model, selectively bind Human Cycli
 
 NOTE: Query should return 65 molecules
 
-\begin{tiny}
+\begin{small}
 \begin{verbatim}
 select distinct ?molecule WHERE 
 { 
@@ -726,7 +727,7 @@ select distinct ?molecule WHERE
   }
 }
 \end{verbatim}
-\end{tiny}
+\end{small}
 
 Analysis on the set of molecules returned by this query can be used to help identify small 
 molecule features, which may increase target-binding specificity. For queries which link 
