@@ -156,10 +156,10 @@ obo / pro & OBO \& PRotein Ontology~\cite{Sidhu2006} \\
 chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
 
 \multicolumn{2}{l}{\textbf{ChEMBL-RDF Prefixes }}\\
-act    & http://data.kasabi.com/dataset/chembl-rdf/activity/ \\
-assay  & http://data.kasabi.com/dataset/chembl-rdf/assay/ \\
-mol    & http://data.kasabi.com/dataset/chembl-rdf/molecule/ \\
-res    & http://data.kasabi.com/dataset/chembl-rdf/resource/ \\
+act    & http://linkedchemistry.info/chembl/activity/ \\
+assay  & http://linkedchemistry.info/chembl/assay/ \\
+mol    & http://linkedchemistry.info/chembl/molecule/ \\
+res    & http://linkedchemistry.info/chembl/resource/ \\
 \hline
 \end{tabular}
 \end{center}
@@ -419,7 +419,7 @@ The following SPARQL query returns 1,143,682 ChEMBL molecules:
 
 %Mark Davies notes:
 %NOTE: Full set of ChEMBL molecules have been created by querying molecule\_dictionary table
-%NOTE: I have added extra triple for each molecule: <http://data.kasabi.com/dataset/chembl-rdf/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
+%NOTE: I have added extra triple for each molecule: <http://linkedchemistry.info/chembl/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
 %NOTE: Modified molecule compound structure can be queried here: https://wwwdev.ebi.ac.uk/chembl/sparql
 
 \begin{small}
@@ -541,7 +541,7 @@ are also available via a CHEMINF representation:
  
 \begin{small}
 \begin{verbatim}
-<http://data.kasabi.com/dataset/chembl-rdf/chemblid/ChEMBL324846>
+<http://linkedchemistry.info/chembl/chemblid/ChEMBL324846>
  skos:exactMatch <http://rdf.chemspider.com/370> .
 \end{verbatim}
 \end{small}
@@ -595,7 +595,7 @@ in SPARQL endpoints. For example, if the ChEMBL web application is running on th
 local machine, e.g. \url{http://localhost:8080/chembl/}, then a request for the
 article with identifier ``a31863'', \url{http://localhost:8080/-chembl/article/a31863},
 will be resolved from the database using the full original URI,
-\url{http://data.kasabi.com/dataset/chembl-rdf/activity/a31863}. If the
+\url{http://linkedchemistry.info/chembl/activity/a31863}. If the
 user requested an RDF document using content negotiation, the original URIs will be unchanged,
 however, if the user requested an HTML document, the results will contain both the
 original RDF triples, represented using RDFa, with links that resolve using the users local machine.
