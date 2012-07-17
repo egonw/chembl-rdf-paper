@@ -651,7 +651,20 @@ structures and consider strategies for optimization.
 
 \subsection*{Chem2Bio2RDF}
 
-David/Bin: Chem2Bio2RDF
+Chem2Bio2RDF created a single RDF repository covering over 20 public data resources pertaining to drugs, chemical compounds, carcinogens,
+protein targets, genes, diseases, side effects, pathways and their relations~\cite{Chen2010}. The entities and their relations were
+further annotated by Chem2Bio2OWL ontology, making it a rich semantic resource for integrative search~\cite{Chen2012a} and
+mining~\cite{Chen2012b}.  ChEMBL-RDF set (version 13) has been uploaded into Chem2Bio2RDF triple store, enabling to perform
+queries linking ChEMBL with other entities in Chem2Bio2RDF. Since both ChEMBL RDF and Chem2Bio2RDF use InChi keys to present chemical
+compounds and adopt Bio2RDF protein identifiers to present targets, queries can be easily constructed to link each other. For instance,
+to investigate the relations between drug side effects and their targets (usually off-targets), a query was created to link the
+targets in ChEMBL to side effects (e.g., heart disease) in Chem2Bio2RDF via side effect related drugs and their bioassay activities.
+In this case, 36 drugs causing heart diseases were linked to 87 unique protein targets (IC$_50$ $<$ 10um). The top two most common targets
+of these drugs are HERG and Serotonin transporter. HERG is a well-known off-target accounting for cardiovascular problems, while
+the activity of Serotonin transporter may also be associated with significant cardiovascular adverse effects~\cite{Levy2006}. 
+The targets can be also linked to side effects via protein protein interactions by searching across ChEMBL, HPRD and Sider in
+Chem2Bio2RDF. SPARQLs are available at \url{http://chem2bio2rdf.wikispaces.com/Integrate+with+ChEMBL} and can be executed in the
+SPARQL endpoint~\cite{Chen2010}.
 
 \subsection*{Compound Selectivity}
 
