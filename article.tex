@@ -168,9 +168,10 @@ res    & http://linkedchemistry.info/chembl/resource/ \\
 To expose that ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
 hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
 querying is capped, based on the estimated computational effort. Second, resources have
-been made dereferencable using the Kasabi platform~\cite{kasabi}. The Kasabi hosting provides a SPARQL
-end point which requires a user account. A user account can be acquired for free for casual usage,
-or paid for uncapped  use.
+been made dereferencable via the \url{http://linkedchemistry.info} resource. The Kasabi
+platform~\cite{kasabi} was used for a period of time, until that project was discontinued.
+The Uppsala SPARQL end point still uses resource IRIs based on this, and follow a similar
+IRI pattern where linkedchemistry.info/chembl is replaced by data.kasabi.com/dataset/chembl-rdf.
 
 Although many parts of the ChEMBL-RDF 13 dataset now use community based ontologies, some 
 terms from the previous ad-hoc ontology are still used. These terms were created under the 
@@ -751,7 +752,8 @@ is already being performed within the context of the Open PHACTS project~\cite{W
 EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
 AW extended CitedIn to support citation info in ChEMBL-RDF and supported setting up the http://linkedchemistry.info/ host.
 OS, AW, and VT developed the nearest neighbor application of Bioclipse and ChemSpider.
-JH supported the project with CHEMINF representations. PA integrated ChEMBL-RDF into Bio2RDF.
+JH supported the project with CHEMINF representations.
+PA integrated ChEMBL-RDF into Bio2RDF.
 JO, AG, and MD critically validated and summarized the ChEMBL data statistics.
 All authors contributed to the continued development of ChEMBL-RDF, as well as to the writing of the paper,
 and approved the final version.
