@@ -122,7 +122,7 @@ links to other datasets using their RDF URIs to further support research in the 
 \label{s2}
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
-The SQL datadump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
+The SQL data dump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
 were then executed to generate RDF files using a set of PHP scripts. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
 has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest
@@ -474,7 +474,7 @@ core content as source relational database.
 To integrate ChEMBL-RDF with other RDF versions of scientific datasets, we link out to various resources.
 These links are shown in Figure~\ref{2}. Triples for compounds link out to ChemSpider 
 using the complementary index and OpenMolecules RDF using InChI values. Protein links are given to Bio2RDF~\cite{Belleau2008}
-using the Uniprot identifier~\cite{TheUniProtConsortium2010}. Literature references are directed to CrossRef and Bio2RDF 
+using the UniProt identifier~\cite{TheUniProtConsortium2010}. Literature references are directed to CrossRef and Bio2RDF 
 using the DOIs and PubMed identifiers, respectively.
 
 \begin{figure}[t]
@@ -489,8 +489,8 @@ Edges are labeled by the predicates making the links.}\label{2}
 
 The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data
 server~\cite{Ansell2011} to access SPARQL endpoints for a range of scientific databases~\cite{Belleau2008}.
-A number of these databases are referenced in ChEMBL, including ChEBI, Pubmed, and both the
-Uniprot protein and taxonomy databases~\cite{TheUniProtConsortium2010}. These links are
+A number of these databases are referenced in ChEMBL, including ChEBI, PubMed, and both the
+UniProt protein and taxonomy databases~\cite{TheUniProtConsortium2010}. These links are
 vital to provide context for use cases that require a correlation between chemical
 structures and other scientific data. 
 
@@ -644,7 +644,7 @@ structures and consider strategies for optimization.
 		\begin{center}
 		\includegraphics[width=15cm]{bioclipse-ds.png}
 		\newline
-		\caption[wee]{Screnshot from Bioclipse Decision Support with results from a ChemSpider + ChEMBL-RDF search. The top left canvas contains the query structure, in this case the drug Carbamezapine, the top right canvas shows the near neighbors in ChemSpider (via a similarStructure search) that contain ChEMBL-RDF data, the lower right shows the chemical structure for the selected compound in the top right canvas, and the lower left canvas shows the found interactions for this compound using ChEMBL-RDF.}
+		\caption[wee]{Screenshot from Bioclipse Decision Support with results from a ChemSpider + ChEMBL-RDF search. The top left canvas contains the query structure, in this case the drug carbamezapine, the top right canvas shows the near neighbors in ChemSpider (via a similarStructure search) that contain ChEMBL-RDF data, the lower right shows the chemical structure for the selected compound in the top right canvas, and the lower left canvas shows the found interactions for this compound using ChEMBL-RDF.}
 	\label{fig:bioclipse-ds}
 		\end{center}
 \end{figure*}
@@ -656,14 +656,14 @@ Chem2Bio2RDF created a single RDF repository covering over 20 public data resour
 protein targets, genes, diseases, side effects, pathways and their relations~\cite{Chen2010}. The entities and their relations were
 further annotated by Chem2Bio2OWL ontology, making it a rich semantic resource for integrative search~\cite{Chen2012a} and
 mining~\cite{Chen2012b}.  ChEMBL-RDF set (version 13) has been uploaded into Chem2Bio2RDF triple store, enabling to perform
-queries linking ChEMBL with other entities in Chem2Bio2RDF. Since both ChEMBL RDF and Chem2Bio2RDF use InChi keys to present chemical
+queries linking ChEMBL with other entities in Chem2Bio2RDF. Since both ChEMBL RDF and Chem2Bio2RDF use InChI keys to present chemical
 compounds and adopt Bio2RDF protein identifiers to present targets, queries can be easily constructed to link each other. For instance,
 to investigate the relations between drug side effects and their targets (usually off-targets), a query was created to link the
 targets in ChEMBL to side effects (e.g., heart disease) in Chem2Bio2RDF via side effect related drugs and their bioassay activities.
 In this case, 36 drugs causing heart diseases were linked to 87 unique protein targets (IC$_50$ $<$ 10um). The top two most common targets
 of these drugs are HERG and Serotonin transporter. HERG is a well-known off-target accounting for cardiovascular problems, while
 the activity of Serotonin transporter may also be associated with significant cardiovascular adverse effects~\cite{Levy2006}. 
-The targets can be also linked to side effects via protein protein interactions by searching across ChEMBL, HPRD and Sider in
+The targets can be also linked to side effects via protein protein interactions by searching across ChEMBL, HPRD and SIDER in
 Chem2Bio2RDF. SPARQLs are available at \url{http://chem2bio2rdf.wikispaces.com/Integrate+with+ChEMBL} and can be executed in the
 SPARQL endpoint~\cite{Chen2010}.
 
