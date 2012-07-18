@@ -8,12 +8,13 @@
 %\usepackage[applemac]{inputenc} %applemac support if unicode package fails
 %\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
 \urlstyle{rm}
-\usepackage[citestyle=numeric-comp,sorting=none,firstinits=true,doi=false,isbn=false,url=false]{biblatex}
-\setlength{\bibitemsep}{0cm}                                                                                                                
-\renewbibmacro{in:}{%                                                                                                                       
-  \ifentrytype{article}{}{%                                                                                                                 
-  \printtext{\bibstring{in}\intitlepunct}}}                                                                                                 
-\addbibresource{article.bib}                                                                                                                    
+%\usepackage[citestyle=numeric-comp,sorting=none,firstinits=true,doi=false,isbn=false,url=false]{biblatex}
+\usepackage{cite}
+%\setlength{\bibitemsep}{0cm}                                                                                                                
+%\renewbibmacro{in:}{%                                                                                                                       
+%  \ifentrytype{article}{}{%                                                                                                                 
+%  \printtext{\bibstring{in}\intitlepunct}}}                                                                                                 
+%\addbibresource{article.bib}                                                                                                                    
 
 %\usepackage{amsmath}
 %\usepackage{endnotes}
@@ -778,7 +779,8 @@ support in hosting the SPARQL end point. OS acknowledges funding from the Swedis
 The data in ChEMBL is made available by funding from the Wellcome Trust [086151/Z/08/Z].
 
 {\ifthenelse{\boolean{publ}}{\footnotesize}{\small}
-\printbibliography
+ \bibliographystyle{bmc_article}  % Style BST file
+  \bibliography{article}
 }
 
 \ifthenelse{\boolean{publ}}{\end{multicols}}{}
