@@ -635,13 +635,17 @@ SPARQL endpoint~\cite{Chen2010}.
 
 
 \subsection*{CitedIn}
+The impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn (http://www.citedin.org), an online resource was developed to make scientific impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public resources. ChEMBL contains many literature references. Currently ChEMBL's SPARQL endpoint is queried by CitedIn and thee results are presented to its users. (see Figure xx). Counting citations in ChEMBL is done by the following SPARQL query.
 
-Andra: use the SPARQL end point to find which entries in ChEMBL cite what papers
- 
-The link between data and formal publication is important in many areas of
-attribution, scientist ranking, etc, as outline in \cite{Waagmeester2012}.
-ChEMBL contains many literature references, and we wish to query this data
-for CitedIn.
+\begin{small}
+\begin{verbatim}
+SELECT * WHERE {
+                  ?paper <http://purl.org/ontology/bibo/pmid> \"$pmid\" .
+                  ?paper <http://purl.org/ontology/bibo/pmid> ?pmid .
+                  ?object ?cites ?paper .
+}
+\end{verbatim}
+\end{small}
 
 \subsection*{Bioclipse Decision Support}
 
