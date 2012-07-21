@@ -634,15 +634,25 @@ Chem2Bio2RDF. SPARQLs are available at \url{http://chem2bio2rdf.wikispaces.com/I
 SPARQL endpoint~\cite{Chen2010}.
 
 
+\begin{figure*}[!ht]
+		\begin{center}
+		\includegraphics[width=15cm]{cited.png}
+		\newline
+		\caption[wee]{Screenshot from Bioclipse Decision Support with results from a ChemSpider + ChEMBL-RDF search. The top left canvas contains the query structure, in this case the drug Carbamezapine, the top right canvas shows the near neighbors in ChemSpider (via a similarStructure search) that contain ChEMBL-RDF data, the lower right shows the chemical structure for the selected compound in the top right canvas, and the lower left canvas shows the found interactions for this compound using ChEMBL-RDF.}
+	\label{fig:bioclipse-ds}
+		\end{center}
+\end{figure*}
+
 \subsection*{CitedIn}
-The impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn (http://www.citedin.org), an online resource was developed to make scientific impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public resources. ChEMBL contains many literature references. Currently ChEMBL's SPARQL endpoint is queried by CitedIn and thee results are presented to its users. (see Figure xx). Counting citations in ChEMBL is done by the following SPARQL query.
+
+Using the SPARQL end point, it is easy to integrate data from ChEMBL into other web resources, such as in CitedIn, (http://www.citedin.org).
+The impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn was developed to make scientific impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public resources. ChEMBL contains many literature references. The SPARQL endpoint is queried by CitedIn and the results are presented to its users. Figure shows the result for the Nature paper by Gamo presenting the malari structures, which is highly cited in ChEMBL~\cite{Gamo2010}. Counting citations in ChEMBL is done by the following SPARQL query.
 
 \begin{small}
 \begin{verbatim}
-SELECT * WHERE {
-                  ?paper <http://purl.org/ontology/bibo/pmid> \"$pmid\" .
-                  ?paper <http://purl.org/ontology/bibo/pmid> ?pmid .
-                  ?object ?cites ?paper .
+SELECT count(?object) WHERE {
+  ?paper bibo:pmid \"$pmid\" .
+  ?object cito:citesAsDataSource ?paper .
 }
 \end{verbatim}
 \end{small}
