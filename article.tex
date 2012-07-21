@@ -695,61 +695,31 @@ compared to others. Taking this one step further it is possible to identify a se
 which have a high affinity to protein A (e.g. IC$_{50}$ value $<$ 50~nM) and low affinity to protein 
 B (e.g. IC$_{50}$ value $>$ 200~nM). 
 
-The following SPARQL query identifies a set of molecules, which based on data curated from the 
+The following SPARQL query identifies a set of 65 molecules, which based on data curated from the 
 literature and stored in the ChEMBL-RDF data model, selectively bind Human Cyclin-Dependent Kinase 2 
 (UniProt: P24941) over Human Cyclin-Dependent Kinase 4 (UniProt: P11802). 
 
-NOTE: Query should return 65 molecules
-
 \begin{small}
 \begin{verbatim}
-select distinct ?molecule WHERE 
-{ 
-  ?assay ?p chembl:Assay ;
-  chembl:hasTarget ?target .
-  ?activity ?p chembl:Activity ;
-  chembl:forMolecule ?molecule ;
-  chembl:onAssay ?assay ;
-  chembl:type ?type ;
-  chembl:standardUnits ?unit ;
-  chembl:standardValue ?value;
-  chembl:relation ?relation
-  FILTER (
-    ?type = "IC50"  &&
-    ?unit = "nM"    &&
-    ?value  < 50    &&
-    ?relation = "="
-  ) .
-  ?target ?p chembl:Target;
-  dc:identifier ?id
-  FILTER (
-    ?id = "uniprot:P24941"
-  ) .
-  { 
-    select ?molecule WHERE 
-    {
-      ?assay ?p chembl:Assay ;
-      chembl:hasTarget ?target .
-      ?activity ?p chembl:Activity ;
-      chembl:forMolecule ?molecule ;
-      chembl:onAssay ?assay;
-      chembl:type ?type ;
-      chembl:standardUnits ?unit ;
-      chembl:standardValue ?value ;
-      chembl:relation ?relation
-      FILTER (
-        ?type = "IC50"  &&
-        ?unit = "nM"    &&
-        ?value  > 200   &&
-        ?relation = "="
-      ) .
-      ?target ?p chembl:Target;
-      dc:identifier ?id
-      FILTER (
-        ?id = "uniprot:P11802"
-      ) .
-    }
-  }
+select distinct ?molecule WHERE {
+  ?target1 owl:sameAs <http://bio2rdf.org/uniprot:P24941> .
+  ?assay1 chembl:hasTarget ?target1 .
+  ?activity1 chembl:onAssay ?assay1 ;
+    chembl:forMolecule ?molecule ;
+    chembl:type "IC50" ;
+    chembl:standardUnits "nM" ;
+    chembl:standardValue ?value1 ;
+    chembl:relation "="
+    FILTER ( ?value1 < 50 ) .
+  ?target2 owl:sameAs <http://bio2rdf.org/uniprot:P11802> .
+  ?assay2 chembl:hasTarget ?target2 .
+  ?activity2 chembl:onAssay ?assay2 ;
+    chembl:forMolecule ?molecule ;
+    chembl:type "IC50" ;
+    chembl:standardUnits "nM" ;
+    chembl:standardValue ?value2 ;
+    chembl:relation "="
+    FILTER ( ?value2 > 200 ) .
 }
 \end{verbatim}
 \end{small}
