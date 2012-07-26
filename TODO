@@ -3,3 +3,4 @@
 - everyone: check initials
 - discuss the Chem2Bio2RDF OWL
 - discuss mol instance from CHEMINF
+- check: use the molecule_dictionary to get the complete set of chembl molecules
