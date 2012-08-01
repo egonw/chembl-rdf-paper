@@ -53,8 +53,8 @@ David~Wild$^7$\email{David Wild - djwild@indiana.edu}
 \iid(2)Department of Pharmaceutical Biosciences, Uppsala University, PO Box 591, SE-751 24, Uppsala, Sweden \\
 \iid(3)University of Queensland, St Lucia, Qld 4072, Australia \\
 \iid(4)Royal Society of Chemistry, 904 Tamaras Circle, Wake Forest, NC 27587, U.S.A. \\
-\iid(5)Chemoinformatics and Metabolism, European Bioinformatics Institute, POSTAL CODE, Hinxton, United Kingdom \\
-\iid(6)EMBL-European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, United Kingdom \\ 
+\iid(5)Cheminformatics and Metabolism, European Bioinformatics Institute, Hinxton, Cambridgeshire, CB10 1SD, United Kingdom \\
+\iid(6)Chemogenomics, European Bioinformatics Institute, Wellcome Trust Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, United Kingdom \\ 
 \iid(7)School of Informatics and Computing, Indiana University, Bloomington, IN, U.S.A.
 }
 
@@ -64,19 +64,20 @@ David~Wild$^7$\email{David Wild - djwild@indiana.edu}
 \paragraph*{Background:}
 Making data available as Linked Data using Resource Description Framework (RDF) promotes integration with other web resources.
 RDF documents can natively link to related data, and others can link back using Universal Resource Identifiers (URIs).
-RDF makes the data machine-readable, using extensible vocabularies for additional information, making it easier
+RDF makes the data machine-readable and uses extensible vocabularies for additional information, making it easier
 to scale up inference and data analysis.
 \paragraph*{Results:}
-This paper describes the continued project to convert data from the ChEMBL database into RDF triples.
-This updated version of ChEMBL-RDF now uses recently introduced ontologies, including CHEMINF and CiTO,
+This paper describes recent developments in an ongoing project converting data from the ChEMBL database into RDF triples.
+Relative to earlier versions, this updated version of ChEMBL-RDF uses recently introduced ontologies, including CHEMINF and CiTO,
 exposes more information from the database, and is now available as dereferencable, linked data.
 To demonstrate these new features, we present novel use cases showing further integration with
 other web resources, including Bio2RDF, Chem2Bio2RDF, and ChemSpider, and showing the use of standard
-ontologies.
+ontologies for querying.
 \paragraph*{Conclusions:}
-The use cases show that by using open standards and ontologies it is possible to link the ChEMBL database
-to other databases. Using those links data integration can be understood by software and create a foundation
-for integrated cheminformatics applications, such as the presented decision support.
+We have illustrated the advantage of using open standards and ontologies to link the ChEMBL database
+to other databases. Using those links and the knowledge encoded in standards and ontologies, the ChEMBL-RDF
+resource creates a foundation for integrated semantic web cheminformatics applications, 
+such as the presented decision support.
 \end{abstract}
 
 
@@ -86,37 +87,38 @@ for integrated cheminformatics applications, such as the presented decision supp
 \label{s1}
 
 
-The current scientific data deluge, in which datasets grow faster in size and complexity than scientists can handle,
+The current scientific data deluge, in which datasets grow faster in size and complexity than scientists can keep up with,
 provides several new challenges for information systems. Scientists wish to 
 discover new, unique, and significant patterns in datasets that explain biological 
 phenomena not yet understood. This process requires integration of datasets that are both 
 sparse, and growing independently of one another. The discovery of new patterns showing the 
-causes and effects of various biological phenomena is beyond the scope of single datasets.
+causes and effects of various biological phenomena is often beyond the scope of single datasets.
 For example, systems biologists integrate micro-array differential expression datasets to 
 biological pathways, using various other datasets to provide evidence for the links~\cite{Staab2007}. 
-Another prominent example is drug discovery where a new unique chemical entity is discovered 
-based on descriptions of its biological properties. This process requires the effective 
+Another prominent example is drug discovery, in which a new unique chemical entity is designed or discovered 
+based on descriptions of its required biological properties. This process requires the effective 
 linkage of many scientific datasets~\cite{Samwald2011,Williams2012}.
 
 ChEMBL contains descriptions for biological activities involving over a million chemical 
-entities, extracted from literature. This provides a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
+entities, extracted from the scientific literature, providing a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
 It is updated on a fairly frequent basis as the existing data is further curated and new data is added. 
 The ChEMBL dataset is available for download and can be browsed using a web interface. 
 The former requires scientists to import the data into a relational database, while the 
-latter limits the machine access to the data.
+latter limits the machine access to the data. ChEMBL also provides web services for programmatic
+access, but these are limited to specific types of query as encoded in the web service API. 
 
 Using the right to download, modify, and redistribute the ChEMBL data, two independent teams
 have previously mapped  the ChEMBL dataset to the Resource Description Framework (RDF),
 Chem2Bio2RDF~\cite{Chen2010} and ChEMBL-RDF~\cite{Willighagen2011}. RDF is a framework where
-knowledge is represented by small so-called triples reflecting very basic facts. Any fact can
-be given on anything, and RDF therefore talks about \textit{things}~\cite{Miller:04:RP}. Things in RDF
+knowledge is represented by small so-called triples, reflecting ``facts''. A fact can
+be given on any topic, and RDF therefore talks about \textit{things} very generically~\cite{Miller:04:RP}. Things in RDF
 are represented by Universal Resource Identifiers (URI) and when the more specialized
 Universal Resource Locator (URL) is used, it creates \emph{linked data}~\cite{Samwald2011}. RDF is
 developed as an open standard by the World Wide Web Consortium, and provides a knowledge
-representation framework that applies to many, if not any, domain, making it a perfect
-approach for data integration in the life sciences.
+representation framework that applies to many, if not all, domains, making it a successful 
+approach to data integration in the life sciences.
 
-This paper presents an update on the ChEMBL-RDF dataset, and details of the latest structures
+This paper presents an update on the ChEMBL-RDF resource, including details of the latest structures
 and ontologies used to map ChEMBL to RDF, along with new use cases, showing 
 links to other datasets using their RDF URIs to further support research in the life sciences.
 
@@ -125,16 +127,17 @@ links to other datasets using their RDF URIs to further support research in the 
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
 The SQL data dump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
-were then executed to generate RDF files using a set of PHP scripts. These scripts are Open Source 
+were then executed to generate RDF triples using a set of PHP scripts. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
 has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest
 Group~\cite{Marshall2012}. This process has not changed much since its original description.
 
-However, The previous ChEMBL-RDF conversion used custom predicates and classes to represent RDF triples, defining
+However, the previous ChEMBL-RDF conversion used custom predicates and classes to represent RDF triples, defining
 an ad-hoc ontology~\cite{Willighagen2011}. The current version, instead, uses community-proposed
-ontologies, making the RDF more interoperable. The new triple dataset uses standard ontologies
-including the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology~\cite{Hastings2011} for literature
-references and citations, and domain ontologies like the Protein Ontology\cite{Sidhu2006} and the Chemical Information
+ontologies, making the RDF more interoperable with the RDF offerings of different databases. 
+The new triple dataset uses standard ontologies
+including the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology~\cite{Shotton2010} for literature
+references and citations, and domain ontologies such the Protein Ontology\cite{Sidhu2006} and the Chemical Information
 Ontology\cite{Hastings2011}. Throughout this paper various prefixes are used to denote different ontology 
 namespaces to simplify the RDF examples. These prefixes are outlined in Table~\ref{namespaces}.
 
@@ -168,16 +171,17 @@ res    & http://linkedchemistry.info/chembl/resource/ \\
 \end{center}
 \end{table*}
 
-To expose the ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point
-hosted at Uppsala University, using the Open Source Virtuoso software. Use is free, but the
-querying is capped, based on the estimated computational effort. Second, resources have
+To expose the ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point is being
+hosted at Uppsala University, using the Open Source Virtuoso software. Usage is free, but the
+allowed volume of querying is capped, based on the estimated computational effort. Second, resources have
 been made dereferencable via the \url{http://linkedchemistry.info} resource. The Kasabi
 platform~\cite{kasabi} was used for a period of time, until that project was discontinued.
-The Uppsala SPARQL end point still uses resource IRIs based on this, and follow a similar
+The Uppsala SPARQL end point still uses resource IRIs based on the Kasabi approach, following a similar
 IRI pattern where linkedchemistry.info/chembl is replaced by data.kasabi.com/dataset/chembl-rdf.
 
 Although many parts of the ChEMBL-RDF 13 dataset now use community based ontologies, some 
-terms from the previous ad-hoc ontology are still used. These terms were created under the 
+terms from the previous ad-hoc ontology are still used because no community alternative is yet available. 
+These terms were created under the 
 URI namespace \textit{http://rdf.farmbio.uu.se/chembl/onto/\#}, and are referenced here using the
 prefix: \textit{chembl}.
 
@@ -204,14 +208,10 @@ of common classes, while others are instances.}\label{f1}
 \end{center}
 \end{figure}
 
-The core concept in the ChEMBL database is that of the biological activity. This
-is the type of information that the ChEMBL database extracts from literature.
-Standard ontologies are being explored for future release for annotation
-of activities, but, currently, the
-type, fields and links to other resources are still using the \textit{chembl}
-namespace. While ChEMBL provides both the original activities as found in literature
+The core concept in the ChEMBL database is that of the biological activity. 
+While ChEMBL provides both the original activities as found in literature
 and standardized values allowing comparison between studies, the triples only
-make the latter available. The link to literature is encoded using the CiTO ontology.
+make the latter available. The links to the literature are encoded using the CiTO ontology.
 This results in a set of triples that look like:
 
 \begin{small}
@@ -235,11 +235,11 @@ More than five thousand different activity types, represented by the chembl:type
 are captured by the ChEMBL database.
 The top five types are Potency (43\%), IC50 (13\%), MIC (4.6\%), Inhibition (3.7\%),
 and Ki (3.6\%). The activity types in ChEMBL-RDF are currently not available as, or
-using, an ontology.
+linked to, an ontology.
 
 The activities themselves are measured against assays, which make up a second important
-resource type. Various assay types are found in the database: chembl:ADMET, chembl:Binding,
-chembl:Functional, chembl:Property, and chembl:Unassigned.
+resource type. Various assay types are found in the database: \verb+chembl:ADMET+, \verb+chembl:Binding+,
+\verb+chembl:Functional+, \verb+chembl:Property+, and \verb+chembl:Unassigned+.
 
 \begin{small}
 \begin{verbatim}
@@ -267,11 +267,12 @@ assay:a17/score/t100122
 \end{small}
 
 The ChEMBL database
-recognizes various types: pro:PR\_0000001, chembl:ADMET, chembl:CELL-LINE,
-chembl:NUCLEIC-ACID, chembl:ORGANISM, chembl:SUBCELLULAR, chembl:TISSUE,
-chembl:UNCHECKED, and chembl:UNKNOWN. The latter two are currently defined as
-explicit types, and effectively uses a closed-world approach. A target
-specification can then look like:
+recognizes various types: \verb+pro:PR_0000001+, \verb+chembl:ADMET+, \verb+chembl:CELL-LINE+,
+\verb+chembl:NUCLEIC-ACID+, \verb+chembl:ORGANISM+, \verb+chembl:SUBCELLULAR+, \verb+chembl:TISSUE+,
+\verb+chembl:UNCHECKED+, and \verb+chembl:UNKNOWN+. The latter two are currently defined as
+explicit types, thus effectively implementing a closed-world approach. 
+
+A target specification can then look like:
 
 \begin{small}
 \begin{verbatim}
@@ -298,17 +299,16 @@ but also peptides, proteins, antibodies, oligosaccharides, oligonucleotides, and
 even cells. ChEMBL-RDF follows the approach used by the CHEMINF ontology,
 and encodes drugs as classes, rather than instances, and they subclass
 classes defined by several ontologies for these drug types. For example, proteins subclass the
-Protein concept from the PRotein Ontology (PR\_000000001), small
-molecules subclass the Chemical Entity concept from the CHEMINF
-ontology (CHEMINF\_000000), and oligosaccharides and oligonucleotides
+Protein class from the PRotein Ontology (PR\_000000001), small
+molecules subclass the Chemical Entity class from the CHEMINF
+ontology (CHEMINF\_000000) (which is itself equivalent to the Chemical Entity class in ChEBI, CHEBI\_24431), 
+and oligosaccharides and oligonucleotides
 subclass their respective matches in the CHEBI ontology (CHEBI\_50699
 and CHEBI\_7754).
 
-It should also be noted that the drugs are not subclassed from
-a general drug class, or any other common superclass. However, to annotate
-the drugs to be drugs, they are identified as having the 
-the role of being a drug. This is triplified using the OBO and ChEBI
-ontologies, where CHEBI\_23888 is the drug role:
+It should also be noted that the relationship of these structural classes of drug 
+to a general drug class is that of having a \textit{role} rather than a subclass relationship. 
+This is triplified using the OBO and ChEBI ontologies, where CHEBI\_23888 is the drug role:
 
 \begin{small}
 \begin{verbatim}
@@ -351,7 +351,7 @@ chemblid:ChEMBL406142
 
 Similarly, properties of small molecules are available from ChEMBL, and as of ChEMBL-RDF 13
 these too are exposed in triple format. Like the InChI and InChIKey, these are provided using the
-CHEMINF ontology approach. Here is, for example, the ALogP value (as distributed with ChEMBL and
+CHEMINF ontology. Here is, for example, the ALogP value (as distributed with ChEMBL and
 calculated with ACD/Labs software):
 
 \begin{small}
@@ -367,10 +367,10 @@ m1:alogp
 \end{small}
 
 The literature from which all this data was extracted, is replicated from the database,
-but only a subset of information about that literature is provided. In all cases
-it uses the PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs) to link
-to authoritative databases to provide full detail, as outlined later in this paper.
-The provided properties are using the BIBO ontology:
+but only a subset of the possible information about that literature is provided. In all cases 
+the PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs) are used to link
+to authoritative databases that provide full detail about the references, as outlined later in this paper.
+The properties are provided using the BIBO ontology:
 
 \begin{small}
 \begin{verbatim}
@@ -407,7 +407,7 @@ are as follows:
 These counts are important as firstly they show continued growth in ChEMBL data, as seen 
 in all previous releases. Secondly, these counts can help validate any transformations, 
 which have been applied to the relational data model traditionally used to store the ChEMBL 
-data. The following SPARQL queries attempt to provide a high level validation of the 
+data.  The following SPARQL queries attempt to provide a high level validation of the 
 ChEMBL-RDF by regenerating the ChEMBL 13 release statistics.
 
 The following SPARQL query returns 8,845 ChEMBL targets:
@@ -455,9 +455,9 @@ select count(*) WHERE {
 \end{verbatim}
 \end{small}
 
-The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 less than appears 
-in ChEMBL 13 release notes~\cite{ChEMBL13ReleaseNotes}, as it does not include doc\_id -1, which refers to the 
-unpublished dataset.
+The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 fewer than appears 
+in the ChEMBL 13 release notes~\cite{ChEMBL13ReleaseNotes}, as the result does not include the doc\_id -1, as this refers to the 
+unpublished dataset, not itself a valid \verb+bibo:Article+.
 
 \begin{small}
 \begin{verbatim}
@@ -467,7 +467,7 @@ select count(*) WHERE {
 \end{verbatim}
 \end{small}
 
-Recreation of the ChEMBL release statistics, by querying the ChEMBL-RDF with SPARQL 
+Reproduction of the ChEMBL release statistics through querying ChEMBL-RDF with SPARQL 
 provides end users with a high degree of confidence that the ChEMBL-RDF contains the same 
 core content as the source relational database. 
 
@@ -526,7 +526,7 @@ res:r23 skos:exactMatch <http://bio2rdf.org/pubmed:15149661> .
 
 ChemSpider~\cite{Pence2010} is a freely accessible, online database provided by Royal Society of Chemistry (RSC).
 It contains over 28 million unique
-chemical compounds aggregated from over 400 data sources as well as chemical data extracted
+chemical compounds aggregated from over 400 data sources, as well as chemical data extracted
 from RSC scientific articles and databases. Since its inception, efforts have been made to
 utilize it as both a deposition platform for the community to contribute novel data, as
 well as a platform for annotation and curation for existing data. Studies have shown that there are data
@@ -541,7 +541,7 @@ The data mappings between the CSIDs and ChEMBL IDs are released to the
 community under the Creative Common Attribution-Share Alike license (CC-BY-SA 3.0). Attribution 
 should be made to the original ChEMBL database, Open PHACTS, and ChemSpider.
 
-Link mappings are provided with skos:exactMatch predicates, while the ChemSpider identifiers
+Link mappings are provided with \verb+skos:exactMatch+ predicates, while the ChemSpider identifiers
 are also available via a CHEMINF representation:
  
 \begin{small}
@@ -555,8 +555,8 @@ are also available via a CHEMINF representation:
 
 The InChI is a unique identifier for (small) organic molecules, and has been previously used
 to define unique IRIs for molecules~\cite{Bradley2009,Willighagen2011}. While IRIs are theoretically unlimited in length,
-in practice web browsers and servers limit the length of IRIs. Virtuoso is, unfortunately,
-a system which supports only IRIs of up to a certain length. Therefore, InChI-based links are only created for smaller molecules. 
+in practice many web browsers and servers limit the length of IRIs. Virtuoso is, unfortunately,
+one such system that supports only IRIs of up to a certain length. Therefore, InChI-based links are only created for smaller molecules. 
 Almost 1.3 million links to OpenMolecules RDF were created in a similar manner to:
 
 \begin{small}
@@ -566,8 +566,8 @@ mol:m62687 owl:equivalentClass
 \end{verbatim}
 \end{small}
 
-Notice here the use of owl:equivalentClass to match the formalism in CHEMINF that defines molecules
-as classes, rather than instances.
+Notice here the use of \verb+owl:equivalentClass+ since in CHEMINF molecules are defined as
+as classes rather than instances.
 
 \subsubsection*{Linking out to CrossRef}
 
@@ -583,7 +583,7 @@ res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
 \section*{Applications}
 
 ChEMBL-RDF can be used to explore interrelated scientific datasets, and we here present a few applications. 
-The first application describes how it uses the SPARQL end point can be used to make the data available as linked data
+The first application describes how the SPARQL end point can be used to make the data available as linked data
 via the Bio2RDF platform. The second application takes advantage of the bibliographic information
 exposed as machine readable data, in calculating citation statistics. The third application shows
 an integration of ChEMBL-RDF with ChemSpider to provide an extension for the decision support
@@ -592,21 +592,21 @@ with other life sciences databases, showing the power of the Linked Data approac
 
 \subsection*{Bio2RDF}
 
-This first applications shows how ChEMBL-RDF can be integrated into other linked data services.
+This first application shows how ChEMBL-RDF can be integrated into other linked data services.
 The Linked Data server used by Bio2RDF has been reconfigured for ChEMBL to provide URL
-based services for standard URI resolution, along with text and link searches~\cite{Ansell2011}. 
+based services for standard URI resolution, along with textual and link-based searches~\cite{Ansell2011}. 
 A Java Web Archive (WAR) file along with the configuration files and build scripts for the ChEMBL-RDF Linked Data server are available on GitHub~\cite{WebAppGitHub}. 
 It proxies the standard ChEMBL-RDF URIs by translating URLs between those requested by users and the URIs that are available
-in SPARQL endpoints. For example, if the ChEMBL web application is running on the users
+in SPARQL endpoints. For example, if the ChEMBL web application is running on the user's
 local machine, e.g. \url{http://localhost:8080/chembl/}, then a request for the
 article with identifier ``a31863'', \url{http://localhost:8080/-chembl/article/a31863},
 will be resolved from the database using the full original URI,
 \url{http://linkedchemistry.info/chembl/activity/a31863}. If the
 user requested an RDF document using content negotiation, the original URIs will be unchanged,
 however, if the user requested an HTML document, the results will contain both the
-original RDF triples, represented using RDFa, with links that resolve using the users local machine.
+original RDF triples, represented using RDFa, with links that resolve using the user's local machine.
 
-These links service enables the ChEMBL application to derive both forward links, originating in
+These link services enable the ChEMBL application to derive both forward links, originating in
 ChEMBL, e.g. \url{http://localhost:8080/chembl/linkstonamespace/-targetns/originalns:identifier},
 and backward links, originating in other databases, such as LODD, Bio2RDF
 (\url{http://bio2rdf.org/linksns/targetns/originalns:identifier}), and Chem2Bio2RDF.
@@ -619,16 +619,16 @@ links efficiently using simple queries as demonstrated in the ChEMBL web applica
 
 \subsection*{Chem2Bio2RDF}
 
-A second resource in the linked open data network in which ChEMBL-RDF has been integrated is Chem2Bio2RDF.
+A second resource in the linked open data network into which ChEMBL-RDF has been integrated is Chem2Bio2RDF.
 Chem2Bio2RDF created a single RDF repository covering over 20 public data resources pertaining to drugs, chemical compounds, carcinogens,
 protein targets, genes, diseases, side effects, pathways and their relations~\cite{Chen2010}. The entities and their relations were
-further annotated by Chem2Bio2OWL ontology, making it a rich semantic resource for integrative search~\cite{Chen2012a} and
-mining~\cite{Chen2012b}. The ChEMBL-RDF set has been uploaded into the Chem2Bio2RDF triple store, enabling
-queries linking ChEMBL with other entities in Chem2Bio2RDF. Since both ChEMBL RDF and Chem2Bio2RDF use InChI keys to present chemical
-compounds and adopt Bio2RDF protein identifiers to present targets, queries can be easily constructed to link each other. For instance,
-to investigate the relations between drug side effects and their targets (usually off-targets), a query was created to link the
+further annotated by Chem2Bio2OWL ontology, making it a rich semantic resource for integrative searches~\cite{Chen2012a} and
+data mining~\cite{Chen2012b}. The ChEMBL-RDF set has been uploaded into the Chem2Bio2RDF triple store, enabling
+queries linking ChEMBL with other entities in Chem2Bio2RDF. Since both ChEMBL-RDF and Chem2Bio2RDF use InChI keys to present chemical
+compounds and adopt Bio2RDF protein identifiers to present targets, queries can be easily constructed to link the two. For instance,
+to investigate the relations between drug side effects and their targets (usually off-target effects), a query was created to link the
 targets in ChEMBL to side effects (e.g., heart disease) in Chem2Bio2RDF via side effect related drugs and their bioassay activities.
-In this case, 36 drugs causing heart diseases were linked to 87 unique protein targets ($IC_50$ $<$ 10um). The top two most common targets
+In this case, 36 drugs causing heart disease were linked to 87 unique protein targets ($IC_50$ $<$ 10um). The top two most common targets
 of these drugs are HERG and Serotonin transporter. HERG is a well-known off-target accounting for cardiovascular problems, while
 the activity of Serotonin transporter may also be associated with significant cardiovascular adverse effects~\cite{Levy2006}. 
 The targets can be also linked to side effects via protein-protein interactions by searching across ChEMBL, HPRD and Sider in
@@ -647,8 +647,8 @@ SPARQL endpoint~\cite{Chen2010}.
 
 \subsection*{CitedIn}
 
-Using the SPARQL end point, it is easy to integrate data from ChEMBL into other web resources, such as in CitedIn, (http://www.citedin.org).
-The impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn was developed to make scientific impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public resources. ChEMBL contains many literature references. The SPARQL endpoint is queried by CitedIn and the results are presented to its users. Figure~\ref{fig:citedin} shows the result for the Nature paper by Gamo presenting the malaria structures, which is highly cited in ChEMBL~\cite{Gamo2010}. Counting citations in ChEMBL is done by the following SPARQL query.
+Using the SPARQL end point, it is easy to integrate data from ChEMBL into other web resources, such as CitedIn (http://www.citedin.org).
+While the impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn was developed to make scientific impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public resources. ChEMBL contains many literature references. The SPARQL endpoint is queried by CitedIn and the results are presented to its users. Figure~\ref{fig:citedin} shows the result for the Nature paper by Gamo presenting the malaria structures, which is highly cited in ChEMBL~\cite{Gamo2010}. Counting citations in ChEMBL is done by the following SPARQL query:
 
 \begin{small}
 \begin{verbatim}
@@ -675,10 +675,10 @@ present results from distributed toxicity predictions from the OpenTox infrastru
 
 In this study we extended Bioclipse DS with remote access to ChEMBL-RDF and ChemSpider. 
 This enables users browsing chemical structures in Bioclipse to look up near neighbors in ChemSpider 
-via the ChemSpider Web API (SOAP), and for the found compounds to query ChEMBL-RDF for 
+via the ChemSpider Web API (SOAP), and for the found compounds to be used to query ChEMBL-RDF for 
 available interaction data. The results are presented alongside predictive models in Bioclipse
 (see Fig~\ref{fig:bioclipse-ds}), and can be used for decision support when evaluating chemical
-structures and consider strategies for optimization.
+structures and considering strategies for optimization.
 
 \begin{figure*}[!ht]
 		\begin{center}
@@ -691,22 +691,22 @@ structures and consider strategies for optimization.
 
 \subsection*{Compound Selectivity}
 
-Designing a molecule, which is selective to one target over another will often be considered a 
-successful outcome in a drug design process. If the target in question is a protein, it is easy
-to understand that as sequence identity amongst residues, which contribute to potential small 
-molecule binding sites remains high, so does the issue of selectivity. That is, the molecule being 
-designed may also bind to the equivalent binding site in the  closely related protein 
-target and may lead to undesirable consequences. The ChEMBL data model links molecules to 
-targets using different activity types recorded in the literature. Using activity types, 
-which act as a measure of binding affinity, such as $IC_{50}$ or $K_{i}$ and applying activity value cuts
-offs it is possible to identify molecules which have higher binding affinity to certain targets 
-compared to others. Taking this one step further it is possible to identify a set molecules
-which have a high affinity to protein A (e.g. $IC_{50}$ value $<$ 50~nM) and low affinity to protein 
+Designing a molecule that is selective in binding to one target rather than another is often considered a 
+successful outcome in a drug design process. If the target in question is a protein, high sequence similarity
+between the binding site and that of other proteins will make such selectivity more challenging. 
+That is, the molecule being 
+designed may also bind to the equivalent binding site in the closely related protein 
+target, and this may lead to undesirable consequences. The ChEMBL data model links molecules to 
+targets using different activity types recorded in the literature. Using activity types 
+that act as a measure of binding affinity, such as $IC_{50}$ or $K_{i}$, and applying activity value 
+cut-offs, it is possible to identify molecules which have higher binding affinity to certain targets 
+compared to others. Taking this one step further, it is possible to identify a set of molecules
+that have a high affinity to protein A (e.g. $IC_{50}$ value $<$ 50~nM) and low affinity to protein 
 B (e.g. $IC_{50}$ value $>$ 200~nM). 
 
-The following SPARQL query identifies a set of 65 molecules, which based on data curated from the 
-literature and stored in the ChEMBL-RDF data model, selectively bind Human Cyclin-Dependent Kinase 2 
-(UniProt: P24941) over Human Cyclin-Dependent Kinase 4 (UniProt: P11802). 
+The following SPARQL query identifies a set of 65 molecules that selectively bind Human Cyclin-Dependent Kinase 2 
+(UniProt: P24941) over Human Cyclin-Dependent Kinase 4 (UniProt: P11802), based on data curated from the 
+literature and stored in the ChEMBL-RDF data model. 
 
 \begin{small}
 \begin{verbatim}
@@ -746,18 +746,19 @@ confidence score has been ignored in this example compound selectivity use case.
 \section*{Discussion}
 
 This paper shows the evolution of the ChEMBL-RDF resource in standardizing access to the
-ChEMBL data in a machine-readable manner, by using semantic web technologies. This standardization
+ChEMBL data in a machine-readable manner using semantic web technologies. This standardization
 applies to several aspects of data exchange, including the data serialization format and
-access options, the data structure, and the ontologies used to explain what the data is about.
+access options, the data structure, and the ontologies used to explain what the data are about.
 We touched upon choices made to implement these approaches, such as a selection of
 RDF technologies, and chosen ontologies.
 
 For example, for linking to other databases we selected a few predicates to link to
-other databases: rdfs:seeAlso, skos:exactMatch, owl:equivalentClass, owl:sameAs. Each
-has an increasing level of implications, ranging from "you may also be interested in" to
-"both objects are identical and all properties apply to both objects". Additionally,
+other databases: \verb+rdfs:seeAlso+, \verb+skos:exactMatch+, \verb+owl:equivalentClass+, \verb+owl:sameAs+. 
+These are ordered according to their increasing level of implication, 
+ranging from ``you may also be interested in" to ``both objects are identical 
+and all properties apply to both objects". Additionally,
 the CiTO ontology has been used to link data to the literature it was extracted from,
-which provides links that lie in between rdfs:seeAlso and skos:exactMatch.
+which provides links that lie in between \verb+rdfs:seeAlso+ and \verb+skos:exactMatch+.
 
 Another ontology that we adopted in this ChEMBL-RDF 13 is the cheminformatics ontology
 CHEMINF, allowing us to encode numeric and non-numeric descriptors of chemical entities
@@ -765,25 +766,26 @@ in the same standardized way. Using this approach we expose identity descriptors
 as the SMILES string, InChI, and InChIKey, and molecular properties including the
 logP, rotatable bond count, and hydrogen bond donor and acceptor counts.
 
-However, not all information is yet using standardized ontologies. For example, the
+However, not all information has thus far been annotated 
+using standardized ontologies. For example, the 
 activity types (IC50, EC50, Potency) are not exposed using an ontology, making it
-still impossible to reason or just group over similar activity types. Likewise,
+still impossible to reason or group over similar activity types. Likewise,
 measurement units are provided as literals, making it needlessly hard to compare
 concentrations in nM and mM. For this kind of data, two new ontologies were
-recently developed. For example, the BioAssay Ontology addresses many of our
-remaining concerns around making the experimental data machine readable~\cite{Visser2011},
-while the Quantity, Unit, Dimension and Type (QUDT) ontology makes it possible
+recently developed. Firstly, the BioAssay Ontology addresses many of our
+remaining concerns around making the experimental data machine readable~\cite{Visser2011}. Secondly,
+the Quantity, Unit, Dimension and Type (QUDT) ontology makes it possible
 to express measurements in a machine readable way~\cite{QUDT}. Both approaches are
 currently explored to be applied to ChEMBL-RDF as part of work in the
 Open PHACTS project~\cite{Williams2012}.
 
-Finally, we stress that nothing in this paper cannot be done with other approaches, such as
-more common relational databases. In fact, that is exactly what the ChEMBL website does.
-Similarly, there is nothing principle component analysis does that you cannot do with drawings
-on paper too; it is just inappropriate to do so when computer-based approaches are so much
+Finally, we stress that nothing reported on in this paper cannot be achieved within other approaches 
+or paradigms, such as the more common relational database paradigm that is in fact the backbone of the core ChEMBL offering. 
+Similarly, there is nothing principal component analysis does that one cannot do with drawings
+on paper; it is just inappropriate to use paper when computer-based approaches are so much
 more efficient. We have presented here a linked data approach to the ChEMBL data
-showing standardized and simplified integration to other resources, and that is what
-cheminformatics is about.
+showing standardized and simplified integration to other resources, and that is one of the requirements
+core to the efforts of cheminformatics.
 
 \section*{Authors contributions}
 EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
@@ -798,7 +800,8 @@ and approved the final version.
 \section*{Acknowledgements}
 
 The authors acknowledge A. L\"ovgren at the BMC Computing Department at Uppsala University for his
-support in hosting the SPARQL end point. OS acknowledges funding from the Swedish VR (2011-6129) and eSSENCE.
+support in hosting the SPARQL end point. OS acknowledges funding from the Swedish VR (2011-6129) and eSSENCE. 
+JH acknowledges funding from the EU-OPENSCREEN project. 
 The data in ChEMBL is made available by funding from the Wellcome Trust [086151/Z/08/Z].
 
 {\ifthenelse{\boolean{publ}}{\footnotesize}{\small}
