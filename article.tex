@@ -100,9 +100,9 @@ based on descriptions of its required biological properties. This process requir
 linkage of many scientific datasets~\cite{Samwald2011,Williams2012}.
 
 ChEMBL contains descriptions for biological activities involving over a million chemical 
-entities, extracted from the scientific literature, providing a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
+entities, extracted primarily from the scientific literature, providing a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
 It is updated on a fairly frequent basis as the existing data is further curated and new data is added. 
-The ChEMBL dataset is available for download and can be browsed using a web interface. 
+The ChEMBL dataset is available for download and can be browsed using a web interface and web services.
 The former requires scientists to import the data into a relational database, while the 
 latter limits the machine access to the data. ChEMBL also provides web services for programmatic
 access, but these are limited to specific types of query as encoded in the web service API. 
@@ -136,7 +136,7 @@ However, the previous ChEMBL-RDF conversion used custom predicates and classes t
 an ad-hoc ontology~\cite{Willighagen2011}. The current version, instead, uses community-proposed
 ontologies, making the RDF more interoperable with the RDF offerings of different databases. 
 The new triple dataset uses standard ontologies
-including the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology~\cite{Shotton2010} for literature
+including the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology (CiTO)~\cite{Shotton2010} for literature
 references and citations, and domain ontologies such the Protein Ontology\cite{Sidhu2006} and the Chemical Information
 Ontology\cite{Hastings2011}. Throughout this paper various prefixes are used to denote different ontology 
 namespaces to simplify the RDF examples. These prefixes are outlined in Table~\ref{namespaces}.
@@ -157,6 +157,7 @@ cito    & Citation Typing Ontology~\cite{Shotton2010} \\
         & http://purl.org/spar/cito/ \\
 obo / pro & OBO \& PRotein Ontology~\cite{Sidhu2006} \\
           & http://purl.obolibrary.org/obo/ \\
+bfo     & Basic Formal Ontology~\cite{Smith2004} \\
 
 \multicolumn{2}{l}{\textbf{ChEMBL-RDF Namespace}} \\
 chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
@@ -254,7 +255,8 @@ assay:a17
 \end{small}
 
 Each assay measures activities against one or more particular biological targets. To each
-target the ChEMBL database associates a confidence score. Because this score is specific
+target the ChEMBL database associates a confidence score (see the Compound Selectivity
+example). Because this score is specific
 for each target, the following construct is used:
 
 \begin{small}
@@ -293,21 +295,25 @@ target:t1
 \end{verbatim}
 \end{small}
 
-For drug discovery, the drugs themselves are the main topic of study.
-ChEMBL contains many different drug types, mostly small molecules,
+For drug discovery, the drug-like compounds themselves are the main topic of study.
+ChEMBL contains many different compound types, mostly small molecules,
 but also peptides, proteins, antibodies, oligosaccharides, oligonucleotides, and
 even cells. ChEMBL-RDF follows the approach used by the CHEMINF ontology,
 and encodes drugs as classes, rather than instances, and they subclass
-classes defined by several ontologies for these drug types. For example, proteins subclass the
+classes defined by several ontologies for these types. For example, proteins subclass the
 Protein class from the PRotein Ontology (PR\_000000001), small
 molecules subclass the Chemical Entity class from the CHEMINF
 ontology (CHEMINF\_000000) (which is itself equivalent to the Chemical Entity class in ChEBI, CHEBI\_24431), 
 and oligosaccharides and oligonucleotides
 subclass their respective matches in the CHEBI ontology (CHEBI\_50699
-and CHEBI\_7754).
+and CHEBI\_7754). To ensure we can look up all entities for which activities
+are reported, we subclass everything from the BFO 1.1 class MaterialEntity~\cite{Smith2004},
+which is a superclass to the CHEMINF Chemical Entity class.
 
-It should also be noted that the relationship of these structural classes of drug 
-to a general drug class is that of having a \textit{role} rather than a subclass relationship. 
+It should also be noted that the relationship of these structural classes 
+is that of having a \textit{role} of drug, rather than a subclass relationship.
+Moreover, we triples only give this drug role to approved drugs, as defined by the
+ChEMBL database. 
 This is triplified using the OBO and ChEBI ontologies, where CHEBI\_23888 is the drug role:
 
 \begin{small}
@@ -325,6 +331,7 @@ provided via the CHEMINF formalism (abbreviated here):
 mol:m41
  rdfs:label "ChEMBL406142" , 
    "Bis(3-[1 .... yl]-propionamide)" ;
+ rdfs:subClassOf bfo:MaterialEntity ;
  rdfs:subClassOf cheminf:CHEMINF_000000 ;
  cheminf:CHEMINF_000200
   m41:inchikey , m41:smiles , m41:inchi ;
@@ -420,17 +427,12 @@ select count(*) WHERE {
 \end{verbatim}
 \end{small}
 
-The following SPARQL query returns 1,143,682 ChEMBL molecules:
-
-%Mark Davies notes:
-%NOTE: Full set of ChEMBL molecules have been created by querying molecule\_dictionary table
-%NOTE: I have added extra triple for each molecule: <http://linkedchemistry.info/chembl/13/molecule/m1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.farmbio.uu.se/chembl/onto/#Molecule> .
-%NOTE: Modified molecule compound structure can be queried here: https://wwwdev.ebi.ac.uk/chembl/sparql
+The following SPARQL query returns 1,143,682 entities for which activities are captured in ChEMBL:
 
 \begin{small}
 \begin{verbatim}
 select count(*) WHERE {
-  ?s ?p chembl:Molecule .
+  ?s ?p bfo:MaterialEntity .
 }
 \end{verbatim}
 \end{small}
@@ -444,6 +446,10 @@ select count(*) WHERE {
 }
 \end{verbatim}
 \end{small}
+
+It should be noted that this returns five entries less than the SQL database, because the
+triple generation requires the assay type to be defined, which is not the case for those 
+five assays.
 
 The following SPARQL query returns the 6,933,068 ChEMBL activities:
 
@@ -584,11 +590,13 @@ res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
 
 ChEMBL-RDF can be used to explore interrelated scientific datasets, and we here present a few applications. 
 The first application describes how the SPARQL end point can be used to make the data available as linked data
-via the Bio2RDF platform. The second application takes advantage of the bibliographic information
-exposed as machine readable data, in calculating citation statistics. The third application shows
-an integration of ChEMBL-RDF with ChemSpider to provide an extension for the decision support
-platform in Bioclipse. The last application shows how Chem2Bio2RDF can combine the ChEMBL data
+via the Bio2RDF platform. The second example shows how Chem2Bio2RDF can combine the ChEMBL data
 with other life sciences databases, showing the power of the Linked Data approach.
+The third application takes advantage of the bibliographic information exposed as machine readable
+data, in calculating citation statistics. The fourth use case shows an integration of ChEMBL-RDF with
+ChemSpider to provide an extension for the decision support platform in Bioclipse. The final application
+shows a more complex SPARQL query showing how information from various tables can be used to
+find compounds with a high selectivity.
 
 \subsection*{Bio2RDF}
 
@@ -648,7 +656,13 @@ SPARQL endpoint~\cite{Chen2010}.
 \subsection*{CitedIn}
 
 Using the SPARQL end point, it is easy to integrate data from ChEMBL into other web resources, such as CitedIn (http://www.citedin.org).
-While the impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn was developed to make scientific impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public resources. ChEMBL contains many literature references. The SPARQL endpoint is queried by CitedIn and the results are presented to its users. Figure~\ref{fig:citedin} shows the result for the Nature paper by Gamo presenting the malaria structures, which is highly cited in ChEMBL~\cite{Gamo2010}. Counting citations in ChEMBL is done by the following SPARQL query:
+While the impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this
+narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn was developed to make scientific
+impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public
+resources. ChEMBL contains many literature references. The SPARQL endpoint is queried by CitedIn and the results are presented to its users.
+Figure~\ref{fig:citedin} shows the results for the Nature paper by Gamo presenting the malaria structures~\cite{Gamo2010}
+which is cited as the reference for a large number of activity datapoints and compounds in ChEMBL.
+Counting all objects that reference this paper is done by the following SPARQL query:
 
 \begin{small}
 \begin{verbatim}
