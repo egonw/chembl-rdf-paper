@@ -68,8 +68,8 @@ RDF makes the data machine-readable and uses extensible vocabularies for additio
 to scale up inference and data analysis.
 \paragraph*{Results:}
 This paper describes recent developments in an ongoing project converting data from the ChEMBL database into RDF triples.
-Relative to earlier versions, this updated version of ChEMBL-RDF uses recently introduced ontologies, including CHEMINF and CiTO,
-exposes more information from the database, and is now available as dereferencable, linked data.
+Relative to earlier versions, this updated version of ChEMBL-RDF uses recently introduced ontologies, including CHEMINF and CiTO;
+exposes more information from the database; and is now available as dereferencable, linked data.
 To demonstrate these new features, we present novel use cases showing further integration with
 other web resources, including Bio2RDF, Chem2Bio2RDF, and ChemSpider, and showing the use of standard
 ontologies for querying.
@@ -90,30 +90,29 @@ such as the presented decision support.
 The current scientific data deluge, in which datasets grow faster in size and complexity than scientists can keep up with,
 provides several new challenges for information systems. Scientists wish to 
 discover new, unique, and significant patterns in datasets that explain biological 
-phenomena not yet understood. This process requires integration of datasets that are both 
-sparse, and growing independently of one another. The discovery of new patterns showing the 
+phenomena not yet understood. The discovery of new patterns showing the 
 causes and effects of various biological phenomena is often beyond the scope of single datasets.
 For example, systems biologists integrate micro-array differential expression datasets to 
 biological pathways, using various other datasets to provide evidence for the links~\cite{Staab2007}. 
 Another prominent example is drug discovery, in which a new unique chemical entity is designed or discovered 
 based on descriptions of its required biological properties. This process requires the effective 
-linkage of many scientific datasets~\cite{Samwald2011,Williams2012}.
+linkage of many scientific datasets that are both sparse, and growing independently of one another~\cite{Samwald2011,Williams2012}.
 
 ChEMBL contains descriptions for biological activities involving over a million chemical 
-entities, extracted primarily from the scientific literature, providing a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
+entities, extracted primarily from scientific literature. This provides a unique resource for drug researchers~\cite{Gaulton2012,Warr2009}.
 It is updated on a fairly frequent basis as the existing data is further curated and new data is added. 
 The ChEMBL dataset is available for download and can be browsed using a web interface and web services.
 The former requires scientists to import the data into a relational database, while the 
 latter limits the machine access to the data. ChEMBL also provides web services for programmatic
-access, but these are limited to specific types of query as encoded in the web service API. 
+access, but these are limited to the specific types of queries which are encoded in the web service API. 
 
 Using the right to download, modify, and redistribute the ChEMBL data, two independent teams
 have previously mapped the ChEMBL dataset to the Resource Description Framework (RDF), resulting
 in Chem2Bio2RDF~\cite{Chen2010} and ChEMBL-RDF~\cite{Willighagen2011}. RDF is a framework where
 knowledge is represented by small so-called triples, reflecting ``facts''. A fact can
 be given on any topic, and RDF therefore talks about \textit{things} very generically~\cite{Miller:04:RP}. Things in RDF
-are represented by Universal Resource Identifiers (URI) and when the more specialized
-Universal Resource Locator (URL) is used, it creates \emph{linked data}~\cite{Samwald2011}. RDF is
+are represented by Universal Resource Identifiers (URI). When the URI can be resolved, 
+for example using the HTTP protocol, it creates \emph{linked data}~\cite{Samwald2011}. RDF is
 developed as an open standard by the World Wide Web Consortium, and provides a knowledge
 representation framework that applies to many, if not all, domains, making it a successful 
 approach to data integration in the life sciences.
@@ -312,9 +311,9 @@ which is a superclass to the CHEMINF Chemical Entity class.
 
 It should also be noted that the relationship of these structural classes 
 is that of having a \textit{role} of drug, rather than a subclass relationship.
-Moreover, we triples only give this drug role to approved drugs, as defined by the
+Moreover, the triples only attach this drug role to approved drugs, as defined by the
 ChEMBL database. 
-This is triplified using the OBO and ChEBI ontologies, where CHEBI\_23888 is the drug role:
+This is triplified using the OBO and ChEBI ontologies in the following manner, where CHEBI\_23888 is the drug role:
 
 \begin{small}
 \begin{verbatim}
@@ -497,7 +496,7 @@ Edges are labeled by the predicates making the links.}\label{2}
 \subsubsection*{Linking out to Bio2RDF}
 
 The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data
-server~\cite{Ansell2011} to access SPARQL endpoints for a range of scientific databases~\cite{Belleau2008}.
+server~\cite{Ansell2011} and SPARQL endpoints containing RDF data from a range of scientific databases~\cite{Belleau2008}.
 A number of these databases are referenced in ChEMBL, including ChEBI, PubMed, and both the
 UniProt protein and taxonomy databases~\cite{TheUniProtConsortium2010}. These links are
 vital to provide context for use cases that require a correlation between chemical
@@ -535,16 +534,15 @@ It contains over 28 million unique
 chemical compounds aggregated from over 400 data sources, as well as chemical data extracted
 from RSC scientific articles and databases. Since its inception, efforts have been made to
 utilize it as both a deposition platform for the community to contribute novel data, as
-well as a platform for annotation and curation for existing data. Studies have shown that there are data
-quality issues in many of the public compound databases~\cite{Williams2011}. ChemSpider has become a
-valuable resource for curated data, especially chemical-compound name mappings. ChemSpider
+well as a platform for annotation and curation for existing data. ChemSpider has become a
+valuable resource for curated data, especially chemical-compound name mappings~\cite{Williams2011}. ChemSpider
 is presently providing the chemical structure, substructure and similarity searching services 
 underpinning the Open PHACTS semantic web project~\cite{Williams2012}. Specific chemical data 
 sources containing data mappings between ChemSpider identifiers (CSIDs) and the original data 
 source identifiers have been provided to the triple store, together with chemical identifiers 
 including validated chemical names (systematic, generic and trivial), SMILES, and InChIs. 
 The data mappings between the CSIDs and ChEMBL IDs are released to the 
-community under the Creative Common Attribution-Share Alike license (CC-BY-SA 3.0). Attribution 
+community under the Creative Commons Attribution, Share Alike, license (CC-BY-SA 3.0). Attribution 
 should be made to the original ChEMBL database, Open PHACTS, and ChemSpider.
 
 Link mappings are provided with \verb+skos:exactMatch+ predicates, while the ChemSpider identifiers
