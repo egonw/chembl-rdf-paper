@@ -5,27 +5,14 @@
 \usepackage{ifthen}  % Conditional 
 \usepackage{multicol}   %Columns
 \usepackage[utf8]{inputenc} %unicode support
-%\usepackage[applemac]{inputenc} %applemac support if unicode package fails
-%\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
 \urlstyle{rm}
-%\usepackage[citestyle=numeric-comp,sorting=none,firstinits=true,doi=false,isbn=false,url=false]{biblatex}
 \usepackage{cite}
-%\setlength{\bibitemsep}{0cm}                                                                                                                
-%\renewbibmacro{in:}{%                                                                                                                       
-%  \ifentrytype{article}{}{%                                                                                                                 
-%  \printtext{\bibstring{in}\intitlepunct}}}                                                                                                 
-%\addbibresource{article.bib}                                                                                                                    
-
-%\usepackage{amsmath}
-%\usepackage{endnotes}
 \usepackage{graphicx}
-%\usepackage{tikz}
 
 \newboolean{publ}
 
 %Review style settings
 \newenvironment{bmcformat}{\begin{raggedright}\baselineskip20pt\sloppy\setboolean{publ}{false}}{\end{raggedright}\baselineskip20pt\sloppy}
-
 %Publication style settings
 %\newenvironment{bmcformat}{\fussy\setboolean{publ}{true}}{\fussy}
 
