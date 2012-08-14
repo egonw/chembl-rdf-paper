@@ -163,8 +163,8 @@ hosted at Uppsala University, using the Open Source Virtuoso software. Usage is 
 allowed volume of querying is capped, based on the estimated computational effort. Second, resources have
 been made dereferencable via the \url{http://linkedchemistry.info} resource. The Kasabi
 platform~\cite{kasabi} was used for a period of time, until that project was discontinued.
-The Uppsala SPARQL end point still uses resource IRIs based on the Kasabi approach, following a similar
-IRI pattern where linkedchemistry.info/chembl is replaced by data.kasabi.com/dataset/chembl-rdf.
+The Uppsala SPARQL end point still uses resource URIs based on the Kasabi approach, following a similar
+URI pattern where linkedchemistry.info/chembl is replaced by data.kasabi.com/dataset/chembl-rdf.
 
 Although many parts of the ChEMBL-RDF 13 dataset now use community based ontologies, some 
 terms from the previous ad-hoc ontology are still used because no community alternative is yet available. 
@@ -545,9 +545,9 @@ are also available via a CHEMINF representation:
 \subsubsection*{Linking out to OpenMolecules RDF}
 
 The InChI is a unique identifier for (small) organic molecules, and has been previously used
-to define unique IRIs for molecules~\cite{Bradley2009,Willighagen2011}. While IRIs are theoretically unlimited in length,
-in practice many web browsers and servers limit the length of IRIs. Virtuoso is, unfortunately,
-one such system that supports only IRIs of up to a certain length. Therefore, InChI-based links are only created for smaller molecules. 
+to define unique URIs for molecules~\cite{Bradley2009,Willighagen2011}. While URIs are theoretically unlimited in length,
+in practice many web browsers and servers limit the length of URIs. Virtuoso is, unfortunately,
+one such system that supports only URIs of up to a certain length. Therefore, InChI-based links are only created for smaller molecules. 
 Almost 1.3 million links to OpenMolecules RDF were created in a similar manner to:
 
 \begin{small}
