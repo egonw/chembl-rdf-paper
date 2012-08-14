@@ -633,7 +633,9 @@ SPARQL endpoint~\cite{Chen2010}.
 		\begin{center}
 		\includegraphics[width=15cm]{citedin.png}
 		\newline
-		\caption[wee]{Screenshot of the CitedIn web service showing a paper cited 94671 times in the ChEMBL database.}
+		\caption[wee]{Screenshot of the CitedIn web service showing a paper cited 94671 times in the ChEMBL database.
+		   The \textit{Details} button on the webpage links to a ChEMBL webpage with detail on what parts of the database are
+		   linked to that paper.}
 	\label{fig:citedin}
 		\end{center}
 \end{figure*}
@@ -657,6 +659,10 @@ SELECT count(?object) WHERE {
 }
 \end{verbatim}
 \end{small}
+
+The CitedIn summary for ChEMBL also provides a \textit{Details} button that links back to a ChEMBL webpage providing
+a \textit{Document Report Card} showing in more detail what targets, assays, compounds, and activities in the database
+are linked to that paper.
 
 \subsection*{Bioclipse Decision Support}
 
