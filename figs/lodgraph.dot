@@ -9,12 +9,14 @@ digraph G {
   chemspider [label="ChemSpider"];
   bio2rdfuniprot [label="Bio2RDF\nUniprot"];
   bio2rdfpubmed [label="Bio2RDF\nPubMed"];
+  bio2rdfec [label="Bio2RDF\nEC"];
   crossref [label="CrossRef"];
   ron [label="OpenMolecules\nRDF"];
 
   chembl -> chemspider [label="skos:exactMatch"];
   chembl -> bio2rdfuniprot [label="owl:sameAs"];
   chembl -> bio2rdfpubmed [label="rdfs:seeAlso"];
+  chembl -> bio2rdfec [label="rdfs:subClassOf"];
   chembl -> crossref [label="owl:sameAs"];
   chembl -> ron [label="owl:equivalentClass"];
 
