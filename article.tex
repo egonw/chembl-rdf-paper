@@ -472,6 +472,13 @@ using the complementary index and OpenMolecules RDF using InChI values. Protein 
 using the UniProt identifier~\cite{TheUniProtConsortium2010}. Literature references are directed to CrossRef and Bio2RDF 
 using the DOIs and PubMed identifiers, respectively.
 
+The predicates used to capture the links to these databases are
+\verb+rdfs:seeAlso+, \verb+skos:exactMatch+, \verb+owl:equivalentClass+, and \verb+owl:sameAs+. 
+These relations are ordered according to their increasing level of implication:
+ranging from ``you may also be interested in'' with \verb+rdfs:seeAlso+ to
+``both objects are identical  and all properties apply to both objects'' for
+\verb+owl:sameAs+.
+
 \begin{figure}[t]
 {\center
 \includegraphics[width=0.45\textwidth]{figs/lodgraph}
@@ -506,7 +513,7 @@ target:t101191
 \end{verbatim}
 \end{small}
 
-For papers with PubMed identifiers we also link out to Bio2RDF:
+For resources from the biomedical with PubMed identifiers we also link out to Bio2RDF:
 
 \begin{small}
 \begin{verbatim}
@@ -751,45 +758,66 @@ confidence score has been ignored in this example compound selectivity use case.
 \section*{Discussion}
 
 This paper shows the evolution of the ChEMBL-RDF resource in standardizing access to the
-ChEMBL data in a machine-readable manner using semantic web technologies. This standardization
-applies to several aspects of data exchange, including the data serialization format and
-access options, the data structure, and the ontologies used to explain what the data are about.
-We touched upon choices made to implement these approaches, such as a selection of
-RDF technologies, and chosen ontologies.
+ChEMBL data in a machine-readable manner using semantic web technologies. We showed here
+that the conversion into RDF allows a number of new integrations with other resources.
+It should be clear that these applications can be made using other technologies too, but
+using the RDF standards it is easier to implement them. More importantly, the solutions
+will be generally applicable to any system using these open standards. However, a number
+of choices need discussion. 
 
-For example, for linking to other databases we selected a few predicates to link to
-other databases: \verb+rdfs:seeAlso+, \verb+skos:exactMatch+, \verb+owl:equivalentClass+, \verb+owl:sameAs+. 
-These are ordered according to their increasing level of implication, 
-ranging from ``you may also be interested in" to ``both objects are identical 
-and all properties apply to both objects". Additionally,
-the CiTO ontology has been used to link data to the literature it was extracted from,
-which provides links that lie in between \verb+rdfs:seeAlso+ and \verb+skos:exactMatch+.
+For example, much can be argued about the choice of ontologies, and the lack of an
+ontology at places where we decided to use custom classes and predicates. Indeed, the
+choices have only partly been decided on ontological arguments, but are mostly based
+on pragmatic approaches to fulfill our needs for the applications. It should be noted,
+however, that the ChEMBL data base captures a wide variety of experimental studies
+and that semantics are not fully specified in the source from which the data was
+extracted. Clearly, missing semantics must not be made up: it is better to leave
+some semantics undefined than making incorrect assumptions. Indeed, during the
+development of the applications some incorrect assumptions have been discovered and
+fixed. Therefore, the goal of this work is the conversion of the ChEMBL data into
+RDF, and not an ontological modeling of the domain.
 
-Another ontology that we adopted in this ChEMBL-RDF 13 is the cheminformatics ontology
-CHEMINF, allowing us to encode numeric and non-numeric descriptors of chemical entities
-in the same standardized way. Using this approach we expose identity descriptors such
+For example, this applies for the links to other databases: when linking between
+two databases based on a shared identifier, we make assumptions. Besides the mere
+aspect that either database may contain typing mistakes in databases, additional
+error may be introduced because at least the assumption is made in the ChEMBL database
+that entries in that database really matches the data linked to in the other database.
+That is the reason why we used different predicates for linking to other databases.
+This problem, however, is general, and applies to other methods to link databases with
+identifiers too~\cite{VanIersel2010}.
+
+Also debatable is the choice of the ontologies. For example, in this release of the
+ChEMBL-RDF data, we adopted the cheminformatics ontology, CHEMINF. Using this ontology
+we can encode numeric and non-numeric descriptors of chemical entities in the same
+standardized way. Using this approach we expose identity descriptors such
 as the SMILES string, InChI, and InChIKey, and molecular properties including the
 logP, rotatable bond count, and hydrogen bond donor and acceptor counts.
+The design of this annotation is more complex than strictly needed for a translation
+of the data in the ChEMBL relational database into RDF. Moreover, this also
+affects the querying of the data, where a more complex SPARQL query is needed.
+While we found that our selection of ontologies fit well with our applications,
+we anticipate that we will select more expressive ontologies in the future.
 
-However, not all information has thus far been annotated 
-using standardized ontologies. For example, the 
-activity types (IC50, EC50, Potency) are not exposed using an ontology, making it
-still impossible to reason or group over similar activity types. Likewise,
-measurement units are provided as literals, making it needlessly hard to compare
-concentrations in nM and mM. For this kind of data, two new ontologies were
-recently developed. Firstly, the BioAssay Ontology addresses many of our
-remaining concerns around making the experimental data machine readable~\cite{Visser2011}. Secondly,
+For example, not all information in the databases has so far been annotated using
+standard ontologies. That includes the activity types (``IC50'', ``EC50'', and ``Potency'' in ChEMBL), making it
+still impossible to reason or group over similar activity types. For example,
+the IC$_{50}$ and K$_i$ end point are closely related, but that is currently not
+ontologically expressed. Similarly, measurement units are currently provided as
+string literals, making it needlessly hard to compare concentrations in nM and mM.
+If we further allow to make some assumptions, we can even search for activities
+expressed in \mu g/ml with query concentration in nM.
+
+To address these issues, two ontologies were
+recently developed. First, the BioAssay Ontology addresses many of our
+remaining concerns around making the experimental data machine readable~\cite{Visser2011}. Second,
 the Quantity, Unit, Dimension and Type (QUDT) ontology makes it possible
 to express measurements in a machine readable way~\cite{QUDT}. Both approaches are
 currently explored to be applied to ChEMBL-RDF as part of work in the
 Open PHACTS project~\cite{Williams2012}.
 
-Finally, we stress that nothing reported on in this paper cannot be achieved within other approaches 
-or paradigms, such as the more common relational database paradigm that is in fact the backbone of the core ChEMBL offering. 
-Similarly, there is nothing principal component analysis does that one cannot do with drawings
-on paper; it is just inappropriate to use paper when computer-based approaches are so much
-more efficient. We have presented here a linked data approach to the ChEMBL data
-showing standardized and simplified integration to other resources, and that is one of the requirements
+Taking these points into account, we believe that the adoption of the RDF standards provide
+novel use cases with the ChEMBL data. More importantly, the adoption of explicit
+semantics simplifies integration to other resources, and that is one of the requirements
 core to the efforts of cheminformatics.
 
 \section*{Authors contributions}
