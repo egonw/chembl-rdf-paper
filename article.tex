@@ -286,7 +286,7 @@ ChEMBL contains many different compound types, mostly small molecules,
 but also peptides, proteins, antibodies, oligosaccharides, oligonucleotides, and
 even cells. ChEMBL-RDF follows the approach used by the CHEMINF ontology,
 and encodes drugs as classes, rather than instances, and they subclass
-classes defined by several ontologies for these types. For example, proteins subclass the
+other classes defined by several ontologies for these types. For example, proteins subclass the
 Protein class from the PRotein Ontology (PR\_000000001), small
 molecules subclass the Chemical Entity class from the CHEMINF
 ontology (CHEMINF\_000000) (which is itself equivalent to the Chemical Entity class in ChEBI, CHEBI\_24431), 
@@ -344,7 +344,7 @@ chemblid:ChEMBL406142
 
 Similarly, properties of small molecules are available from ChEMBL, and as of ChEMBL-RDF 13
 these too are exposed in triple format. Like the InChI and InChIKey, these are provided using the
-CHEMINF ontology. Here is, for example, the ALogP value (as distributed with ChEMBL and
+CHEMINF ontology. Here is, for example, the logP value (as distributed with ChEMBL and
 calculated with ACD/Labs software):
 
 \begin{small}
@@ -447,7 +447,7 @@ select count(*) WHERE {
 \end{verbatim}
 \end{small}
 
-The following SPARQL query returns the 44,681 ChEMBL documents. This is 1 fewer than appears 
+The following SPARQL query returns the 44,681 ChEMBL documents. This is one fewer than appears 
 in the ChEMBL 13 release notes~\cite{ChEMBL13ReleaseNotes}, as the result does not include the doc\_id -1, as this refers to the 
 unpublished dataset, not itself a valid \verb+bibo:Article+.
 
@@ -565,7 +565,7 @@ mol:m62687 owl:equivalentClass
 \end{small}
 
 Notice here the use of \verb+owl:equivalentClass+ since in CHEMINF molecules are defined as
-as classes rather than instances.
+classes rather than instances.
 
 \subsubsection*{Linking out to CrossRef}
 
@@ -801,7 +801,7 @@ we anticipate that we will select more expressive ontologies in the future.
 For example, not all information in the databases has so far been annotated using
 standard ontologies. That includes the activity types (``IC50'', ``EC50'', and ``Potency'' in ChEMBL), making it
 still impossible to reason or group over similar activity types. For example,
-the IC$_{50}$ and K$_i$ end point are closely related, but that is currently not
+the IC$_{50}$ and K$_i$ end points are closely related, but that is currently not
 ontologically expressed. Similarly, measurement units are currently provided as
 string literals, making it needlessly hard to compare concentrations in nM and mM.
 If we further allow to make some assumptions, we can even search for activities
