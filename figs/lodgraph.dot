@@ -13,11 +13,11 @@ digraph G {
   crossref [label="CrossRef"];
   ron [label="OpenMolecules\nRDF"];
 
-  chembl -> chemspider [label="skos:exactMatch"];
-  chembl -> bio2rdfuniprot [label="owl:sameAs"];
-  chembl -> bio2rdfpubmed [label="rdfs:seeAlso"];
-  chembl -> bio2rdfec [label="rdfs:subClassOf"];
-  chembl -> crossref [label="owl:sameAs"];
-  chembl -> ron [label="owl:equivalentClass"];
+  chembl -> chemspider [headlabel="skos:exactMatch", labeldistance=4.5, labelangle=60];
+  chembl -> bio2rdfuniprot [headlabel="owl:sameAs", labeldistance=7.5, labelangle=40];
+  chembl -> bio2rdfpubmed [headlabel="rdfs:seeAlso", labeldistance=3.5, labelangle=-50];
+  chembl -> bio2rdfec [headlabel="rdfs:subClassOf", labeldistance=3.5, labelangle=60];
+  chembl -> crossref [headlabel="owl:sameAs", labeldistance=7, labelangle=-40];
+  chembl -> ron [headlabel="owl:equivalentClass", labeldistance=4, labelangle=-80];
 
 }
