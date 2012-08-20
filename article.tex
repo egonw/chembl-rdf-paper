@@ -765,61 +765,59 @@ using the RDF standards it is easier to implement them. More importantly, the so
 will be generally applicable to any system using these open standards. However, a number
 of choices need discussion. 
 
-For example, much can be argued about the choice of ontologies, and the lack of an
-ontology at places where we decided to use custom classes and predicates. Indeed, the
-choices have only partly been decided on ontological arguments, but are mostly based
-on pragmatic approaches to fulfill our needs for the applications. It should be noted,
-however, that the ChEMBL data base captures a wide variety of experimental studies
-and that semantics are not fully specified in the source from which the data was
-extracted. Clearly, missing semantics must not be made up: it is better to leave
-some semantics undefined than making incorrect assumptions. Indeed, during the
+Much could be argued about the choice of ontologies, and the lack of an
+ontology in places where we decided to use custom classes and predicates. Indeed, the
+choices have only partly been decided using ontological arguments. Most of the choices are based
+on pragmatic approaches to enable solutions to the range of use cases we describe here. It should be noted,
+however, that the ChEMBL database captures a wide variety of experimental studies
+and that semantics are not fully specified in the primary source from which the ChEMBL data was
+extracted. As it is not possible to infer the original intentions in these cases, 
+it is our opinion that it is better to leave some semantics undefined. During the 
 development of the applications some incorrect assumptions have been discovered and
-fixed. Therefore, the goal of this work is the conversion of the ChEMBL data into
+fixed, but in the main we have tried to avoid making assumptions if they are not generally known to be valid. 
+Therefore, the goal of this work is the conversion of the ChEMBL data into
 RDF, and not an ontological modeling of the domain.
 
-For example, this applies for the links to other databases: when linking between
-two databases based on a shared identifier, we make assumptions. Besides the mere
-aspect that either database may contain typing mistakes in databases, additional
-error may be introduced because at least the assumption is made in the ChEMBL database
-that entries in that database really matches the data linked to in the other database.
-That is the reason why we used different predicates for linking to other databases.
-This problem, however, is general, and applies to other methods to link databases with
-identifiers too~\cite{VanIersel2010}.
+Once case where Linked Data publishers must avoid implying strong semantics in many cases is
+in relation to links to other databases. When linking between two databases based on a shared identifier,
+Linked Data publishers make assumptions including syntax assumptions that the identifiers 
+are correct and present in the target database, along with semantic assumptions inferring that the
+that entries identified in the target database have a scientifically meaningful relationship with the current database.
+It is for this reason that the ChEMBL-RDF dataset uses different predicates for linking to various databases.
+This problem, however, is general, applying also to other cases where databases link out to third-party sources using identifiers~\cite{VanIersel2010}.
 
-Also debatable is the choice of the ontologies. For example, in this release of the
+Also debatable is the choice of ontologies used to describe the dataset in RDF. As an example, in this release of the
 ChEMBL-RDF data, we adopted the cheminformatics ontology, CHEMINF. Using this ontology
-we can encode numeric and non-numeric descriptors of chemical entities in the same
-standardized way. Using this approach we expose identity descriptors such
+we can encode numeric and non-numeric descriptors of chemical entities in a consistent
+manner. This method is used to consistently expose identity descriptors such
 as the SMILES string, InChI, and InChIKey, and molecular properties including the
 logP, rotatable bond count, and hydrogen bond donor and acceptor counts.
-The design of this annotation is more complex than strictly needed for a translation
-of the data in the ChEMBL relational database into RDF. Moreover, this also
-affects the querying of the data, where a more complex SPARQL query is needed.
-While we found that our selection of ontologies fit well with our applications,
-we anticipate that we will select more expressive ontologies in the future.
+However, the design of this annotation is more general than may be needed for a translation
+of the data in the ChEMBL relational database into RDF. Although this results in more 
+complex SPARQL queries, it allows generic queries that may not otherwise be easy to construct.
+While the selection of ontologies used was found to fit well with our applications,
+we anticipate that we will select more expressive ontologies in future iterations of the project.
 
-For example, not all information in the databases has so far been annotated using
-standard ontologies. That includes the activity types (``IC50'', ``EC50'', and ``Potency'' in ChEMBL), making it
-still impossible to reason or group over similar activity types. For example,
-the IC$_{50}$ and K$_i$ end points are closely related, but that is currently not
-ontologically expressed. Similarly, measurement units are currently provided as
-string literals, making it needlessly hard to compare concentrations in nM and mM.
-If we further allow to make some assumptions, we can even search for activities
-expressed in $\mu$g/ml with query concentrations in nM. Without introducing machine-readable
-semantics, such conversions are less easily automated.
+Some information in the databases has not yet been annotated using standard ontologies. 
+For example, the activity types in ChEMBL, ``IC50'', ``EC50'', and ``Potency'', are not exposed in the RDF dataset
+meaning that it is not yet possible to reason or group over similar activity types.
+When the activity types are exposed queries could be constructed based on the knowledge 
+that the IC$_{50}$ and K$_i$ end points are closely related. Similarly, measurement units are currently provided as
+string literals, making it difficult to compare concentrations when some are given in nM and others in mM.
+In the future it may also be possible, relying on some assumptions, to crossmatch activities
+expressed in $\mu$g/ml with query concentrations in nM. These additional semantics are necessary 
+to translate raw experimental data into semantically useful, machine-readable information.
 
-To address these issues, two ontologies were
-recently developed. First, the BioAssay Ontology addresses many of our
-remaining concerns around making the experimental data machine readable~\cite{Visser2011}. Second,
-the Quantity, Unit, Dimension and Type (QUDT) ontology makes it possible
-to express measurements in a machine readable way~\cite{QUDT}. Both approaches are
-currently explored to be applied to ChEMBL-RDF as part of work in the
-Open PHACTS project~\cite{Williams2012}.
+Two ontologies were recently developed that may address these issues for ChEMBL-RDF in future. Firstly, the BioAssay Ontology, which addresses many of our
+remaining concerns around making the experimental data machine readable~\cite{Visser2011}. Secondly,
+the Quantity, Unit, Dimension and Type (QUDT) ontology which makes it possible
+to express measurements in a standardised machine readable way~\cite{QUDT}. Both approaches are 
+being explored in the Open PHACTS project and will be applied to ChEMBL-RDF as the Open PHACTS project progresses~\cite{Williams2012}.
 
-Taking these points into account, we believe that the adoption of the RDF standards provide
-novel use cases with the ChEMBL data. More importantly, the adoption of explicit
-semantics simplifies integration to other resources, and that is one of the requirements
-core to the efforts of cheminformatics.
+Taking these points into account, we believe that the adoption of RDF and community based ontologies allows
+novel use cases to be solved using the ChEMBL data that would not otherwise be achievable. More importantly, the adoption of explicit
+semantics simplifies integration to other resources, as others can more easily understand the intent and purpose of each part of the ChEMBL dataset.
+This is a requirement which is essential to the efforts of cheminformatics researchers wishing to infer knowledge from both ChEMBL and other datasets.
 
 \section*{Authors contributions}
 EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
