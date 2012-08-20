@@ -127,37 +127,6 @@ references and citations, and domain ontologies such the Protein Ontology\cite{S
 Ontology\cite{Hastings2011}. Throughout this paper various prefixes are used to denote different ontology 
 namespaces to simplify the RDF examples. These prefixes are outlined in Table~\ref{namespaces}.
 
-\begin{table*}
-\caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
-\begin{center}
-\begin{tabular}{ll}
-\hline
-\multicolumn{2}{l}{\textbf{Common Vocabularies}} \\
-bibo    & Bibliography Ontology~\cite{Giasson2011} \\
-        & http://purl.org/ontology/bibo/ \\
-chebi   & Chemical Entities of Biological Interest~\cite{DeMatos2010} \\
-        & http://purl.org/obo/owl/CHEBI\# \\
-cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
-        & http://semanticscience.org/resource/ \\
-cito    & Citation Typing Ontology~\cite{Shotton2010} \\
-        & http://purl.org/spar/cito/ \\
-obo / pro & OBO \& PRotein Ontology~\cite{Sidhu2006} \\
-          & http://purl.obolibrary.org/obo/ \\
-bfo     & Basic Formal Ontology~\cite{Smith2004} \\
-
-\multicolumn{2}{l}{\textbf{ChEMBL-RDF Namespace}} \\
-chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
-
-\multicolumn{2}{l}{\textbf{ChEMBL-RDF Prefixes }}\\
-act    & http://linkedchemistry.info/chembl/activity/ \\
-assay  & http://linkedchemistry.info/chembl/assay/ \\
-mol    & http://linkedchemistry.info/chembl/molecule/ \\
-res    & http://linkedchemistry.info/chembl/resource/ \\
-\hline
-\end{tabular}
-\end{center}
-\end{table*}
-
 To expose the ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point is being
 hosted at Uppsala University, using the Open-Source Edition of the Virtuoso software~\cite{Virtuoso}. Usage is free, but the
 allowed volume of querying is capped, based on the estimated computational effort. Second, resources have
@@ -187,13 +156,6 @@ For each of the common resource classes, a triple pattern was defined, following
 data available in the relational database. Figure~\ref{f1} shows how the various resource
 classes are linked together, detailed in this section at a triple level.
 
-\begin{figure}[t]
-\begin{center}
-\includegraphics[width=0.7\textwidth]{figs/relations}
-\caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
-of common classes, while others are instances.}\label{f1}
-\end{center}
-\end{figure}
 
 The core concept in the ChEMBL database is that of the biological activity. 
 While ChEMBL provides both the original activities as found in literature
@@ -479,14 +441,6 @@ ranging from ``you may also be interested in'' with \verb+rdfs:seeAlso+ to
 ``both objects are identical  and all properties apply to both objects'' for
 \verb+owl:sameAs+.
 
-\begin{figure}[t]
-{\center
-\includegraphics[width=0.45\textwidth]{figs/lodgraph}
-\caption{The links out of the ChEMBL-RDF data into the Linked Open Data cloud.
-Edges are labeled by the predicates making the links.}\label{2}
-}
-\end{figure}
-
 \subsubsection*{Linking out to Bio2RDF}
 
 The Bio2RDF project provides both resolvable Linked Data URIs using a generic Linked Data
@@ -636,16 +590,6 @@ Chem2Bio2RDF. SPARQLs are available at \url{http://chem2bio2rdf.wikispaces.com/I
 SPARQL endpoint~\cite{Chen2010}.
 
 
-\begin{figure*}[!ht]
-		\begin{center}
-		\includegraphics[width=15cm]{citedin.png}
-		\newline
-		\caption[wee]{Screenshot of the CitedIn web service showing a paper cited 94671 times in the ChEMBL database.
-		   The \textit{Details} button on the webpage links to a ChEMBL webpage with detail on what parts of the database are
-		   linked to that paper.}
-	\label{fig:citedin}
-		\end{center}
-\end{figure*}
 
 \subsection*{CitedIn}
 
@@ -691,15 +635,6 @@ via the ChemSpider Web API (SOAP), and for the found compounds to be used to que
 available interaction data. The results are presented alongside predictive models in Bioclipse
 (see Fig~\ref{fig:bioclipse-ds}), and can be used for decision support when evaluating chemical
 structures and considering strategies for optimization.
-
-\begin{figure*}[!ht]
-		\begin{center}
-		\includegraphics[width=15cm]{bioclipse-ds.png}
-		\newline
-		\caption[wee]{Screenshot from Bioclipse Decision Support with results from a ChemSpider + ChEMBL-RDF search. The top left canvas contains the query structure, in this case the drug Carbamezapine, the top right canvas shows the near neighbors in ChemSpider (via a similarStructure search) that contain ChEMBL-RDF data, the lower right shows the chemical structure for the selected compound in the top right canvas, and the lower left canvas shows the found interactions for this compound using ChEMBL-RDF.}
-	\label{fig:bioclipse-ds}
-		\end{center}
-\end{figure*}
 
 \subsection*{Compound Selectivity}
 
@@ -842,6 +777,79 @@ The data in ChEMBL is made available by funding from the Wellcome Trust [086151/
 }
 
 \ifthenelse{\boolean{publ}}{\end{multicols}}{}
+
+\newpage
+
+\begin{figure}[t]
+\begin{center}
+relations.pdf
+%\includegraphics[width=0.7\textwidth]{figs/relations}
+\caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
+of common classes, while others are instances.}\label{f1}
+\end{center}
+\end{figure}
+
+\begin{figure}[t]
+{\center
+lodgraph.pdf
+%\includegraphics[width=0.45\textwidth]{figs/lodgraph}
+\caption{The links out of the ChEMBL-RDF data into the Linked Open Data cloud.
+Edges are labeled by the predicates making the links.}\label{2}
+}
+\end{figure}
+
+\begin{figure*}[!ht]
+		\begin{center}
+		citedin.png
+		%\includegraphics[width=15cm]{citedin.png}
+		\caption[wee]{Screenshot of the CitedIn web service showing a paper cited 94671 times in the ChEMBL database.
+		   The \textit{Details} button on the webpage links to a ChEMBL webpage with detail on what parts of the database are
+		   linked to that paper.}
+	\label{fig:citedin}
+		\end{center}
+\end{figure*}
+
+\begin{figure*}[!ht]
+		\begin{center}
+		bioclipse-ds.png
+		%\includegraphics[width=15cm]{bioclipse-ds.png}
+		\caption[wee]{Screenshot from Bioclipse Decision Support with results from a ChemSpider + ChEMBL-RDF search. The top left canvas contains the query structure, in this case the drug Carbamezapine, the top right canvas shows the near neighbors in ChemSpider (via a similarStructure search) that contain ChEMBL-RDF data, the lower right shows the chemical structure for the selected compound in the top right canvas, and the lower left canvas shows the found interactions for this compound using ChEMBL-RDF.}
+	\label{fig:bioclipse-ds}
+		\end{center}
+\end{figure*}
+
+\newpage
+
+\begin{table*}
+\caption{Prefixes and their matching namespaces used in this paper.} \label{namespaces}
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\multicolumn{2}{l}{\textbf{Common Vocabularies}} \\
+bibo    & Bibliography Ontology~\cite{Giasson2011} \\
+        & http://purl.org/ontology/bibo/ \\
+chebi   & Chemical Entities of Biological Interest~\cite{DeMatos2010} \\
+        & http://purl.org/obo/owl/CHEBI\# \\
+cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
+        & http://semanticscience.org/resource/ \\
+cito    & Citation Typing Ontology~\cite{Shotton2010} \\
+        & http://purl.org/spar/cito/ \\
+obo / pro & OBO \& PRotein Ontology~\cite{Sidhu2006} \\
+          & http://purl.obolibrary.org/obo/ \\
+bfo     & Basic Formal Ontology~\cite{Smith2004} \\
+
+\multicolumn{2}{l}{\textbf{ChEMBL-RDF Namespace}} \\
+chembl & http://rdf.farmbio.uu.se/chembl/onto/\# \\
+
+\multicolumn{2}{l}{\textbf{ChEMBL-RDF Prefixes }}\\
+act    & http://linkedchemistry.info/chembl/activity/ \\
+assay  & http://linkedchemistry.info/chembl/assay/ \\
+mol    & http://linkedchemistry.info/chembl/molecule/ \\
+res    & http://linkedchemistry.info/chembl/resource/ \\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
 
 
 \end{bmcformat}
