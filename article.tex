@@ -218,7 +218,7 @@ assay:a17/score/t100122
 \end{small}
 
 The ChEMBL database
-recognizes various types: \verb+pro:PR_0000001+, \verb+chembl:ADMET+, \verb+chembl:CELL-LINE+,
+recognizes various target types: \verb+pro:PR_0000001+, \verb+chembl:ADMET+, \verb+chembl:CELL-LINE+,
 \verb+chembl:NUCLEIC-ACID+, \verb+chembl:ORGANISM+, \verb+chembl:SUBCELLULAR+, \verb+chembl:TISSUE+,
 \verb+chembl:UNCHECKED+, and \verb+chembl:UNKNOWN+. The latter two are currently defined as
 explicit types, thus effectively implementing a closed-world approach. 
@@ -249,8 +249,9 @@ ChEMBL contains many different compound types, mostly small molecules,
 but also peptides, proteins, antibodies, oligosaccharides, oligonucleotides, and
 even cells. ChEMBL-RDF follows the approach used by the CHEMINF ontology,
 and encodes drugs as classes, rather than instances, and they subclass
-other classes defined by several ontologies for these types. For example, proteins subclass the
-Protein class from the PRotein Ontology (PR\_000000001), small
+other classes defined by several ontologies for these types. For example, protein drugs subclass the
+Protein class from the PRotein Ontology (PR\_000000001), instead that these drugs are
+of the Protein type. Each drug is a class itself. Likewise, small
 molecules subclass the Chemical Entity class from the CHEMINF
 ontology (CHEMINF\_000000) (which is itself equivalent to the Chemical Entity class in ChEBI, CHEBI\_24431), 
 and oligosaccharides and oligonucleotides
@@ -259,11 +260,13 @@ and CHEBI\_7754). To ensure we can look up all entities for which activities
 are reported, we subclass everything from the BFO 1.1 class MaterialEntity~\cite{Smith2004},
 which is a superclass of the CHEMINF Chemical Entity class.
 
-It should also be noted that the relationship of these structural classes 
-is that of having a \textit{role} of drug, rather than a subclass relationship.
+It should also be noted that all drug-like entities in ChEMBL are not ontologically
+subclassing a drug class. Instead, we give the entities the role of drug: only within a
+particular context, they would be drug. If not used as medication, they are not drug.
 Moreover, the triples only attach this drug role to approved drugs, as defined by the
-ChEMBL database. 
-This is triplified using the OBO and ChEBI ontologies in the following manner, where CHEBI\_23888 is the drug role:
+ChEMBL database. All drug-like entities in the database do not have the role of drug.
+The role is triplified using the OBO and ChEBI ontologies in the following manner,
+where CHEBI\_23888 is the ontological entry for of ``drug role'' in ChEBI:
 
 \begin{small}
 \begin{verbatim}
