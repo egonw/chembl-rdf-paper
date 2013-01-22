@@ -266,7 +266,7 @@ particular context, they would be drug. If not used as medication, they are not 
 Moreover, the triples only attach this drug role to approved drugs, as defined by the
 ChEMBL database. All drug-like entities in the database do not have the role of drug.
 The role is triplified using the OBO and ChEBI ontologies in the following manner,
-where CHEBI\_23888 is the ontological entry for ``drug role'' in ChEBI:
+where CHEBI\_23888 is the ontological entry for of ``drug role'' in ChEBI:
 
 \begin{small}
 \begin{verbatim}
@@ -379,51 +379,13 @@ select count(*) WHERE {
 \end{verbatim}
 \end{small}
 
-The following SPARQL query returns 1,143,682 entities for which activities are captured in ChEMBL:
-
-\begin{small}
-\begin{verbatim}
-select count(*) WHERE {
-  ?s ?p bfo:MaterialEntity .
-}
-\end{verbatim}
-\end{small}
-
-The following SPARQL query returns 617,681 ChEMBL assays:
-
-\begin{small}
-\begin{verbatim}
-select count(*) WHERE {
-  ?s ?p chembl:Assay .
-}
-\end{verbatim}
-\end{small}
-
-It should be noted that this returns five entries less than the SQL database, because the
+A similar SPARQL query, replacing \verb+chembl:Target+ with \verb+bfo:MaterialEntity+, returns 1,143,682 entities for which activities are captured in ChEMBL, and by using \verb+chembl:Assay+, the query returns the total of 617,681 ChEMBL assays.
+It should be noted that last query returns five entries less than the SQL database, because the
 triple generation requires the assay type to be defined, which is not the case for those 
-five assays.
-
-The following SPARQL query returns the 6,933,068 ChEMBL activities:
-
-\begin{small}
-\begin{verbatim}
-select count(*) WHERE {
-  ?s ?p chembl:Activity .
-}
-\end{verbatim}
-\end{small}
-
-The following SPARQL query returns the 44,681 ChEMBL documents. This is one fewer than appears 
+five assays. With \verb+chembl:Activity+ and \verb+bibo:Article+, we count 6,933,068 ChEMBL activities and 44,681 documents,
+respectively. The document count is one fewer than appears 
 in the ChEMBL 13 release notes~\cite{ChEMBL13ReleaseNotes}, as the result does not include the doc\_id -1, as this refers to the 
 unpublished dataset, not itself a valid \verb+bibo:Article+.
-
-\begin{small}
-\begin{verbatim}
-select count(*) WHERE {
-  ?s ?p bibo:Article .
-}
-\end{verbatim}
-\end{small}
 
 Reproduction of the ChEMBL release statistics through querying ChEMBL-RDF with SPARQL 
 provides end users with a high degree of confidence that the ChEMBL-RDF contains the same 
@@ -763,10 +725,10 @@ from ChEMBL as well as other datasets.
 
 The ongoing ChEMBL-RDF project is Open Source making it possible to others to convert ChEMBL to RDF too.
 The ChEMBL team (JO, AG, MD) plans to be a primary source of a RDF version of ChEMBL, while others continue
-exposing ChEMBL as RDF (EW, PA). Different versions may arise which expose the data using different ontologies,
-supporting current community needs, however, convergence is expected after a period of experimenting with ontologies that
-may not prove to be practically useful. The availability of Open Source scripts ensures that the community can contribute to the
-process of choosing a practically useful set of ontological terms.
+exposing ChEMBL as RDF too (EW, PA). Various version may arise, exposing the data in different ontologies,
+supporting community needs, though convergence may arise after a period of experimenting with ontologies that
+will not survive the test of time. The availability of Open Source scripts ensure an easy switch from one
+ontology to another.
 
 \section*{Authors contributions}
 EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
