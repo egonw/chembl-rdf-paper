@@ -404,7 +404,7 @@ select count(*) WHERE {
 \end{verbatim}
 \end{small}
 
-A similar SPARQL query, replacing \verb+chembl:Target+ with \verb+bfo:MaterialEntity+, returns 1,143,682 entities for which activities are captured in ChEMBL, and by using \verb+chembl:Assay+, the query returns the total of 617,681 ChEMBL assays.
+A similar SPARQL query, replacing \verb+chembl:Target+ with \verb+bfo:MaterialEntity+, returns 1,143,682 entities for which activities are captured in ChEMBL, and by using \verb+chembl:Assay+, the query returns the total of 617,676 ChEMBL assays.
 It should be noted that last query returns five entries less than the SQL database, because the
 triple generation requires the assay type to be defined, which is not the case for those 
 five assays. With \verb+chembl:Activity+ and \verb+bibo:Article+, we count 6,933,068 ChEMBL activities and 44,681 documents,
