@@ -733,7 +733,8 @@ remaining concerns around making the experimental data machine readable. For exa
 it provides an ontology of activity types. Secondly,
 the Quantity, Unit, Dimension and Type (QUDT) ontology which makes it possible
 to express measurements in a standardised machine readable way~\cite{QUDT}. Both approaches are 
-being explored in the Open PHACTS project and will be applied to ChEMBL-RDF as the Open PHACTS project progresses~\cite{Williams2012}.
+being explored in the Open PHACTS project and will be applied to ChEMBL-RDF as the Open PHACTS
+project progresses~\cite{Williams2012}.
 
 Taking these points into account, we believe that the adoption of RDF and community based ontologies allows
 novel use cases to be addressed using the ChEMBL data that would not otherwise be achievable. More importantly, the adoption of explicit
@@ -742,7 +743,16 @@ This is a requirement which is essential to the efforts of cheminformatics resea
 from ChEMBL as well as other datasets.
 
 The ongoing ChEMBL-RDF project is Open Source making it possible to others to convert ChEMBL to RDF too.
-The ChEMBL team (JO, AG, MD) plans to be a primary source of a RDF version of ChEMBL, while others continue
+Technically, the choice of PHP makes it easy to share functionality between the
+here described conversion scripts, and PHP-enabled web services, used to provide the Linked
+Data interface to the ChEMBL-RDF data, as is fast enough for practical uses. These scripts do
+not use a library for handling RDF data. While using such libraries increases the dependencies
+for the scripts, they also ensure the generation of syntactically correct RDF triples. Continued
+development of the ChEMBL-RDF scripts, however, has started using RDF libraries for this purpose
+specificaly for triple generation of compound names, removing code in the scripts to escape
+special characters, like double quotes.
+
+Finally, the ChEMBL team (JO, AG, MD) plans to be a primary source of a RDF version of ChEMBL, while others continue
 exposing ChEMBL as RDF too (EW, PA). Various version may arise, exposing the data in different ontologies,
 supporting current community needs, however, convergence is expected after a period of experimenting with ontologies that
 may not prove to be practically useful. The availability of Open Source scripts ensures that the community can contribute to the
