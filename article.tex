@@ -796,8 +796,11 @@ The data in ChEMBL is made available by funding from the Wellcome Trust [086151/
 \begin{center}
 relations.pdf
 %\includegraphics[width=0.7\textwidth]{figs/relations}
-\caption{The various resource types found in the ChEMBL triples. Some entities are subclasses
-of common classes, while others are instances.}\label{f1}
+\caption{The various resource types found in the ChEMBL-RDF triples. Some entities are
+subclasses of common classes, using a rdfs:subClassOf predicate, such as
+target:t100122, while others are instances using the rdf:type predicate, such as
+assay:a17. The predicates between classes are also provided, showing how the
+resources are semantically linked.}\label{f1}
 \end{center}
 \end{figure}
 
@@ -805,8 +808,9 @@ of common classes, while others are instances.}\label{f1}
 {\center
 lodgraph.pdf
 %\includegraphics[width=0.45\textwidth]{figs/lodgraph}
-\caption{The links out of the ChEMBL-RDF data into the Linked Open Data cloud.
-Edges are labeled by the predicates making the links.}\label{2}
+\caption{The links out of the ChEMBL-RDF data into the Linked Open Data cloud
+versions of various external databases. Edges are labeled by the predicates making
+the links.}\label{2}
 }
 \end{figure}
 
@@ -814,7 +818,8 @@ Edges are labeled by the predicates making the links.}\label{2}
 		\begin{center}
 		citedin.png
 		%\includegraphics[width=15cm]{citedin.png}
-		\caption[wee]{Screenshot of the CitedIn web service showing a paper cited 94671 times in the ChEMBL database.
+		\caption[wee]{Screenshot of the CitedIn web service showing a 2010
+		Nature paper cited 94671 times in the ChEMBL database.
 		   The \textit{Details} button on the webpage links to a ChEMBL webpage with detail on what parts of the database are
 		   linked to that paper.}
 	\label{fig:citedin}
@@ -825,7 +830,7 @@ Edges are labeled by the predicates making the links.}\label{2}
 		\begin{center}
 		bioclipse-ds.png
 		%\includegraphics[width=15cm]{bioclipse-ds.png}
-		\caption[wee]{Screenshot from Bioclipse Decision Support with results from a ChemSpider + ChEMBL-RDF search. The top left canvas contains the query structure, in this case the drug Carbamezapine, the top right canvas shows the near neighbors in ChemSpider (via a similarStructure search) that contain ChEMBL-RDF data, the lower right shows the chemical structure for the selected compound in the top right canvas, and the lower left canvas shows the found interactions for this compound using ChEMBL-RDF.}
+		\caption[wee]{Screenshot from the Bioclipse Decision Support with results from a combined ChemSpider and ChEMBL-RDF search. The top left canvas contains the query structure, carbamezapine, and the top right canvas shows its near neighbors found in ChemSpider for which ChEMBL-RDF data exists. The lower right canvas shows the chemical structure selected in the top right canvas, and the lower left canvas shows the available activities in ChEMBL-RDF for this compound.}
 	\label{fig:bioclipse-ds}
 		\end{center}
 \end{figure*}
