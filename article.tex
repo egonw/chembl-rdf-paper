@@ -149,16 +149,30 @@ prefix: \textit{chembl}.
 \label{s3}
 
 We present here the updated ChEMBL-RDF, including a description of the mapping process 
-and the identification of links to other datasets.
+and the identification of links to other datasets. Because the primary purpose of of this
+paper is to expose the ChEMBL data as linked data, less focus has been placed on ontologically
+capturing the fine details of the pharmacological literature. This is the reason why
+many concepts are not mapped to existing ontologies, though also the lack of ontologies
+with a clear open license restrict the options.
 
 \subsection*{Data Structure}
 
 For each of the common resource classes, a triple pattern was defined, following the
-data available in the relational database. Figure~\ref{f1} shows how the various resource
-classes are linked together, detailed in this section at a triple level.
+data available in the relational database. Unless the ontological meaning of the data
+in the database was very clear, the classes are annotated with concepts as implicitly
+defined by the relational database. For example, the activity concept in the triples
+merely follows the activity table in the database. As such, the concept of chembl:Activity
+is implied by the content of that table in the relational database.
 
+However, where the database content is well-defined, specific ontologies have been used.
+For example, where the database specifies literature from which data was extraced,
+the CiTO ontology is used. The choice of the ontologies is driven by the use cases and
+compatibility with other Linked Data projects, rather than formal ontological arguments.
+We have not observed ontological contradictions based on these choices.
 
-The core concept in the ChEMBL database is that of the biological activity. 
+Figure~\ref{f1} shows how the various resource classes are linked together, detailed in
+this section at a triple level.
+The core concept in the ChEMBL database is that of the biological activity.
 While ChEMBL provides both the original activities as found in literature
 and standardized values allowing comparison between studies, the triples only
 make the latter available. The links to the literature are encoded using the CiTO ontology.
@@ -185,7 +199,7 @@ More than five thousand different activity types, represented by the chembl:type
 are captured by the ChEMBL database.
 The top five types are ``Potency'' (43\%), ``IC50'' (13\%), ``MIC'' (4.6\%), ``Inhibition'' (3.7\%),
 and ``Ki'' (3.6\%). The activity types in ChEMBL-RDF are currently not available as, or
-linked to, an ontology.
+linked to, an ontology. The BioAssay Ontology could be a future option~\cite{Visser2011}.
 
 The activities themselves are measured against assays, which make up a second important
 resource type. Various assay types are found in the database: \verb+chembl:ADMET+, \verb+chembl:Binding+,
@@ -275,8 +289,14 @@ mol:m4 obo:has_role chebi:CHEBI_23888 .
 \end{small}
 
 The name and synonyms for each drug are
-provided as labels. When InChI and InChIKeys are available for a drug, then these are
-provided via the CHEMINF formalism (abbreviated here):
+provided as labels. If SMILES, InChI, or InChIKeys are given for a drug, then these are
+provided via the CHEMINF formalism.
+The CHEMINF ontology has been used here because of it's flexibility in defining
+descriptor types and their origin and meaning. By allowing an ontology of descriptors,
+we enable comparing values between databases semantically. Differences in, for example,
+the SMILES may then be explained by the software used for that descriptor.
+
+Example output for ChEMBL406142 looks like:
 
 \begin{small}
 \begin{verbatim}
@@ -329,7 +349,8 @@ The literature from which all this data was extracted, is replicated from the da
 but only a subset of the possible information about that literature is provided. In all cases 
 the PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs) are used to link
 to authoritative database, as outlined later in this paper.
-The properties are provided using the BIBO ontology:
+The properties are provided using the BIBO ontology, which is an open sourced ontology
+for bibliographic information, compatible with the CiTO ontology:
 
 \begin{small}
 \begin{verbatim}
@@ -708,7 +729,7 @@ to translate raw experimental data into semantically useful, machine-readable in
 
 Two ontologies were recently developed that may address these issues for ChEMBL-RDF in future.
 Firstly, the BioAssay Ontology, which addresses many of our
-remaining concerns around making the experimental data machine readable~\cite{Visser2011}. For example,
+remaining concerns around making the experimental data machine readable. For example,
 it provides an ontology of activity types. Secondly,
 the Quantity, Unit, Dimension and Type (QUDT) ontology which makes it possible
 to express measurements in a standardised machine readable way~\cite{QUDT}. Both approaches are 
