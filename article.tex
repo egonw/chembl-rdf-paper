@@ -116,7 +116,7 @@ The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 Feb
 The SQL data dump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
 were then executed to generate RDF triples using a set of PHP scripts. The scripts use SQL to
 query the database and output triples using print statements. Custom PHP scripts have been used
-as a light-weight soluton to provide a Linked Data API via a Apache webserver, as well as to
+as a light-weight solution to provide a Linked Data API via a Apache webserver, as well as to
 create data files with triples. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
 has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest
@@ -169,7 +169,7 @@ merely follows the activity table in the database. As such, the concept of chemb
 is implied by the content of that table in the relational database.
 
 However, where the database content is well-defined, specific ontologies have been used.
-For example, where the database specifies literature from which data was extraced,
+For example, where the database specifies literature from which data was extracted,
 the CiTO ontology is used. The choice of the ontologies is driven by the use cases and
 compatibility with other Linked Data projects, rather than formal ontological arguments.
 We have not observed ontological contradictions based on these choices.
@@ -757,7 +757,7 @@ Data interface to the ChEMBL-RDF data, as is fast enough for practical uses. The
 not use a library for handling RDF data. While using such libraries increases the dependencies
 for the scripts, they also ensure the generation of syntactically correct RDF triples. Continued
 development of the ChEMBL-RDF scripts, however, has started using RDF libraries for this purpose
-specificaly for triple generation of compound names, removing code in the scripts to escape
+specifically for triple generation of compound names, removing code in the scripts to escape
 special characters, like double quotes.
 
 Finally, the ChEMBL team (JO, AG, MD) plans to be a primary source of a RDF version of ChEMBL, while others continue
