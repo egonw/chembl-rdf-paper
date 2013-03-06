@@ -114,7 +114,10 @@ links to other datasets using their RDF URIs to further support research in the 
 
 The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 February 2012.
 The SQL data dump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
-were then executed to generate RDF triples using a set of PHP scripts. These scripts are Open Source 
+were then executed to generate RDF triples using a set of PHP scripts. The scripts use SQL to
+query the database and output triples using print statements. Custom PHP scripts have been used
+as a light-weight soluton to provide a Linked Data API via a Apache webserver, as well as to
+create data files with triples. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
 has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest
 Group~\cite{Marshall2012}. This process has not changed much since its original description.
