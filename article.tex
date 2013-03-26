@@ -282,7 +282,11 @@ It should also be noted that all drug-like entities in ChEMBL are not ontologica
 subclassing a drug class. Instead, we give the entities the role of drug, and only within a
 particular context would they be a drug. If not used as medication, they are not a drug.
 Moreover, the triples only attach this drug role to approved drugs, as defined by the
-ChEMBL database. All drug-like entities in the database do not have the role of drug.
+ChEMBL database. 
+% FIXME: What does the following exactly mean? This is the first use of the 
+% word drug-like, so it isn't clear whether it actually means:
+% Not all drug-like entities in the database have the role of drug
+All drug-like entities in the database do not have the role of drug.
 The role is triplified using the OBO and ChEBI ontologies in the following manner,
 where CHEBI\_23888 is the ontological entry for ``drug role'' in ChEBI:
 
