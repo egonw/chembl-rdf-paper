@@ -548,7 +548,7 @@ It proxies the standard ChEMBL-RDF URIs by translating URLs between those reques
 in SPARQL endpoints. For example, if the ChEMBL web application is running on the user's
 local machine, e.g. \url{http://localhost:8080/chembl/}, then a request for the
 article with identifier ``a31863'', \url{http://localhost:8080/chembl/article/a31863},
-will be resolved from the database using the full original URI,
+will be resolved using the webapp from the database using the full original URI,
 \url{http://linkedchemistry.info/chembl/activity/a31863}. If the
 user requested an RDF document using content negotiation, the original URIs will be unchanged,
 however, if the user requested an HTML document, the results will contain both the
