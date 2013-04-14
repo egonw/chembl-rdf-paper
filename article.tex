@@ -116,32 +116,32 @@ The ChEMBL version used in this paper is ChEMBL 13, which was released on 29 Feb
 The SQL data dump provided by ChEMBL was inserted into a local MySQL database. A set of SQL queries 
 were then executed to generate RDF triples using a set of PHP scripts. The scripts use SQL to
 query the database and output triples using print statements. Custom PHP scripts have been used
-as a light-weight solution to provide a Linked Data API via a Apache webserver, as well as to
+as a lightweight solution to provide a Linked Data API via a Apache webserver, as well as to
 create data files with triples. These scripts are Open Source 
 and are available from the source code hosting service, GitHub~\cite{ChEMBLRDFGitHub}. This process 
 has been outlined in a best practices note by the W3C Health Care and Life Sciences Interest
 Group~\cite{Marshall2012}. This process is similar to its original description.
 
 However, the previous ChEMBL-RDF conversion used custom predicates and classes to represent RDF triples, defining
-an ad-hoc ontology~\cite{Willighagen2011}. This implicit ontology reflects the concepts expressed
+an ad hoc ontology~\cite{Willighagen2011}. This implicit ontology reflects the concepts expressed
 in the relational database, and is not formally defined. The current version, instead, uses community-proposed
 ontologies, making the resulting RDF triples more interoperable with RDF provided by other life sciences databases. 
 The new triple dataset uses standard ontologies
 including the Bibliography Ontology~\cite{Giasson2011} and the Citation Typing Ontology (CiTO)~\cite{Shotton2010} for literature
-references and citations, and domain ontologies such the Protein Ontology\cite{Natale2011} and the Chemical Information
+references and citations, and domain ontologies such as the Protein Ontology\cite{Natale2011} and the Chemical Information
 Ontology\cite{Hastings2011}. Throughout this paper various prefixes are used to denote different ontology 
 namespaces to simplify the RDF examples. These prefixes are outlined in Table~\ref{namespaces}.
 
-To expose the ChEMBL-RDF data two approaches have been adopted. First, a SPARQL end point is being
+To expose the ChEMBL-RDF data two approaches have been adopted. First, a SPARQL endpoint is being
 hosted at Uppsala University, using the Open-Source Edition of the Virtuoso software~\cite{Virtuoso}. Usage is free, but the
 allowed volume of querying is capped, based on the estimated computational effort. Second, resources have
 been made dereferencable via the \url{http://linkedchemistry.info} resource. The Kasabi
 platform~\cite{kasabi} was used for a period of time, until that project was discontinued.
-The Uppsala SPARQL end point still uses resource URIs based on the Kasabi approach, following a similar
+The Uppsala SPARQL endpoint still uses resource URIs based on the Kasabi approach, following a similar
 URI pattern where linkedchemistry.info/chembl is replaced by data.kasabi.com/dataset/chembl-rdf.
 
 Although many parts of the ChEMBL-RDF 13 dataset now use community based ontologies, some 
-terms from the previous ad-hoc ontology are still used when a community alternative is not yet available. 
+terms from the previous ad hoc ontology are still used when a community alternative is not yet available. 
 These terms were created under the 
 URI namespace \textit{http://rdf.farmbio.uu.se/chembl/onto/\#}, and are referenced here using the
 prefix: \textit{chembl}.
@@ -153,7 +153,7 @@ prefix: \textit{chembl}.
 \label{s3}
 
 We present here the updated ChEMBL-RDF, including a description of the mapping process 
-and the identification of links to other datasets. Because the primary purpose of of this
+and the identification of links to other datasets. Because the primary purpose of this
 paper is to expose the ChEMBL data as linked data, less focus has been placed on ontologically
 capturing the fine details of the pharmacological literature. This is the reason why
 many concepts are not mapped to existing ontologies, though also the lack of ontologies
@@ -274,13 +274,13 @@ molecules subclass the Chemical Entity class from the CHEMINF
 ontology (CHEMINF\_000000) (which is itself equivalent to the Chemical Entity class in ChEBI, CHEBI\_24431), 
 and oligosaccharides and oligonucleotides
 subclass their respective matches in the CHEBI ontology (CHEBI\_50699
-and CHEBI\_7754). To ensure we can look up all entities for which activities
+and CHEBI\_7754). To ensure that we can look up all entities for which activities
 are reported, we subclass everything from the BFO 1.1 class MaterialEntity~\cite{Smith2004},
 which is a superclass of the CHEMINF Chemical Entity class.
 
 It should also be noted that all drug-like entities in ChEMBL are not ontologically
 subclassing a drug class. Instead, we give the entities the role of drug, and only within a
-particular context would they be a drug. If not used as medication, they are not a drug.
+particular context would they be a drug. If not used as a medication, they are not a drug.
 Moreover, the triples only attach this drug role to approved drugs, as defined by the
 ChEMBL database. 
 % FIXME: What does the following exactly mean? It isn't clear whether it actually means:
@@ -298,10 +298,10 @@ mol:m4 obo:has_role chebi:CHEBI_23888 .
 The name and synonyms for each drug are
 provided as labels. If SMILES, InChI, or InChIKeys are given for a drug, then these are
 provided via the CHEMINF formalism.
-The CHEMINF ontology has been used here because of it's flexibility in defining
+The CHEMINF ontology has been used here because of its flexibility in defining
 descriptor types and their origin and meaning. By allowing an ontology of descriptors,
-we enable comparing values between databases semantically. Differences in, for example,
-the SMILES may then be explained by the software used for that descriptor.
+we enable the comparison of values between databases semantically. Differences in, for example,
+the SMILES string may then be explained by the software used for that descriptor.
 
 Example output for ChEMBL406142 looks like:
 
@@ -335,7 +335,7 @@ chemblid:ChEMBL406142
 \end{verbatim}
 \end{small}
 
-Similarly, properties of small molecules are available from ChEMBL, and as of ChEMBL-RDF 13
+Similarly, the properties of small molecules are available from ChEMBL, and as of ChEMBL-RDF 13
 these too are exposed in triple format. Like the InChI and InChIKey, these are provided using the
 CHEMINF ontology. Here is, for example, the logP value (as distributed with ChEMBL and
 calculated with ACD/Labs software):
@@ -356,7 +356,7 @@ The literature from which all this data was extracted, is replicated from the da
 but only a subset of the possible information about that literature is provided. In all cases 
 the PubMed Identifiers (PMIDs) and Digital Object Identifiers (DOIs) are used to link
 to an authoritative database, as outlined later in this paper.
-The properties are provided using the BIBO ontology, which is an open sourced ontology
+The properties are provided using the BIBO ontology, which is an open source ontology
 for bibliographic information, compatible with the CiTO ontology:
 
 \begin{small}
@@ -380,7 +380,7 @@ journal:j6c706049c2e08871b7c46a6528065736
 
 \subsection*{Data Statistics and Validation}
 
-Each release of the ChEMBL database is accompanied by a set of release statistics, which help 
+Each release of the ChEMBL database is accompanied by a set of release statistics which help 
 provide a concise content overview of the release in question. The ChEMBL 13 release counts
 are as follows:
 \begin{itemize}
@@ -408,7 +408,7 @@ select count(*) WHERE {
 \end{small}
 
 A similar SPARQL query, replacing \verb+chembl:Target+ with \verb+bfo:MaterialEntity+, returns 1,143,682 entities for which activities are captured in ChEMBL, and by using \verb+chembl:Assay+, the query returns the total of 617,676 ChEMBL assays.
-It should be noted that last query returns five entries less than the SQL database, because the
+It should be noted that this last query returns five entries less than the SQL database, because the
 triple generation requires the assay type to be defined, which is not the case for those 
 five assays. With \verb+chembl:Activity+ and \verb+bibo:Article+, we count 6,933,068 ChEMBL activities and 44,681 documents,
 respectively. The document count is one fewer than appears 
@@ -418,8 +418,8 @@ unpublished dataset, not itself a valid \verb+bibo:Article+.
 Reproduction of the ChEMBL release statistics through querying ChEMBL-RDF with SPARQL 
 provides end users with a high degree of confidence that the ChEMBL-RDF contains the same 
 core content as the source relational database. The development of a validation test suite
-is being discussed but not yet implemented; testing criteria other then the here presented
-summarizing counts would change with each release due to curation events. Interactive,
+is being discussed but not yet implemented; testing criteria other then the summarizing counts
+presented here, would change with each release due to curation events. Interactive,
 manual curation of the conversion process as employed by the authors already is more effective
 at this moment.
 
@@ -532,8 +532,8 @@ res:r2032 owl:sameAs <http://dx.doi.org/10.1016/0960-894X(96)00111-4> .
 
 \section*{Applications}
 
-ChEMBL-RDF can be used to explore interrelated scientific datasets, and we here present five applications,
-describing how the SPARQL end point can be used, the combination of the ChEMBL data
+ChEMBL-RDF can be used to explore interrelated scientific datasets, and we present here five applications,
+describing how the SPARQL endpoint can be used, the combination of the ChEMBL data
 with other life sciences databases, the use of the bibliographic information in calculating citation
 statistics, and how to integrate ChEMBL-RDF with ChemSpider to provide an extension for the decision
 support platform in Bioclipse.
@@ -587,7 +587,7 @@ SPARQL endpoint~\cite{Chen2010}.
 
 \subsection*{CitedIn}
 
-Using the SPARQL end point, it is easy to integrate data from ChEMBL into other web resources, such as CitedIn (http://www.citedin.org)~\cite{CitedIn2011}.
+Using the SPARQL endpoint, it is easy to integrate data from ChEMBL into other web resources, such as CitedIn (http://www.citedin.org)~\cite{CitedIn2011}.
 While the impact of a scientific publication is traditionally measured by frequency of citation in subsequent publications, this
 narrowly defined calculation increasingly fails to capture the true reach of a paper. CitedIn was developed to make scientific
 impact more visible and more accurate by providing insight into where published work is being cited online in a variety of public
@@ -624,8 +624,8 @@ and results from predictive models. Bioclipse DS has previously been demonstrate
 modeling in drug safety assessment~\cite{Spjuth:2011uq} and also been linked to invoke and 
 present results from distributed toxicity predictions from the OpenTox infrastructure~\cite{Willighagen:2011kx}.
 
-In this study we extended Bioclipse DS with remote access to ChEMBL-RDF and ChemSpider. 
-This enables users browsing chemical structures in Bioclipse to look up near neighbors in ChemSpider 
+In this study we extended Bioclipse DS with remote access to both ChEMBL-RDF and ChemSpider. 
+This enables users browsing chemical structures in Bioclipse to look up nearest neighbors in ChemSpider 
 via the ChemSpider Web API (SOAP), and for the found compounds to be used to query ChEMBL-RDF for 
 available interaction data. The results are presented alongside predictive models in Bioclipse
 (see Fig~\ref{fig:bioclipse-ds}), and can be used for decision support when evaluating chemical
@@ -732,7 +732,7 @@ Some information in the databases has not yet been annotated using standard onto
 For example, the activity types in ChEMBL, such as ``IC50'', ``EC50'', and ``Potency'', are not exposed in the RDF dataset,
 meaning that it is not yet possible to reason or group over similar activity types.
 When the activity types are exposed, queries could be constructed based on the knowledge 
-that the IC$_{50}$ and K$_i$ end points are closely related. Similarly, measurement units are currently provided as
+that the IC$_{50}$ and K$_i$ endpoint are closely related. Similarly, measurement units are currently provided as
 string literals, making it difficult to compare concentrations when some are given in nM and others in mM.
 In the future it may also be possible, relying on some assumptions, to crossmatch activities
 expressed in $\mu$g/ml with query concentrations in nM. These additional semantics are necessary 
@@ -782,7 +782,7 @@ and approved the final version.
 \section*{Acknowledgements}
 
 The authors acknowledge A. L\"ovgren at the BMC Computing Department at Uppsala University for his
-support in hosting the SPARQL end point. OS acknowledges funding from the Swedish VR (2011-6129) and eSSENCE. 
+support in hosting the SPARQL endpoint. OS acknowledges funding from the Swedish VR (2011-6129) and eSSENCE. 
 JH acknowledges funding from the EU-OPENSCREEN project. 
 The data in ChEMBL is made available by funding from the Wellcome Trust [086151/Z/08/Z].
 
