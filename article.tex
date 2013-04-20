@@ -165,9 +165,9 @@ merely follows the activity table in the database. As such, the concept of chemb
 is implied by the content of that table in the relational database.
 
 However, where the database content is well-defined, specific ontologies have been used.
-For example, where the database specifies literature from which data was extracted,
+For example, where the database specifies literature from which data were extracted,
 the CiTO ontology is used. The choice of the ontologies is driven by the use cases and
-compatibility with other Linked Data projects, rather than formal ontological arguments.
+compatibility with other Linked Data projects, rather than formal ontological considerations.
 We have not observed ontological contradictions based on these choices.
 
 Figure~\ref{f1} shows how the various resource classes are linked together, detailed in
@@ -689,8 +689,7 @@ will be generally applicable to any system using these open standards. However, 
 of choices need discussion. 
 
 Much could be argued about the choice of ontologies, and the lack of an
-ontology in places where we decided to use custom classes and predicates. These
-choices have only partly been decided using ontological arguments. Most of the choices are based
+ontology in places where we decided to use custom classes and predicates. Most of the choices are based
 on pragmatic approaches to enable solutions to the range of use cases we describe here. It should be noted,
 however, that the ChEMBL database captures a wide variety of experimental studies
 and that semantics are not fully specified in the primary source from which the ChEMBL data was
@@ -756,7 +755,7 @@ development of the ChEMBL-RDF scripts, however, has started using RDF libraries 
 specifically for triple generation of compound names, removing code in the scripts to escape
 special characters, like double quotes.
 
-Finally, the ChEMBL team (JO, AG, MD) plans to be a primary source of a RDF version of ChEMBL, while others continue
+Finally, the ChEMBL project will privide RDF versions of ChEMBL, while others continue
 exposing ChEMBL as RDF too (EW, PA). In the future various versions may arise, exposing the data in different ontologies,
 supporting current community needs, however, convergence is expected after a period of experimenting with ontologies that
 may not prove to be practically useful. The availability of Open Source scripts ensures that the community can contribute to the
@@ -766,7 +765,6 @@ process of choosing a practically useful set of ontological terms.
 EW initiated the project, created the initial RDF version of the ChEMBL data, and encouraged the use cases.
 AW extended CitedIn to support citation info in ChEMBL-RDF and supported setting up the http://linkedchemistry.info/ host.
 OS, AJW, and VT developed the nearest neighbor application of Bioclipse and ChemSpider.
-JO, AG, and MD critically validated and summarized the ChEMBL data statistics.
 BC, DW contributed the Chem2Bio2RDF use cases.
 All authors contributed to the continued development of ChEMBL-RDF, as well as to the writing of the paper,
 and approved the final version.
@@ -838,7 +836,7 @@ the links.}\label{2}
 \multicolumn{2}{l}{\textbf{Common Vocabularies}} \\
 bibo    & Bibliography Ontology~\cite{Giasson2011} \\
         & http://purl.org/ontology/bibo/ \\
-chebi   & Chemical Entities of Biological Interest~\cite{DeMatos2010} \\
+chebi   & Chemical Entities of Biological Interest~\cite{Hastings2013} \\
         & http://purl.org/obo/owl/CHEBI\# \\
 cheminf & Chemical Information Ontology~\cite{Hastings2011} \\
         & http://semanticscience.org/resource/ \\
